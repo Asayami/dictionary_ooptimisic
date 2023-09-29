@@ -4,14 +4,14 @@ import java.util.Comparator;
 
 public class DictionaryCommandline extends DictionaryManagement {
     public void showAllWords() {
-        Words.sort((o1, o2)
-                -> o1.getWord_target().compareTo(
-                o2.getWord_target()));
+        // sắp xếp theo alphabet
+        Words.sort(Comparator.comparing(Word::getWord_target));
 
-        System.out.println(String.format("%-5s %-20s %-20s", "No", "English", "Vietnamese"));
+        // out
+        System.out.printf("%-5s %-20s %-15s %-20s %-20s %s%n", "No", "English", "Type", "Vietnamese", "Pronunciation", "Example");
         for (int i = 0; i < Words.size(); i++) {
             Word word_ = Words.get(i);
-            System.out.println(String.format("%-5d %-20s %-20s", i + 1, word_.getWord_target(), word_.getWord_explain()));
+            System.out.printf("%-5d %-20s %-15s %-20s %-20s %s%n", i + 1, word_.getWord_target(), word_.getWord_type(), word_.getWord_explain(), word_.getPronunciation(), word_.getExample());
         }
     }
 
