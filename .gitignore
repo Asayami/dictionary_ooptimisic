@@ -1,0 +1,9 @@
+# Logs
+logs
+*.log
+
+# Ignore directories and all of its contents
+.idea/
+dictionary_cmdline/out/
+
+dictionary_cmdline/*.iml
