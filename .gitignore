@@ -7,3 +7,4 @@ logs
 dictionary_cmdline/out/
 
 dictionary_cmdline/*.iml
+dictionary_cmdline/src/*.iml
