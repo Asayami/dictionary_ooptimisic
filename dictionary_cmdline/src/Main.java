@@ -3,7 +3,9 @@ public class Main {
         System.out.println("Hello World!");
         /* TEST AREA */
         DictionaryCommandline dic = new DictionaryCommandline();
-        dic.dictionaryBasic();
-
+        //dic.dictionaryBasic();
+        dic.insertFromFile();
+        dic.showAllWords();
+        //dic.dictionaryExportToFile();
     }
 }

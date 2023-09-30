@@ -35,7 +35,7 @@ public class DictionaryManagement extends Dictionary {
     }
     public void insertFromFile() {
         try{
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dictionaries.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dictionary_cmdline\\src\\resources\\dictionaries.txt"));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineFromFile = line.split("\t");
@@ -146,7 +146,7 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionaryExportToFile() {
         try{
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dictionaries.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dictionaries_exported.txt"));
             String line;
             while((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
