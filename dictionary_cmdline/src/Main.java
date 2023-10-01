@@ -5,13 +5,11 @@ public class Main {
         DictionaryCommandline dic = new DictionaryCommandline();
         //dic.dictionaryBasic();
         dic.insertFromFile();
-        // dic.showAllWords();
-        /*
-        dic.dictionaryLookup();
-        dic.dictionaryLookup();
-        dic.dictionaryLookup();
-        */
+        //dic.addWord();
         dic.showAllWords();
-        //dic.dictionaryExportToFile();
+        dic.dictionaryExportToFile();
+        //dic.dictionaryLookup();
+        dic.removeWord();
+        dic.showAllWords();
     }
 }

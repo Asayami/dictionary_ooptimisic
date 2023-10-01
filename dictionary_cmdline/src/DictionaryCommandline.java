@@ -8,10 +8,10 @@ public class DictionaryCommandline extends DictionaryManagement {
         Words.sort(Comparator.comparing(Word::getWord_target));
 
         // out
-        System.out.printf("%-5s %-20s %-15s %-40s %-20s %s%n", "No", "English", "Type", "Vietnamese", "Pronunciation", "Example");
+        System.out.printf("%-5s | %-5s | %-20s | %-15s | %-40s | %-20s | %s%n", "No", "ID", "English", "Type", "Vietnamese", "Pronunciation", "Example");
         for (int i = 0; i < Words.size(); i++) {
             Word word_ = Words.get(i);
-            System.out.printf("%-5d %-20s %-15s %-40s %-20s %s%n", i + 1, word_.getWord_target(), word_.getWord_type(), word_.getWord_explain(), word_.getPronunciation(), word_.getExample());
+            System.out.printf("%-5d | %-5d | %-20s | %-15s | %-40s | %-20s | %s%n", i + 1, word_.getId(), word_.getWord_target(), word_.getWord_type(), word_.getWord_explain(), word_.getPronunciation(), word_.getExample());
         }
     }
 

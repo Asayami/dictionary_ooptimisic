@@ -6,4 +6,6 @@ logs
 .idea/
 dictionary_cmdline/out/
 
+# IML files
 dictionary_cmdline/*.iml
+*.iml
