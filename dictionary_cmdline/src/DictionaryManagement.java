@@ -76,7 +76,6 @@ public class DictionaryManagement extends Dictionary {
         word_target = word_target.substring(0, 1).toUpperCase() + word_target.substring(1);
         System.out.println("Nhập dạng từ của từ mới: ");
         String word_type = scan.nextLine();
-        word_type = word_type.substring(0, 1).toUpperCase() + word_type.substring(1);
         System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
         String word_explain = scan.nextLine();
         System.out.println("Nhập cách phát âm từ mới: ");
