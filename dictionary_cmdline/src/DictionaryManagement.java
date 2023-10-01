@@ -2,7 +2,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
+import java.lang.String;
 
 
 public class DictionaryManagement extends Dictionary {
@@ -35,7 +38,7 @@ public class DictionaryManagement extends Dictionary {
             Words.add(temp); // add vào arraylist
             word_count++;
         }
-        // phien ban cua Loc chua close scan, ong Liem close scanner :)
+
     }
 
     public void insertFromFile() {
@@ -73,7 +76,6 @@ public class DictionaryManagement extends Dictionary {
         System.out.println("Mời bạn nhập một từ mới theo hướng dẫn");
         System.out.println("Nhập từ mới: ");
         String word_target = scan.nextLine();
-        word_target = word_target.substring(0, 1).toUpperCase() + word_target.substring(1);
         System.out.println("Nhập dạng từ của từ mới: ");
         String word_type = scan.nextLine();
         System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
@@ -84,15 +86,37 @@ public class DictionaryManagement extends Dictionary {
         String example = scan.nextLine();
         Word newWord = new Word(word_target, word_type, word_explain, pronunciation, example);
         Words.add(newWord);
-        newWord.setId(word_count);
         word_count++;
+        Collections.sort(Words, new Comparator<Word>() {
+            public int compare(Word obj1, Word obj2) {
+                String str1 = obj1.getWord_target();
+                String str2 = obj2.getWord_target();
+                return str1.compareToIgnoreCase(str2);
+            }
+
+        });
+        /*
+        note này đc ghi vào ngày 1/10
+        lúc trước, addWord thêm vào ở giữa sẽ cho id sai vd: stt là 200 nhưng id là 1000 (wordcount+1)
+        sort Words array sau khi add từ mới để cho đúng id
+        */
+        int tempcount = 0;
+        for (Word word : Words) {
+            tempcount++;
+            if (word.equals(newWord)) {
+                newWord.setId(tempcount - 1);
+            }
+            if (word.getWord_target().compareTo(newWord.getWord_target()) > 0) {
+                word.setId(tempcount - 1);
+            }
+        }
     }
 
     public void updateWord() {
         System.out.println("Hãy chọn chức năng: \n" + "[0] Tìm từ được cập nhật theo id \n" + "[1] Tìm từ được cập nhật theo tên \n");
         int option;
         do {
-            System.out.println("Chỉ được phép nhập 0 hoặc 1: \n");
+            System.out.println("Chỉ được phép nhập 0 hoặc 1:");
             option = scan.nextInt();
             switch (option) {
                 case 0 -> {
@@ -100,14 +124,19 @@ public class DictionaryManagement extends Dictionary {
                     int updatedWordId = scan.nextInt(); //tim tu muon update theo id
                     for (Word word : Words) {
                         if (updatedWordId == word.getId()) {
+                            System.out.println("Đã tìm được! Từ tiếng Anh mới sẽ thay vào chỗ id: " + word.getId());
                             String newWordTarget = scan.nextLine();
                             word.setWord_target(newWordTarget);
+                            System.out.println("Mời bạn nhập dạng từ của từ mới: ");
                             String newWordType = scan.nextLine();
                             word.setWord_type(newWordType);
+                            System.out.println("Mời bạn nhập phần giải thích từ mới: ");
                             String newWordExplain = scan.nextLine();
                             word.setWord_explain(newWordExplain);
+                            System.out.println("TEMP: Mời bạn nhập cách đọc từ mới: ");
                             String newPronunciation = scan.nextLine();
                             word.setPronunciation(newPronunciation);
+                            System.out.println("Mời bạn nhập một ví dụ cách dùng từ mới: ");
                             String newExample = scan.nextLine();
                             word.setExample(newExample);
                             break;
@@ -120,12 +149,17 @@ public class DictionaryManagement extends Dictionary {
                     for (Word word : Words) {
                         if (updatedWord.equals(word.getWord_target())) {
                             scan.nextLine();
+                            System.out.println("Đã tìm được! Từ tiếng Anh mới sẽ thay chỗ của từ: " + word.getWord_target());
+                            System.out.println("Mời bạn nhập dạng từ của từ mới: ");
                             String newWordType = scan.nextLine();
                             word.setWord_type(newWordType);
+                            System.out.println("Mời bạn nhập phần giải thích từ mới: ");
                             String newWordExplain = scan.nextLine();
                             word.setWord_explain(newWordExplain);
+                            System.out.println("TEMP: Mời bạn nhập cách đọc từ mới: ");
                             String newPronunciation = scan.nextLine();
                             word.setPronunciation(newPronunciation);
+                            System.out.println("Mời bạn nhập một ví dụ cách dùng từ mới: ");
                             String newExample = scan.nextLine();
                             word.setExample(newExample);
                             break;
@@ -137,13 +171,19 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public void removeWord() {
+        boolean hasBeenRemoved = false;
         System.out.println("Hãy nhập id của từ cần xóa: ");
+        System.out.println("Lưu ý nhập ID của từ trong khoảng (0-" + (word_count - 1) + ")");
         int removedWordId = scan.nextInt();
         for (Word word : Words) {
-            if (removedWordId - 1 == word.getId()) {
+            if (removedWordId == word.getId()) {
                 Words.remove(word.getId());
+                hasBeenRemoved = true;
                 break;
             }
+        }
+        if (!hasBeenRemoved) {
+           System.out.println("ERROR: Không xóa được từ!");
         }
     }
 

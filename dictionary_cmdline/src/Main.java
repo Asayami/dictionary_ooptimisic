@@ -5,11 +5,9 @@ public class Main {
         DictionaryCommandline dic = new DictionaryCommandline();
         //dic.dictionaryBasic();
         dic.insertFromFile();
-        //dic.addWord();
+        dic.showAllWords();
+        dic.addWord();
         dic.showAllWords();
         dic.dictionaryExportToFile();
-        //dic.dictionaryLookup();
-        dic.removeWord();
-        dic.showAllWords();
     }
 }

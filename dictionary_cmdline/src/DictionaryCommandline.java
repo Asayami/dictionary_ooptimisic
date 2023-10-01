@@ -5,8 +5,13 @@ import java.util.Comparator;
 public class DictionaryCommandline extends DictionaryManagement {
     public void showAllWords() {
         // sắp xếp theo alphabet
-        Words.sort(Comparator.comparing(Word::getWord_target));
-
+        Collections.sort(Words, new Comparator<Word>() {
+            public int compare(Word obj1, Word obj2) {
+                String str1 = obj1.getWord_target();
+                String str2 = obj2.getWord_target();
+                return str1.compareToIgnoreCase(str2);
+            }
+        });
         // out
         System.out.printf("%-5s | %-5s | %-20s | %-15s | %-40s | %-20s | %s%n", "No", "ID", "English", "Type", "Vietnamese", "Pronunciation", "Example");
         for (int i = 0; i < Words.size(); i++) {
