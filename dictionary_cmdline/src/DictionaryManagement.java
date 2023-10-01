@@ -175,15 +175,24 @@ public class DictionaryManagement extends Dictionary {
         System.out.println("Hãy nhập id của từ cần xóa: ");
         System.out.println("Lưu ý nhập ID của từ trong khoảng (0-" + (word_count - 1) + ")");
         int removedWordId = scan.nextInt();
+        int iterator = 0;
+        String tempString = "";
         for (Word word : Words) {
             if (removedWordId == word.getId()) {
+                tempString = word.getWord_target();
                 Words.remove(word.getId());
                 hasBeenRemoved = true;
+                word_count--;
                 break;
             }
         }
+        for (int i = removedWordId; i < word_count; i++) {
+            Words.get(i).setId(i);
+        }
         if (!hasBeenRemoved) {
-           System.out.println("ERROR: Không xóa được từ!");
+            System.out.println("ERROR: Không xóa được từ!");
+        } else {
+            System.out.println("Bạn đã xóa từ thành công!" + "\nID từ đã xóa: " + removedWordId + "\nTừ đã xóa: " + tempString);
         }
     }
 

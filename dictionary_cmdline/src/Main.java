@@ -6,8 +6,7 @@ public class Main {
         //dic.dictionaryBasic();
         dic.insertFromFile();
         dic.showAllWords();
-        dic.addWord();
+        dic.removeWord();
         dic.showAllWords();
-        dic.dictionaryExportToFile();
     }
 }
