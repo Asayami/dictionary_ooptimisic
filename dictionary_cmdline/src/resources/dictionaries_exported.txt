@@ -1,4 +1,3 @@
-0     aatrox               a               b                                        c                    d
 1     abandon              temp_word_type  từ bỏ; bỏ rơi, ruồng bỏ                  temp_pronunciation   temp_word_example
 2     abode                temp_word_type  nơi ở, sự lưu trú                        temp_pronunciation   temp_word_example
 3     abort                temp_word_type  sẩy thai, làm sẩy thai, phá thai bỏ dở   temp_pronunciation   temp_word_example

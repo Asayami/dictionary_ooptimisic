@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class DictionaryCommandline extends DictionaryManagement {
     public void showAllWords() {
         // sắp xếp theo alphabet
-        Collections.sort(Words, new Comparator<Word>() {
+        Words.sort(new Comparator<Word>() {
             public int compare(Word obj1, Word obj2) {
                 String str1 = obj1.getWord_target();
                 String str2 = obj2.getWord_target();
