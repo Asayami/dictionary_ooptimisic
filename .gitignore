@@ -5,6 +5,9 @@ logs
 # Ignore directories and all of its contents
 .idea/
 dictionary_cmdline/out/
+out/
 
+# IML files
 dictionary_cmdline/*.iml
+*.iml
 dictionary_cmdline/src/*.iml
