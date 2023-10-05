@@ -1,9 +1,13 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Scanner;
 import java.lang.String;
 
@@ -46,8 +50,16 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public void insertFromFile() {
+        String filePath;
+        System.out.println("Please enter the file path: ");
+        filePath = scan.nextLine();
+        if (filePath.isBlank()) {
+            System.out.println("No path was detected, aborting action...");
+            return;
+            // stop if input contains nothing or only blank spaces
+        }
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dictionary_cmdline\\src\\resources\\dictionaries.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineFromFile = line.split("\t");
@@ -61,6 +73,7 @@ public class DictionaryManagement extends Dictionary {
                 }
             }
         } catch (Exception e) {
+            System.out.println("Something went wrong.. :(");
             e.printStackTrace();
         }
     }
@@ -203,19 +216,58 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionarySearcher() {
         System.out.println("Nhập từ bạn cần tìm: ");
-        String prefixOfWord = scan.next();
+        String prefixOfWord = scan.nextLine();
+        int count = 0; // optional
+        if (!prefixOfWord.isBlank()) {
+            prefixOfWord = prefixOfWord.toLowerCase();
+        }
         System.out.printf("%-5s | %-20s\n", "ID", "English");
         for (Word word : Words) {
             if (word.getWord_target().startsWith(prefixOfWord)) {
                 System.out.printf("%-5s | %-20s\n", word.getId(), word.getWord_target());
+                count++;
             }
         }
+        System.out.println("Found " + count + " instance(s) of word starting with \"" + prefixOfWord + "\"");
     }
 
     public void dictionaryExportToFile() {
         try {
-            System.out.println("Đang xuất ra file dictionaries_exported.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("dictionary_cmdline\\src\\resources\\dictionaries_exported.txt"));
+            String exportPath;
+            System.out.println("Please write the name of the file: ");
+            String fileName = scan.nextLine();
+            if (fileName.isBlank()) {
+                fileName = "dictionaries_exported.txt";
+                System.out.println("Invalid input detected, reverting to default file name..");
+            } else {
+                fileName += ".txt";
+            }
+            System.out.println("Please enter the path of the directory where you want to export to (optional) ");
+            exportPath = scan.nextLine();
+            if (exportPath.isBlank()) {
+                exportPath = "src\\resources\\";
+            } else if (Files.notExists(Path.of(exportPath))) {
+                System.out.println("Cannot find the directory, please make sure you entered the correct path ");
+                return;
+            }
+
+            File exportedFile = new File(exportPath + fileName);
+            if (exportedFile.exists()) {
+                System.out.println("The file " + fileName + " already exists. To override it, enter 'y' ");
+                String confirmation = scan.nextLine();
+                if (confirmation.equalsIgnoreCase("y")) {
+                    boolean wasDeleted = exportedFile.delete();
+                    if (!wasDeleted) {
+                        System.out.println("Something went wrong while trying to delete the original file");
+                    }
+                } else {
+                    System.out.println("Operation cancelled, returning to menu.. ");
+                    return;
+                }
+            }
+
+            System.out.println("Đang xuất ra file.. ");
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(exportPath + fileName));
             String line;
             int j = 0;
             while (j < Words.size()) {
@@ -224,7 +276,7 @@ public class DictionaryManagement extends Dictionary {
                 j++;
             }
             bufferedWriter.close();
-            System.out.println("Đã xuất ra file dictionaries_exported.txt");
+            System.out.println("Đã xuất ra file ");
         } catch (Exception e) {
             e.printStackTrace(); //co the de return;
         }
