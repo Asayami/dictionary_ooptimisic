@@ -71,7 +71,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     running = false;
                     break;
                 case 1: // add
-                    this.insertFromCommandline();
+                    this.addWord();
                     waitInput();
                     break;
                 case 2: // remove

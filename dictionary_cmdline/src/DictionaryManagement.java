@@ -51,12 +51,14 @@ public class DictionaryManagement extends Dictionary {
 
     public void insertFromFile() {
         String filePath;
-        System.out.println("Please enter the file path: ");
+        System.out.println("Please enter the file path: (optional)");
         filePath = scan.nextLine();
         if (filePath.isBlank()) {
-            System.out.println("No path was detected, aborting action...");
+            System.out.println("No path was entered, using default path..");
+            filePath = "src\\resources\\dictionaries.txt";
+        } else if (Files.notExists(Path.of(filePath))) {
+            System.out.println("Cannot find the directory, please make sure you entered the correct path ");
             return;
-            // stop if input contains nothing or only blank spaces
         }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
@@ -72,6 +74,7 @@ public class DictionaryManagement extends Dictionary {
                     Words.add(word);
                 }
             }
+            System.out.println("Successfully inserted from file ");
         } catch (Exception e) {
             System.out.println("Something went wrong.. :(");
             e.printStackTrace();
@@ -191,35 +194,65 @@ public class DictionaryManagement extends Dictionary {
 
     public void removeWord() {
         boolean hasBeenRemoved = false;
-        System.out.println("Hãy nhập id của từ cần xóa: ");
-        int removedWordId = 0;
-        try {
-            removedWordId = Integer.parseInt(scan.nextLine());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        boolean choice = false;
+        String input;
+        System.out.print("""
+                Choose removing method:
+                [0] By ID
+                [1] By Word
+                """);
+        input = scan.nextLine();
+        if (input.equals("1")) {
+            choice = true;
+        } else if (!input.equals("0")){
+            System.out.println("No matching input, reverting to default method.. ");
         }
-        String tempString = "";
-        for (Word word : Words) {
-            if (removedWordId == word.getId()) {
-                tempString = word.getWord_target();
-                Words.remove(word);
-                hasBeenRemoved = true;
-                break;
+        if (choice) {
+            System.out.println("Hãy nhập từ cần xóa: ");
+            input = scan.nextLine();
+            input = input.toLowerCase();
+            input = input.trim();
+            for (Word word : Words) {
+                if (input.equals(word.getWord_target())) {
+                    Words.remove(word);
+                    hasBeenRemoved = true;
+                    break;
+                }
+            }
+        } else {
+            System.out.println("Hãy nhập id của từ cần xóa: ");
+            int removedWordId = 0;
+            input = scan.nextLine();
+            if (input.matches("[0-9]+")) {
+                removedWordId = Integer.parseInt(input);
+            } else {
+                System.out.println("Invalid input, task abandoned! ");
+                return;
+            }
+            for (Word word : Words) {
+                if (removedWordId == word.getId()) {
+                    input = word.getWord_target();
+                    Words.remove(word);
+                    hasBeenRemoved = true;
+                    break;
+                }
             }
         }
+
         if (!hasBeenRemoved) {
-            System.out.println("ERROR: Không xóa được từ!");
+            System.out.println("Không xóa được từ! Có vẻ như từ này không có trong danh sách ");
         } else {
-            System.out.println("Bạn đã xóa từ thành công!" + "\nID từ đã xóa: " + removedWordId + "\nTừ đã xóa: " + tempString);
+            System.out.println("Bạn đã xóa từ thành công!" + "\nTừ đã xóa: " + input);
         }
     }
 
     public void dictionarySearcher() {
         System.out.println("Nhập từ bạn cần tìm: ");
         String prefixOfWord = scan.nextLine();
-        int count = 0; // optional
+        int count = 0; // optional addition
         if (!prefixOfWord.isBlank()) {
             prefixOfWord = prefixOfWord.toLowerCase();
+            prefixOfWord = prefixOfWord.trim();
         }
         System.out.printf("%-5s | %-20s\n", "ID", "English");
         for (Word word : Words) {
@@ -234,7 +267,7 @@ public class DictionaryManagement extends Dictionary {
     public void dictionaryExportToFile() {
         try {
             String exportPath;
-            System.out.println("Please write the name of the file: ");
+            System.out.println("Please enter the name of the file: ");
             String fileName = scan.nextLine();
             if (fileName.isBlank()) {
                 fileName = "dictionaries_exported.txt";
@@ -278,7 +311,7 @@ public class DictionaryManagement extends Dictionary {
             bufferedWriter.close();
             System.out.println("Đã xuất ra file ");
         } catch (Exception e) {
-            e.printStackTrace(); //co the de return;
+            e.printStackTrace();
         }
     }
 }
