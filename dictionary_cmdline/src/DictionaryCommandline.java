@@ -4,16 +4,13 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class DictionaryCommandline extends DictionaryManagement {
-    private boolean running = true;
 
     public void showAllWords() {
         // sắp xếp theo alphabet
-        Words.sort(new Comparator<Word>() {
-            public int compare(Word obj1, Word obj2) {
-                String str1 = obj1.getWord_target();
-                String str2 = obj2.getWord_target();
-                return str1.compareToIgnoreCase(str2);
-            }
+        Words.sort((obj1, obj2) -> {
+            String str1 = obj1.getWord_target();
+            String str2 = obj2.getWord_target();
+            return str1.compareToIgnoreCase(str2);
         });
         // out
         System.out.printf("%-5s | %-5s | %-20s | %-15s | %-40s | %-20s | %s%n", "No", "ID", "English", "Type", "Vietnamese", "Pronunciation", "Example");
@@ -28,13 +25,8 @@ public class DictionaryCommandline extends DictionaryManagement {
         showAllWords();
     }
 
-    /** these methods are made for testing purposes*/
-    public boolean getStatus() {
-        return running;
-    }
-
     private void waitInput() {
-        System.out.println("Press Enter to continue");
+        System.out.println("Press ENTER to continue");
         scan.nextLine();
     }
 
@@ -48,7 +40,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
 
     public void dictionaryAdvanced() {
-        running = true;
+        boolean running = true;
         do {
             System.out.print("""
                     Welcome to My Application!
@@ -66,50 +58,50 @@ public class DictionaryCommandline extends DictionaryManagement {
                     """);
             byte choice = getChoiceInput();
             switch (choice) {
-                case 0: // exit
+                case 0 -> { // exit
                     System.out.println("Thanks for using our application");
                     running = false;
-                    break;
-                case 1: // add
+                }
+                case 1 -> { // add
                     this.addWord();
                     waitInput();
-                    break;
-                case 2: // remove
+                }
+                case 2 -> { // remove
                     this.removeWord();
                     waitInput();
-                    break;
-                case 3: // update
+                }
+                case 3 -> { // update
                     this.updateWord();
                     waitInput();
-                    break;
-                case 4: // display
+                }
+                case 4 -> { // display
                     this.showAllWords();
                     waitInput();
-                    break;
-                case 5: //
+                }
+                case 5 -> { //
                     this.dictionaryLookup();
                     waitInput();
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     this.dictionarySearcher();
                     waitInput();
-                    break;
-                case 7:
+                }
+                case 7 -> {
                     System.out.println("Action_Game yet to be implemented");
                     waitInput();
-                    break;
-                case 8:
+                }
+                case 8 -> {
                     this.insertFromFile();
                     waitInput();
-                    break;
-                case 9:
+                }
+                case 9 -> {
                     this.dictionaryExportToFile();
                     waitInput();
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Action not supported");
                     waitInput();
-                    break;
+                }
             }
         } while (running);
     }

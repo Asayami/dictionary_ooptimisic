@@ -17,7 +17,7 @@ public class DictionaryManagement extends Dictionary {
 
     public void insertFromCommandline() {
         System.out.println("Nhập số từ muốn thêm: ");
-        int n = 0; // slg từ vựng.
+        int n = -1; // slg từ vựng.
         try {
             n = Integer.parseInt(scan.nextLine());
         } catch (NumberFormatException e) {
@@ -51,13 +51,13 @@ public class DictionaryManagement extends Dictionary {
 
     public void insertFromFile() {
         String filePath;
-        System.out.println("Please enter the file path: (optional)");
+        System.out.println("Please enter the file path or press ENTER to use default path");
         filePath = scan.nextLine();
         if (filePath.isBlank()) {
             System.out.println("No path was entered, using default path..");
-            filePath = "src\\resources\\dictionaries.txt";
+            filePath = "dictionary_cmdline\\src\\resources\\dictionaries.txt";
         } else if (Files.notExists(Path.of(filePath))) {
-            System.out.println("Cannot find the directory, please make sure you entered the correct path ");
+            System.out.println("Cannot find the file, please make sure you entered the correct path ");
             return;
         }
         try {
@@ -83,7 +83,7 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionaryLookup() {
         System.out.println("Mời bạn nhập id từ muốn tra: ");
-        int id = 0;
+        int id = -1;
         try {
             id = Integer.parseInt(scan.nextLine());
         } catch (NumberFormatException e) {
@@ -120,7 +120,7 @@ public class DictionaryManagement extends Dictionary {
                 [0] Tìm từ được cập nhật theo id\s
                 [1] Tìm từ được cập nhật theo tên\s
                 """);
-        int option = 0;
+        int option = -1;
         do {
             System.out.println("Chỉ được phép nhập 0 hoặc 1:");
             try {
@@ -185,8 +185,7 @@ public class DictionaryManagement extends Dictionary {
                     }
                 }
             }
-            if(!checkFound)
-            {
+            if (!checkFound) {
                 System.out.println("Không tìm được từ !");
             }
         } while (option != 0 && option != 1);
@@ -204,7 +203,7 @@ public class DictionaryManagement extends Dictionary {
         input = scan.nextLine();
         if (input.equals("1")) {
             choice = true;
-        } else if (!input.equals("0")){
+        } else if (!input.equals("0")) {
             System.out.println("No matching input, reverting to default method.. ");
         }
         if (choice) {
@@ -278,10 +277,14 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("Please enter the path of the directory where you want to export to (optional) ");
             exportPath = scan.nextLine();
             if (exportPath.isBlank()) {
-                exportPath = "src\\resources\\";
+                exportPath = "dictionary_cmdline\\src\\resources\\";
             } else if (Files.notExists(Path.of(exportPath))) {
                 System.out.println("Cannot find the directory, please make sure you entered the correct path ");
                 return;
+            }
+            // kiem tra ki tu cuoi file la /
+            if (exportPath.charAt(exportPath.length() - 1) != '\\') {
+                exportPath = exportPath + "\\";
             }
 
             File exportedFile = new File(exportPath + fileName);
@@ -304,7 +307,7 @@ public class DictionaryManagement extends Dictionary {
             String line;
             int j = 0;
             while (j < Words.size()) {
-                line = String.format("%-5d %-20s %-15s %-40s %-20s %s%n", j+1, Words.get(j).getWord_target(), Words.get(j).getWord_type(), Words.get(j).getWord_explain(), Words.get(j).getPronunciation(), Words.get(j).getExample());
+                line = String.format("%-5d %-20s %-15s %-40s %-20s %s%n", j + 1, Words.get(j).getWord_target(), Words.get(j).getWord_type(), Words.get(j).getWord_explain(), Words.get(j).getPronunciation(), Words.get(j).getExample());
                 bufferedWriter.write(line);
                 j++;
             }
