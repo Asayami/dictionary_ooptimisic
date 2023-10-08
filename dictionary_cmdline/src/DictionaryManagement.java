@@ -23,25 +23,34 @@ public class DictionaryManagement extends Dictionary {
             n = Integer.parseInt(input);
             // nhập vào n từ vựng
             for (int i = 0; i < n; i++) {
+                boolean wordAlreadyExists = false;
                 System.out.println(i + 1 + ".Nhập từ mới: ");
                 String word_target_ = scan.nextLine();
+                for (Word word : Words) {
+                    if (word_target_.equals(word.getWord_target())) {
+                        System.out.println("Từ này đã tồn tại trong từ điển! Mời bạn nhập một từ khác.");
+                        wordAlreadyExists = true;
+                        break;
+                    }
+                }
+                if (!wordAlreadyExists) {
+                    System.out.println("Nhập dạng từ của từ mới: ");
+                    String word_type_ = scan.nextLine();
 
-                System.out.println("Nhập dạng từ của từ mới: ");
-                String word_type_ = scan.nextLine();
+                    System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
+                    String word_explain_ = scan.nextLine();
 
-                System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
-                String word_explain_ = scan.nextLine();
+                    System.out.println("Nhập cách phát âm từ mới: ");
+                    String pronunciation_ = scan.nextLine();
 
-                System.out.println("Nhập cách phát âm từ mới: ");
-                String pronunciation_ = scan.nextLine();
+                    System.out.println("Nhập ví dụ áp dụng từ này: ");
+                    String example_ = scan.nextLine();
 
-                System.out.println("Nhập ví dụ áp dụng từ này: ");
-                String example_ = scan.nextLine();
-
-                Word temp = new Word(word_target_, word_type_, word_explain_, pronunciation_, example_);
-                temp.setId(word_count);
-                Words.add(temp); // add vào arraylist
-                word_count++;
+                    Word temp = new Word(word_target_, word_type_, word_explain_, pronunciation_, example_);
+                    temp.setId(word_count);
+                    Words.add(temp); // add vào arraylist
+                    word_count++;
+                }
             }
         } else {
             System.out.println("Invalid input, task abandoned! ");
@@ -62,17 +71,35 @@ public class DictionaryManagement extends Dictionary {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             String line;
+            boolean sameWord = false;
+            int numberOfDuplicateWords = 0; // Số từ từ file input bị lặp/đã xuất hiện trong từ điển.
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineFromFile = line.split("\t");
                 if (lineFromFile.length == 2) {
                     String wordInEnglish = lineFromFile[0];
                     String wordExplainInVn = lineFromFile[1];
-                    Word word = new Word(wordInEnglish, "temp_word_type", wordExplainInVn, "temp_pronunciation", "temp_word_example");
-                    word.setId(word_count);
-                    word_count++;
-                    Words.add(word);
+                    for (Word word : Words) {
+                        if (wordInEnglish.equals(word.getWord_target())) {
+                            numberOfDuplicateWords++;
+                            System.out.println("Từ " + wordInEnglish + " đã có trong từ điển! Ghi đè các phần tử từ...");
+                            word.setWord_target(wordInEnglish);
+                            word.setWord_type("temp_word_type");
+                            word.setWord_explain(wordExplainInVn);
+                            word.setPronunciation("temp_pronunciation");
+                            word.setExample("temp_word_example");
+                            sameWord = true;
+                        }
+                    }
+                    if(!sameWord) {
+                        Word word = new Word(wordInEnglish, "temp_word_type", wordExplainInVn, "temp_pronunciation", "temp_word_example");
+                        word.setId(word_count);
+                        word_count++;
+                        Words.add(word);
+                    }
+                    sameWord = false;
                 }
             }
+            System.out.println("Số từ bị lặp từ file: " + numberOfDuplicateWords);
             System.out.println("Successfully inserted from file ");
         } catch (Exception e) {
             System.out.println("Something went wrong.. :(");
@@ -100,6 +127,12 @@ public class DictionaryManagement extends Dictionary {
         System.out.println("Mời bạn nhập một từ mới theo hướng dẫn");
         System.out.println("Nhập từ mới: ");
         String word_target = scan.nextLine();
+        for (Word word : Words) { //if word already exists, exit operation
+            if (word_target.equals(word.getWord_target())) {
+                System.out.println("Từ này đã tồn tại trong từ điển! Đang hủy hoạt động.");
+                return;
+            }
+        }
         System.out.println("Nhập dạng từ của từ mới: ");
         String word_type = scan.nextLine();
         System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
