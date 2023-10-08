@@ -17,36 +17,35 @@ public class DictionaryManagement extends Dictionary {
 
     public void insertFromCommandline() {
         System.out.println("Nhập số từ muốn thêm: ");
-        int n = -1; // slg từ vựng.
-        try {
-            n = Integer.parseInt(scan.nextLine());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        int n; // slg từ vựng.
+        String input = scan.nextLine();
+        if (input.matches("[0-9]+")) {
+            n = Integer.parseInt(input);
+            // nhập vào n từ vựng
+            for (int i = 0; i < n; i++) {
+                System.out.println(i + 1 + ".Nhập từ mới: ");
+                String word_target_ = scan.nextLine();
+
+                System.out.println("Nhập dạng từ của từ mới: ");
+                String word_type_ = scan.nextLine();
+
+                System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
+                String word_explain_ = scan.nextLine();
+
+                System.out.println("Nhập cách phát âm từ mới: ");
+                String pronunciation_ = scan.nextLine();
+
+                System.out.println("Nhập ví dụ áp dụng từ này: ");
+                String example_ = scan.nextLine();
+
+                Word temp = new Word(word_target_, word_type_, word_explain_, pronunciation_, example_);
+                temp.setId(word_count);
+                Words.add(temp); // add vào arraylist
+                word_count++;
+            }
+        } else {
+            System.out.println("Invalid input, task abandoned! ");
         }
-
-        // nhập vào n từ vựng
-        for (int i = 0; i < n; i++) {
-            System.out.println(i + 1 + ".Nhập từ mới: ");
-            String word_target_ = scan.nextLine();
-
-            System.out.println("Nhập dạng từ của từ mới: ");
-            String word_type_ = scan.nextLine();
-
-            System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
-            String word_explain_ = scan.nextLine();
-
-            System.out.println("Nhập cách phát âm từ mới: ");
-            String pronunciation_ = scan.nextLine();
-
-            System.out.println("Nhập ví dụ áp dụng từ này: ");
-            String example_ = scan.nextLine();
-
-            Word temp = new Word(word_target_, word_type_, word_explain_, pronunciation_, example_);
-            temp.setId(word_count);
-            Words.add(temp); // add vào arraylist
-            word_count++;
-        }
-
     }
 
     public void insertFromFile() {
@@ -83,16 +82,17 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionaryLookup() {
         System.out.println("Mời bạn nhập id từ muốn tra: ");
-        int id = -1;
-        try {
-            id = Integer.parseInt(scan.nextLine());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        for (Word word : Words) {
-            if (id == word.getId()) {
-                System.out.printf("%-3d | %-10s\t| %-15s\t| %-30s\t| %-30s\t| %s%n", word.getId(), word.getWord_target(), word.getWord_type(), word.getWord_explain(), word.getPronunciation(), word.getExample());
+        int id;
+        String input = scan.nextLine();
+        if (input.matches("[0-9]+")) {
+            id = Integer.parseInt(input);
+            for (Word word : Words) {
+                if (id == word.getId()) {
+                    System.out.printf("%-3d | %-10s\t| %-15s\t| %-30s\t| %-30s\t| %s%n", word.getId(), word.getWord_target(), word.getWord_type(), word.getWord_explain(), word.getPronunciation(), word.getExample());
+                }
             }
+        } else {
+            System.out.println("Invalid input, task abandoned! ");
         }
     }
 
@@ -117,53 +117,53 @@ public class DictionaryManagement extends Dictionary {
     public void updateWord() {
         System.out.println("""
                 Hãy chọn chức năng:\s
-                [0] Tìm từ được cập nhật theo id\s
-                [1] Tìm từ được cập nhật theo tên\s
+                [0] Tìm từ cần cập nhật theo id\s
+                [1] Tìm từ cần cập nhật theo tên\s
                 """);
-        int option = -1;
-        do {
-            System.out.println("Chỉ được phép nhập 0 hoặc 1:");
-            try {
-                option = Integer.parseInt(scan.nextLine());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+        int option;
+        String input = scan.nextLine();
+        if (input.matches("[0-9]+")) {
+            option = Integer.parseInt(input);
             boolean checkFound = false;
             switch (option) {
                 case 0 -> {
                     System.out.print("Nhập id từ cần cập nhật: \n");
-                    int updatedWordId = 0; //tim tu muon update theo id
-                    try {
-                        updatedWordId = Integer.parseInt(scan.nextLine());
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                    for (Word word : Words) {
-                        if (updatedWordId == word.getId()) {
-                            System.out.println("Đã tìm được! Từ tiếng Anh mới sẽ thay vào chỗ id: " + word.getId());
-                            System.out.println("Mời bạn nhập từ mới: ");
-                            String newWordTarget = scan.nextLine();
-                            word.setWord_target(newWordTarget);
-                            System.out.println("Mời bạn nhập dạng từ của từ mới: ");
-                            String newWordType = scan.nextLine();
-                            word.setWord_type(newWordType);
-                            System.out.println("Mời bạn nhập giải thích từ mới: ");
-                            String newWordExplain = scan.nextLine();
-                            word.setWord_explain(newWordExplain);
-                            System.out.println("Mời bạn nhập cách đọc từ mới: ");
-                            String newPronunciation = scan.nextLine();
-                            word.setPronunciation(newPronunciation);
-                            System.out.println("Mời bạn nhập ví dụ cho từ mới: ");
-                            String newExample = scan.nextLine();
-                            word.setExample(newExample);
-                            break;
+                    int updatedWordId; //tim tu muon update theo id
+                    input = scan.nextLine();
+                    if (input.matches("[0-9]+")) {
+                        updatedWordId = Integer.parseInt(input);
+                        for (Word word : Words) {
+                            if (updatedWordId == word.getId()) {
+                                System.out.println("Đã tìm được! Từ tiếng Anh mới sẽ thay vào chỗ id: " + word.getId());
+                                System.out.println("Mời bạn nhập từ mới: ");
+                                String newWordTarget = scan.nextLine();
+                                word.setWord_target(newWordTarget);
+                                System.out.println("Mời bạn nhập dạng từ của từ mới: ");
+                                String newWordType = scan.nextLine();
+                                word.setWord_type(newWordType);
+                                System.out.println("Mời bạn nhập giải thích từ mới: ");
+                                String newWordExplain = scan.nextLine();
+                                word.setWord_explain(newWordExplain);
+                                System.out.println("Mời bạn nhập cách đọc từ mới: ");
+                                String newPronunciation = scan.nextLine();
+                                word.setPronunciation(newPronunciation);
+                                System.out.println("Mời bạn nhập ví dụ cho từ mới: ");
+                                String newExample = scan.nextLine();
+                                word.setExample(newExample);
+                                checkFound = true;
+                                break;
+                            }
                         }
+                        if (!checkFound) {
+                            System.out.println("Không tìm được từ !");
+                        }
+                    } else {
+                        System.out.println("Invalid input, task abandoned! ");
                     }
                 }
                 case 1 -> {
                     System.out.print("Nhập từ cần cập nhật: \n");
-                    String updatedWord = scan.next(); //tim tu muon update theo ten/wordTarget
-                    scan.nextLine();
+                    String updatedWord = scan.nextLine(); //tim tu muon update theo ten/wordTarget
                     for (Word word : Words) {
                         if (updatedWord.equals(word.getWord_target())) {
                             System.out.println("Đã tìm được! Từ tiếng Anh mới sẽ thay chỗ của từ: " + word.getWord_target());
@@ -183,12 +183,15 @@ public class DictionaryManagement extends Dictionary {
                             break;
                         }
                     }
+                    if (!checkFound) {
+                        System.out.println("Không tìm được từ !");
+                    }
                 }
+                default -> System.out.println("Action not supported");
             }
-            if (!checkFound) {
-                System.out.println("Không tìm được từ !");
-            }
-        } while (option != 0 && option != 1);
+        } else {
+            System.out.println("Invalid input, task abandoned! ");
+        }
     }
 
     public void removeWord() {
@@ -220,7 +223,7 @@ public class DictionaryManagement extends Dictionary {
             }
         } else {
             System.out.println("Hãy nhập id của từ cần xóa: ");
-            int removedWordId = 0;
+            int removedWordId;
             input = scan.nextLine();
             if (input.matches("[0-9]+")) {
                 removedWordId = Integer.parseInt(input);
