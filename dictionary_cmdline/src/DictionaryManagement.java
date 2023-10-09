@@ -28,22 +28,22 @@ public class DictionaryManagement extends Dictionary {
                 String word_target_ = scan.nextLine();
                 for (Word word : Words) {
                     if (word_target_.equals(word.getWord_target())) {
-                        System.out.println("Từ này đã tồn tại trong từ điển! Mời bạn nhập một từ khác.");
+                        System.out.println("Từ đã tồn tại trong từ điển!");
                         wordAlreadyExists = true;
                         break;
                     }
                 }
                 if (!wordAlreadyExists) {
-                    System.out.println("Nhập dạng từ của từ mới: ");
+                    System.out.println("Nhập dạng từ của từ: ");
                     String word_type_ = scan.nextLine();
 
-                    System.out.println("Nhập định nghĩa tiếng Việt của từ mới: ");
+                    System.out.println("Nhập định nghĩa tiếng Việt của từ: ");
                     String word_explain_ = scan.nextLine();
 
-                    System.out.println("Nhập cách phát âm từ mới: ");
+                    System.out.println("Nhập cách phát âm từ: ");
                     String pronunciation_ = scan.nextLine();
 
-                    System.out.println("Nhập ví dụ áp dụng từ này: ");
+                    System.out.println("Nhập ví dụ của từ: ");
                     String example_ = scan.nextLine();
 
                     Word temp = new Word(word_target_, word_type_, word_explain_, pronunciation_, example_);
@@ -53,19 +53,19 @@ public class DictionaryManagement extends Dictionary {
                 }
             }
         } else {
-            System.out.println("Invalid input, task abandoned! ");
+            System.out.println("Đầu vào không hợp lệ !");
         }
     }
 
     public void insertFromFile() {
         String filePath;
-        System.out.println("Please enter the file path or press ENTER to use default path");
+        System.out.println("Điền đường dẫn file hoặc nhấn ENTER để dùng đường dẫn mặc định.");
         filePath = scan.nextLine();
         if (filePath.isBlank()) {
-            System.out.println("No path was entered, using default path..");
+            System.out.println("Không có đường dẫn được nhập, sử dụng đường dẫn mặc định...");
             filePath = "dictionary_cmdline\\src\\resources\\dictionaries.txt";
         } else if (Files.notExists(Path.of(filePath))) {
-            System.out.println("Cannot find the file, please make sure you entered the correct path ");
+            System.out.println("Không thể tìm thấy file từ đường dẫn đã nhập.");
             return;
         }
         try {
@@ -81,7 +81,7 @@ public class DictionaryManagement extends Dictionary {
                     for (Word word : Words) {
                         if (wordInEnglish.equals(word.getWord_target())) {
                             numberOfDuplicateWords++;
-                            System.out.println("Từ " + wordInEnglish + " đã có trong từ điển! Ghi đè các phần tử từ...");
+                            System.out.println("Từ " + wordInEnglish + " đã có trong từ điển! Đang ghi đè dữ liệu của từ...");
                             word.setWord_target(wordInEnglish);
                             word.setWord_type("temp_word_type");
                             word.setWord_explain(wordExplainInVn);
@@ -99,10 +99,10 @@ public class DictionaryManagement extends Dictionary {
                     sameWord = false;
                 }
             }
-            System.out.println("Số từ bị lặp từ file: " + numberOfDuplicateWords);
-            System.out.println("Successfully inserted from file ");
+            System.out.println("Số từ bị lặp trong file là: " + numberOfDuplicateWords + ".");
+            System.out.println("Nhập dữ liệu thành công từ file.");
         } catch (Exception e) {
-            System.out.println("Something went wrong.. :(");
+            System.out.println("Đã xảy ra sự cố.. :(");
             e.printStackTrace();
         }
     }
@@ -119,7 +119,7 @@ public class DictionaryManagement extends Dictionary {
                 }
             }
         } else {
-            System.out.println("Invalid input, task abandoned! ");
+            System.out.println("Đầu vào không hợp lệ !");
         }
     }
 
@@ -129,7 +129,7 @@ public class DictionaryManagement extends Dictionary {
         String word_target = scan.nextLine();
         for (Word word : Words) { //if word already exists, exit operation
             if (word_target.equals(word.getWord_target())) {
-                System.out.println("Từ này đã tồn tại trong từ điển! Đang hủy hoạt động.");
+                System.out.println("Từ này đã tồn tại trong từ điển!");
                 return;
             }
         }
@@ -139,7 +139,7 @@ public class DictionaryManagement extends Dictionary {
         String word_explain = scan.nextLine();
         System.out.println("Nhập cách phát âm từ mới: ");
         String pronunciation = scan.nextLine();
-        System.out.println("Nhập ví dụ áp dụng từ này: ");
+        System.out.println("Nhập ví dụ của từ mới: ");
         String example = scan.nextLine();
         Word newWord = new Word(word_target, word_type, word_explain, pronunciation, example);
         newWord.setId(word_count);
@@ -149,9 +149,9 @@ public class DictionaryManagement extends Dictionary {
 
     public void updateWord() {
         System.out.println("""
-                Hãy chọn chức năng:\s
-                [0] Tìm từ cần cập nhật theo id\s
-                [1] Tìm từ cần cập nhật theo tên\s
+                Hãy chọn cách thức cập nhật:\s
+                [0] Theo id\s
+                [1] Theo từ\s
                 """);
         int option;
         String input = scan.nextLine();
@@ -191,7 +191,7 @@ public class DictionaryManagement extends Dictionary {
                             System.out.println("Không tìm được từ !");
                         }
                     } else {
-                        System.out.println("Invalid input, task abandoned! ");
+                        System.out.println("Đầu vào không hợp lệ !");
                     }
                 }
                 case 1 -> {
@@ -220,10 +220,10 @@ public class DictionaryManagement extends Dictionary {
                         System.out.println("Không tìm được từ !");
                     }
                 }
-                default -> System.out.println("Action not supported");
+                default -> System.out.println("Hành động không được hỗ trợ.");
             }
         } else {
-            System.out.println("Invalid input, task abandoned! ");
+            System.out.println("Đầu vào không hợp lệ !");
         }
     }
 
@@ -232,15 +232,15 @@ public class DictionaryManagement extends Dictionary {
         boolean choice = false;
         String input;
         System.out.print("""
-                Choose removing method:
-                [0] By ID
-                [1] By Word
+                Hãy chọn cách thức xoá:
+                [0] Theo id
+                [1] Theo từ
                 """);
         input = scan.nextLine();
         if (input.equals("1")) {
             choice = true;
         } else if (!input.equals("0")) {
-            System.out.println("No matching input, reverting to default method.. ");
+            System.out.println("Đầu vào không hợp lệ, chuyển về cách thức xoá theo id.. ");
         }
         if (choice) {
             System.out.println("Hãy nhập từ cần xóa: ");
@@ -261,7 +261,7 @@ public class DictionaryManagement extends Dictionary {
             if (input.matches("[0-9]+")) {
                 removedWordId = Integer.parseInt(input);
             } else {
-                System.out.println("Invalid input, task abandoned! ");
+                System.out.println("Đầu vào không hợp lệ !");
                 return;
             }
             for (Word word : Words) {
@@ -275,7 +275,7 @@ public class DictionaryManagement extends Dictionary {
         }
 
         if (!hasBeenRemoved) {
-            System.out.println("Không xóa được từ! Có vẻ như từ này không có trong danh sách ");
+            System.out.println("Không xóa được từ! Có vẻ như từ này không có trong danh sách.");
         } else {
             System.out.println("Bạn đã xóa từ thành công!" + "\nTừ đã xóa: " + input);
         }
@@ -289,33 +289,33 @@ public class DictionaryManagement extends Dictionary {
             prefixOfWord = prefixOfWord.toLowerCase();
             prefixOfWord = prefixOfWord.trim();
         }
-        System.out.printf("%-5s | %-20s\n", "ID", "English");
+        System.out.printf("%-5s | %-20s\n", "ID", "Tiếng Anh");
         for (Word word : Words) {
             if (word.getWord_target().startsWith(prefixOfWord)) {
                 System.out.printf("%-5s | %-20s\n", word.getId(), word.getWord_target());
                 count++;
             }
         }
-        System.out.println("Found " + count + " instance(s) of word starting with \"" + prefixOfWord + "\"");
+        System.out.println("Tìm thấy " + count + " từ bắt đầu với \"" + prefixOfWord + "\"");
     }
 
     public void dictionaryExportToFile() {
         try {
             String exportPath;
-            System.out.println("Please enter the name of the file: ");
+            System.out.println("Hãy nhập tên file: ");
             String fileName = scan.nextLine();
             if (fileName.isBlank()) {
                 fileName = "dictionaries_exported.txt";
-                System.out.println("Invalid input detected, reverting to default file name..");
+                System.out.println("Đầu vào không hợp lệ, sử dụng tên file mặc định dictionaries_exported..");
             } else {
                 fileName += ".txt";
             }
-            System.out.println("Please enter the path of the directory where you want to export to (optional) ");
+            System.out.println("Hãy nhập thư mục chứa file (có thể bỏ qua và sử dụng thư mục mặc định /src/resources) ");
             exportPath = scan.nextLine();
             if (exportPath.isBlank()) {
                 exportPath = "dictionary_cmdline\\src\\resources\\";
             } else if (Files.notExists(Path.of(exportPath))) {
-                System.out.println("Cannot find the directory, please make sure you entered the correct path ");
+                System.out.println("Không tìm thấy thư mục !");
                 return;
             }
             // kiem tra ki tu cuoi file la /
@@ -325,15 +325,15 @@ public class DictionaryManagement extends Dictionary {
 
             File exportedFile = new File(exportPath + fileName);
             if (exportedFile.exists()) {
-                System.out.println("The file " + fileName + " already exists. To override it, enter 'y' ");
+                System.out.println("File " + fileName + " đã tồn tại. Để ghi đè, nhấn 'y' ");
                 String confirmation = scan.nextLine();
                 if (confirmation.equalsIgnoreCase("y")) {
                     boolean wasDeleted = exportedFile.delete();
                     if (!wasDeleted) {
-                        System.out.println("Something went wrong while trying to delete the original file");
+                        System.out.println("Không thể xoá file cũ...");
                     }
                 } else {
-                    System.out.println("Operation cancelled, returning to menu.. ");
+                    System.out.println("Đang trở về menu chính... ");
                     return;
                 }
             }

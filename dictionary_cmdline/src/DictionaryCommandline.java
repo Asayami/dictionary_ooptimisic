@@ -13,7 +13,7 @@ public class DictionaryCommandline extends DictionaryManagement {
             return str1.compareToIgnoreCase(str2);
         });
         // out
-        System.out.printf("%-5s | %-5s | %-20s | %-15s | %-40s | %-20s | %s%n", "No", "ID", "English", "Type", "Vietnamese", "Pronunciation", "Example");
+        System.out.printf("%-5s | %-5s | %-20s | %-15s | %-40s | %-20s | %s%n", "STT", "ID", "Tiếng Anh", "Loại từ", "Nghĩa", "Phát âm", "Ví dụ");
         for (int i = 0; i < Words.size(); i++) {
             Word word_ = Words.get(i);
             System.out.printf("%-5d | %-5d | %-20s | %-15s | %-40s | %-20s | %s%n", i + 1, word_.getId(), word_.getWord_target(), word_.getWord_type(), word_.getWord_explain(), word_.getPronunciation(), word_.getExample());
@@ -26,7 +26,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
 
     private void waitInput() {
-        System.out.println("Press ENTER to continue.");
+        System.out.println("Nhấn ENTER để tiếp tục.");
         scan.nextLine();
     }
 
@@ -43,7 +43,7 @@ public class DictionaryCommandline extends DictionaryManagement {
         boolean running = true;
         do {
             System.out.print("""
-                    Welcome to My Application!
+                    Welcome to Dictionary Ultra Pro Max!
                     [0] Exit
                     [1] Add
                     [2] Remove
@@ -54,12 +54,12 @@ public class DictionaryCommandline extends DictionaryManagement {
                     [7] Game
                     [8] Import from file
                     [9] Export to file
-                    Your action:
+                    Hãy nhập hành động:
                     """);
             byte choice = getChoiceInput();
             switch (choice) {
                 case 0 -> { // exit
-                    System.out.println("Thanks for using our application.");
+                    System.out.println("Cảm ơn bạn vì đã sử dụng ứng dụng.");
                     running = false;
                 }
                 case 1 -> { // add
@@ -87,7 +87,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 case 7 -> {
-                    System.out.println("Action_Game yet to be implemented.");
+                    DictionaryGame.game_temp();
                     waitInput();
                 }
                 case 8 -> {
@@ -99,7 +99,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 default -> {
-                    System.out.println("Action not supported.");
+                    System.out.println("Hành động không được hỗ trợ.");
                     waitInput();
                 }
             }
