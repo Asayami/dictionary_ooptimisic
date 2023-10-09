@@ -26,7 +26,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
 
     private void waitInput() {
-        System.out.println("Press ENTER to continue");
+        System.out.println("Press ENTER to continue.");
         scan.nextLine();
     }
 
@@ -59,7 +59,7 @@ public class DictionaryCommandline extends DictionaryManagement {
             byte choice = getChoiceInput();
             switch (choice) {
                 case 0 -> { // exit
-                    System.out.println("Thanks for using our application");
+                    System.out.println("Thanks for using our application.");
                     running = false;
                 }
                 case 1 -> { // add
@@ -87,7 +87,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 case 7 -> {
-                    System.out.println("Action_Game yet to be implemented");
+                    System.out.println("Action_Game yet to be implemented.");
                     waitInput();
                 }
                 case 8 -> {
@@ -99,7 +99,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 default -> {
-                    System.out.println("Action not supported");
+                    System.out.println("Action not supported.");
                     waitInput();
                 }
             }
