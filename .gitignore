@@ -3,7 +3,8 @@ logs
 *.log
 
 # Ignore directories and all of its contents
-dictionary_cmdline/.idea
+dictionary_cmdline/.idea/vcs.xml
+dictionary_cmdline/.idea/workspace.xml
 dictionary_cmdline/out/
 out/
 dictionary_gui/.idea/**/workspace.xml
