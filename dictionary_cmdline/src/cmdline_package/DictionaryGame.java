@@ -12,7 +12,7 @@ public class DictionaryGame extends Dictionary {
 
     public static void quizGame() {
         try {
-            File ques = new File("dictionary_cmdline\\src\\resources\\dictionaries.txt");
+            File ques = new File("src\\resources\\dictionaries.txt");
             Scanner scanner = new Scanner(System.in);
             Scanner text = new Scanner(ques);
             while (true) {

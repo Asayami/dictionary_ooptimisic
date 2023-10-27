@@ -47,7 +47,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>main_package.Start</mainClass>
+              <mainClass>gui_package.Start</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -70,7 +70,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>main_package.Start</mainClass>
+              <mainClass>gui_package.Start</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
