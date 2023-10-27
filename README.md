@@ -1,2 +1,5 @@
 # dictionary_ooptimisic
-This is MAIN branch
+- This is DEMO_GAME_GUI branch
+## Hey there!
+- Bugs are expected
+- Someone please cleanup DictionaryGame
