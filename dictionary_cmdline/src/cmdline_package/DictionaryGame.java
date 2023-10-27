@@ -1,136 +1,127 @@
 package cmdline_package;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.util.Random;
 
+public class DictionaryGame {
 
-public class DictionaryGame extends Dictionary {
+    //private static Map<String, Quiz> quizzes = new HashMap<>();
 
-    private static Map<String, Quiz> quizzes = new HashMap<>();
+    public static Quiz quizzes;
+    static Scanner scanner = new Scanner(System.in);
+    static Random random = new Random();
 
-    public static void quizGame() {
+    public static void play() {
         try {
-            File ques = new File("src\\resources\\dictionaries.txt");
-            Scanner scanner = new Scanner(System.in);
+            File ques = new File("src\\resources\\ques.txt");
             Scanner text = new Scanner(ques);
-            while (true) {
-                System.out.println("Enter a command: (create, take, view, list, exit)");
-                String command = scanner.nextLine();
-                if (command.equals("create")) {
-                    createQuiz(text);
-                } else if (command.equals("take")) {
-                    takeQuiz(text, scanner);
-                } else if (command.equals("view")) {
-                    viewQuiz(scanner);
-                } else if (command.equals("list")) {
-                    listQuizzes();
-                } else if (command.equals("exit")) {
-                    break;
-                } else {
-                    System.out.println("Invalid command.");
-                }
-            }
+            quizzes = createQuiz(text);
+            takeQuiz();
             text.close();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
 
-    private static void createQuiz(Scanner text) {
-        System.out.println("Enter the name of the quiz:");
-        String quizName = text.nextLine();
-        Quiz quiz = new Quiz(quizName);
-        System.out.println("Enter the number of questions:");
+    private static Quiz createQuiz(Scanner text) {
+        Quiz quiz = new Quiz();
         int numQuestions = Integer.parseInt(text.nextLine());
         for (int i = 0; i < numQuestions; i++) {
-            System.out.println("Enter the question:");
             String question = text.nextLine();
-            System.out.println("Enter the number of choices:");
             int numChoices = Integer.parseInt(text.nextLine());
             List<String> choices = new ArrayList<>();
             for (int j = 0; j < numChoices; j++) {
-                System.out.println("Enter choice " + (j+1) + ":");
                 String choice = text.nextLine();
                 choices.add(choice);
             }
-            System.out.println("Enter the index of the correct choice:");
+            //System.out.println("Enter the index of the correct choice:");
             int correctChoice = Integer.parseInt(text.nextLine()) - 1;
             quiz.addQuestion(new Question(question, choices, correctChoice));
         }
-        quizzes.put(quizName, quiz);
-        System.out.println("Quiz created.");
+        return quiz;
     }
 
-    private static void takeQuiz(Scanner text, Scanner scanner) {
-        System.out.println("Enter the name of the quiz:");
-        String quizName = scanner.nextLine();
-        Quiz quiz = quizzes.get(quizName);
-        if (quiz == null) {
+    private static void takeQuiz() {
+        if (quizzes == null) {
             System.out.println("Quiz not found.");
             return;
         }
         int score = 0;
-        for (int i = 0; i < quiz.getNumQuestions(); i++) {
-            Question question = quiz.getQuestion(i);
-            System.out.println("Question " + (i + 1) + ": " + question.getQuestion());
+        int count = 0;
+        int last_ques = -1;
+        int id = -1;
+        while(true){
+            while(id == last_ques)
+            {
+                id = random.nextInt(quizzes.getNumQuestions());
+            }
+            last_ques = id;
+            System.out.println(id);
+            Question question = quizzes.getQuestion(id);
+            System.out.println("Cau hoi " + (count+1) + ": " + question.getQuestion());
             List<String> choices = question.getChoices();
             for (int j = 0; j < choices.size(); j++) {
-                System.out.println((j + 1) + ": " + choices.get(j));
+                System.out.println((j+1) + ": " + choices.get(j));
             }
-            System.out.println("Enter your answer:");
-            int userAnswer = Integer.parseInt(scanner.nextLine()) - 1;
-            if (userAnswer == question.getCorrectChoice()) {
-                System.out.println("Correct!");
-                score++;
-            } else {
-                System.out.println("Incorrect. The correct answer is " + (question.getCorrectChoice() + 1) + ".");
+            System.out.println("Hay chon dap an dung nhat (nhap 'END' de ket thuc game):");
+            String userAnswer = scanner.nextLine();
+            if (userAnswer.equals("END")) {
+                System.out.println("Dang thoat chuong trinh...");
+                break;
+            }
+            else if(userAnswer.matches("[0-9]+")){
+                int userAnswer2 = Integer.parseInt(userAnswer) - 1;
+                if (userAnswer2 == question.getCorrectChoice()) {
+                    System.out.println("Dap an chinh xac !");
+                    score++;
+                } else {
+                    System.out.println("Dap an sai. Dap an dung la " + (question.getCorrectChoice()+1) + ".");
+                }
+                count++;
+            }
+            else {
+                System.out.println("Dau vao khong hop le !");
             }
         }
-        System.out.println("Your score is " + score + " out of " + quiz.getNumQuestions() + ".");
+        System.out.println("So diem ban dat duoc la " + score + " tren tong so " + count + " cau hoi.");
+        System.out.println("CONGRATULATIONS!!!");
     }
 
-    private static void viewQuiz(Scanner scanner) {
-        System.out.println("Enter the name of the quiz:");
-        String quizName = scanner.nextLine();
-        Quiz quiz = quizzes.get(quizName);
-        if (quiz == null) {
-            System.out.println("Quiz not found.");
-            return;
-        }
-        System.out.println("Quiz: " + quiz.getName());
-        for (int i = 0; i < quiz.getNumQuestions(); i++) {
-            Question question = quiz.getQuestion(i);
-            System.out.println("Question " + (i + 1) + ": " + question.getQuestion());
-            List<String> choices = question.getChoices();
-            for (int j = 0; j < choices.size(); j++) {
-                System.out.println((j + 1) + ": " + choices.get(j));
-            }
-            System.out.println("Answer: " + (question.getCorrectChoice() + 1));
-        }
-    }
+//    private static void viewQuiz(Scanner scanner) {
+//        System.out.println("Enter the name of the quiz:");
+//        String quizName = scanner.nextLine();
+//        Quiz quiz = quizzes.get(quizName);
+//        if (quiz == null) {
+//            System.out.println("Quiz not found.");
+//            return;}
+//        System.out.println("Quiz: " + quiz.getName());
+//        for (int i = 0; i < quiz.getNumQuestions(); i++) {
+//            Question question = quiz.getQuestion(i);
+//            System.out.println("Question " + (i+1) + ": " + question.getQuestion());
+//            List<String> choices = question.getChoices();
+//            for (int j = 0; j < choices.size(); j++) {
+//                System.out.println((j+1) + ": " + choices.get(j));
+//            }
+//            System.out.println("Answer: " + (question.getCorrectChoice()+1));
+//        }
+//    }
 
-    private static void listQuizzes() {
-        System.out.println("Quizzes:");
-        for (String quizName : quizzes.keySet()) {
-            System.out.println("- " + quizName);
-        }
-    }
+//    private static void listQuizzes() {
+//        System.out.println("Quizzes:");
+//        for (String quizName : quizzes.keySet()) {
+//            System.out.println("- " + quizName);
+//        }
+//    }
+
+
 }
 
 class Quiz {
-    private String name;
     private List<Question> questions = new ArrayList<>();
-
-    public Quiz(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void addQuestion(Question question) {
         questions.add(question);
@@ -144,7 +135,6 @@ class Quiz {
         return questions.size();
     }
 }
-
 class Question {
     private String question;
     private List<String> choices;

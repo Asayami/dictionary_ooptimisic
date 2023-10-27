@@ -88,7 +88,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 case 7 -> {
-                    DictionaryGame.quizGame();
+                    DictionaryGame.play();
                     waitInput();
                 }
                 case 8 -> {
