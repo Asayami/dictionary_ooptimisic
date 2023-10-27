@@ -23,7 +23,6 @@ dictionary_gui/.idea/compiler.xml
 dictionary_gui/.idea/.name
 
 # IML files
-*.iml
 dictionary_cmdline/src/*.iml
 
 # Target files
