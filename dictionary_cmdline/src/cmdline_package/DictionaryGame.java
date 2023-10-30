@@ -10,15 +10,14 @@ public class DictionaryGame {
     //private static Map<String, Quiz> quizzes = new HashMap<>();
 
     public static Quiz quizzes;
-    static Scanner scanner = new Scanner(System.in);
-    static Random random = new Random();
 
     public static void play() {
         try {
             File ques = new File("src\\resources\\ques.txt");
+            Scanner scanner = new Scanner(System.in);
             Scanner text = new Scanner(ques);
             quizzes = createQuiz(text);
-            takeQuiz();
+            takeQuiz(text, scanner);
             text.close();
         }
         catch (FileNotFoundException e) {
@@ -51,23 +50,26 @@ public class DictionaryGame {
             return;
         }
         int score = 0;
-        int count = 0;
-        int last_ques = -1;
-        int id = -1;
-        while(true){
-            while(id == last_ques)
-            {
-                id = random.nextInt(quizzes.getNumQuestions());
-            }
-            last_ques = id;
-            System.out.println(id);
-            Question question = quizzes.getQuestion(id);
-            System.out.println("Cau hoi " + (count+1) + ": " + question.getQuestion());
+        int min = 0;
+        int max = quizzes.getNumQuestions() - 1;
+        int count = max - min + 1;
+
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = min; i <= max; i++) {
+            numbers.add(i);
+        }
+        // Shuffle the list to randomize the order
+        long seed = System.nanoTime();
+        Collections.shuffle(numbers, new Random(seed));
+        for (int i = 0; i < count; i++) {
+            int next = numbers.get(i);
+            Question question = quizzes.getQuestion(next);
+            System.out.println("Question " + (i+1) + ": " + question.getQuestion());
             List<String> choices = question.getChoices();
             for (int j = 0; j < choices.size(); j++) {
                 System.out.println((j+1) + ": " + choices.get(j));
             }
-            System.out.println("Hay chon dap an dung nhat (nhap 'END' de ket thuc game):");
+            System.out.println("Nhap dap an cua ban (hoac go END de thoat):");
             String userAnswer = scanner.nextLine();
             if (userAnswer.equals("END")) {
                 System.out.println("Dang thoat chuong trinh...");
@@ -120,7 +122,7 @@ public class DictionaryGame {
 
 }
 
-class Quiz {
+static class Quiz {
     private List<Question> questions = new ArrayList<>();
 
     public void addQuestion(Question question) {
@@ -135,7 +137,7 @@ class Quiz {
         return questions.size();
     }
 }
-class Question {
+static class Question {
     private String question;
     private List<String> choices;
     private int correctChoice;
