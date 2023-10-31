@@ -1,3 +1,4 @@
+package cmdline_package;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -87,7 +88,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     waitInput();
                 }
                 case 7 -> {
-                    DictionaryGame.game_temp();
+                    DictionaryGame.play();
                     waitInput();
                 }
                 case 8 -> {

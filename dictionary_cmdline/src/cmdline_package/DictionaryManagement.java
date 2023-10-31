@@ -1,3 +1,4 @@
+package cmdline_package;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -63,7 +64,7 @@ public class DictionaryManagement extends Dictionary {
         filePath = scan.nextLine();
         if (filePath.isBlank()) {
             System.out.println("Không có đường dẫn được nhập, sử dụng đường dẫn mặc định...");
-            filePath = "dictionary_cmdline\\src\\resources\\dictionaries.txt";
+            filePath = "src\\resources\\dictionaries.txt";
         } else if (Files.notExists(Path.of(filePath))) {
             System.out.println("Không thể tìm thấy file từ đường dẫn đã nhập.");
             return;
@@ -313,7 +314,7 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("Hãy nhập thư mục chứa file (có thể bỏ qua và sử dụng thư mục mặc định /src/resources) ");
             exportPath = scan.nextLine();
             if (exportPath.isBlank()) {
-                exportPath = "dictionary_cmdline\\src\\resources\\";
+                exportPath = "src\\resources\\";
             } else if (Files.notExists(Path.of(exportPath))) {
                 System.out.println("Không tìm thấy thư mục !");
                 return;

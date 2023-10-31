@@ -1,3 +1,4 @@
+package cmdline_package;
 import java.util.ArrayList;
 
 public class Dictionary {

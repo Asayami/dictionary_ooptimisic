@@ -3,11 +3,28 @@ logs
 *.log
 
 # Ignore directories and all of its contents
-.idea/
+dictionary_cmdline/.idea/vcs.xml
+dictionary_cmdline/.idea/workspace.xml
 dictionary_cmdline/out/
 out/
+dictionary_gui/.idea/**/workspace.xml
+dictionary_gui/.idea/**/tasks.xml
+dictionary_gui/.idea/**/usage.statistics.xml
+dictionary_gui/.idea/**/dictionaries
+dictionary_gui/.idea/**/shelf
+dictionary_gui/.idea/artifacts/
+dictionary_gui/.idea/modules.xml
+dictionary_gui/.idea/uiDesigner.xml
+dictionary_gui/.idea/vcs.xml
+dictionary_gui/.idea/workspace.xml
+dictionary_gui/.idea/modules.xml
+dictionary_gui/.idea/jarRepositories.xml
+dictionary_gui/.idea/encodings.xml
+dictionary_gui/.idea/compiler.xml
+dictionary_gui/.idea/.name
 
 # IML files
-dictionary_cmdline/*.iml
-*.iml
 dictionary_cmdline/src/*.iml
+
+# Target files
+dictionary_gui/target/
