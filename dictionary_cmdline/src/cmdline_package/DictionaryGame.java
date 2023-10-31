@@ -9,20 +9,19 @@ public class DictionaryGame {
 
     //private static Map<String, Quiz> quizzes = new HashMap<>();
 
-    public static Quiz quizzes;
+    static Quiz quizzes;
+    static Scanner scanner = new Scanner(System.in);
 
     public static void play() {
         try {
             File ques = new File("src\\resources\\ques.txt");
-            Scanner scanner = new Scanner(System.in);
             Scanner text = new Scanner(ques);
             quizzes = createQuiz(text);
-            takeQuiz(text, scanner);
+            takeQuiz();
             text.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -61,31 +60,30 @@ public class DictionaryGame {
         // Shuffle the list to randomize the order
         long seed = System.nanoTime();
         Collections.shuffle(numbers, new Random(seed));
-        for (int i = 0; i < count; i++) {
+
+        for (int i = 0; i < count; i=i+1) {
+            System.out.println(count);
             int next = numbers.get(i);
             Question question = quizzes.getQuestion(next);
-            System.out.println("Question " + (i+1) + ": " + question.getQuestion());
-            List<String> choices = question.getChoices();
+            System.out.println("Question " + (i + 1) + ": " + question.question());
+            List<String> choices = question.choices();
             for (int j = 0; j < choices.size(); j++) {
-                System.out.println((j+1) + ": " + choices.get(j));
+                System.out.println((j + 1) + ": " + choices.get(j));
             }
             System.out.println("Nhap dap an cua ban (hoac go END de thoat):");
             String userAnswer = scanner.nextLine();
             if (userAnswer.equals("END")) {
                 System.out.println("Dang thoat chuong trinh...");
                 break;
-            }
-            else if(userAnswer.matches("[0-9]+")){
+            } else if (userAnswer.matches("[0-9]+")) {
                 int userAnswer2 = Integer.parseInt(userAnswer) - 1;
-                if (userAnswer2 == question.getCorrectChoice()) {
+                if (userAnswer2 == question.correctChoice()) {
                     System.out.println("Dap an chinh xac !");
                     score++;
                 } else {
-                    System.out.println("Dap an sai. Dap an dung la " + (question.getCorrectChoice()+1) + ".");
+                    System.out.println("Dap an sai. Dap an dung la " + (question.correctChoice() + 1) + ".");
                 }
-                count++;
-            }
-            else {
+            } else {
                 System.out.println("Dau vao khong hop le !");
             }
         }
@@ -122,8 +120,8 @@ public class DictionaryGame {
 
 }
 
-static class Quiz {
-    private List<Question> questions = new ArrayList<>();
+class Quiz {
+    private final List<Question> questions = new ArrayList<>();
 
     public void addQuestion(Question question) {
         questions.add(question);
@@ -137,27 +135,7 @@ static class Quiz {
         return questions.size();
     }
 }
-static class Question {
-    private String question;
-    private List<String> choices;
-    private int correctChoice;
 
-    public Question(String question, List<String> choices, int correctChoice) {
-        this.question = question;
-        this.choices = choices;
-        this.correctChoice = correctChoice;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public List<String> getChoices() {
-        return choices;
-    }
-
-    public int getCorrectChoice() {
-        return correctChoice;
-    }
+record Question(String question, List<String> choices, int correctChoice) {
 
 }
