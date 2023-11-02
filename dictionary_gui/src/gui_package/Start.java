@@ -10,10 +10,11 @@ import java.io.IOException;
 public class Start extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("views/fxml/mainView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("views/fxml/main-screen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
+        stage.setTitle("Dictionary Ultra Vip Pro Plus+");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
