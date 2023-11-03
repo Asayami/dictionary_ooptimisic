@@ -1,6 +1,8 @@
 module main_package {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
+    requires org.slf4j;
 
     opens gui_package to javafx.fxml;
     exports gui_package;
