@@ -1,4 +1,5 @@
 # dictionary_ooptimisic
+## Đã hot fix config project, chỉ cần open project (GUI hoặc cmd) như thường và chạy file Start hoặc Main là được. KHÔNG CẦN THỰC HIỆN NHƯ DƯỚI NỮA
 ## Lưu ý
 - Khi chạy trên IntelliJ thì phải cài đặt chạy cmdline và gui riêng biệt
 - Cài đặt project structure cho đúng, nếu không thì sẽ có lỗi
