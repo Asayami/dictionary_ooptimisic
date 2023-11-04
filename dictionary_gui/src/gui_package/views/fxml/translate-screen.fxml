@@ -14,12 +14,47 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.ButtonController">
    <top>
-      <HBox prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #77a4ed;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="1024.0" style="-fx-background-color: #77a4ed;" text="Dictionary Ultra Pro" textFill="WHITE">
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="4.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../images/google_translate.png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="1024.0" text="Dictionary Ultra Pro" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
-               </font></Label>
+               </font>
+               <HBox.margin>
+                  <Insets left="4.0" />
+               </HBox.margin></Label>
+            <Button id="button_minimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimized" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
+               <HBox.margin>
+                  <Insets top="-8.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/button_minimize.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
+               <HBox.margin>
+                  <Insets top="-8.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/button_close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </HBox>
    </top>
@@ -61,7 +96,7 @@
                <tooltip>
                   <Tooltip text="Game rèn từ vựng" />
                </tooltip></Button>
-            <Button layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+            <Button disable="true" layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,10 +113,10 @@
       </Pane>
    </right>
    <center>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MISSING_MODE_TRANSLATE" BorderPane.alignment="CENTER">
+      <Label text="missing_TRANSLATE" BorderPane.alignment="CENTER">
          <font>
-            <Font size="44.0" />
+            <Font size="70.0" />
          </font>
-      </Text>
+      </Label>
    </center>
 </BorderPane>
