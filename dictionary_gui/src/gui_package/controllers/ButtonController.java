@@ -20,6 +20,8 @@ public class ButtonController implements Initializable {
     private Stage stage;
     private URL fxmlURL;
 
+    private Scene scene;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: nothing
@@ -47,7 +49,7 @@ public class ButtonController implements Initializable {
 
     public void loadScene(URL fxmlURL, Event event) throws IOException {
         Parent root = FXMLLoader.load(fxmlURL);
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         if (stage == null) {
             stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         }
