@@ -1,5 +1,6 @@
 package gui_package.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -37,7 +39,7 @@ public class DictionaryController implements Initializable {
     private ListView<String> listView;
 
     @FXML
-    private ListView<String> detailView;
+    private TextArea wordDetails;
 
     @FXML
     void search(ActionEvent event) {
@@ -52,8 +54,7 @@ public class DictionaryController implements Initializable {
             lastWord = "";
         }
         if (selectedItem != null && !selectedItem.equals(lastWord)) {
-            detailView.getItems().clear();
-            detailView.getItems().addAll(getDetails(selectedItem));
+            System.out.println(selectedItem);
             lastWord = selectedItem;
         }
         listView.getSelectionModel().clearSelection();
@@ -71,11 +72,10 @@ public class DictionaryController implements Initializable {
         }).collect(Collectors.toList());
     }
 
-    private List<String> getDetails(String word) {
-        List<String> details = new ArrayList<>();
-        details.add("Definition: " + word);
-        details.add("This is a curse word");
-        return details;
+    private String getDetails(String word) {
+        StringBuilder details = new StringBuilder("Definition: " + word);
+        details.append('\n').append("This is a curse word.");
+        return details.toString();
     }
 
     public void loadScene(URL fxmlURL, Event event) throws IOException {
