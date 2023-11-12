@@ -1,80 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.DictionaryController">
-   <top>
-      <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #77a4ed;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="4.0" />
-               </HBox.margin>
-               <image>
-                  <Image url="@../images/google_translate.png" />
-               </image>
-            </ImageView>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="1024.0" text="Dictionary Ultra Pro" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="4.0" />
-               </HBox.margin></Label>
-            <Button id="button_minimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimized" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
-               <HBox.margin>
-                  <Insets top="-8.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/button_minimize.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
-               <HBox.margin>
-                  <Insets top="-8.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/button_close.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </HBox>
-   </top>
-   <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="#2638ff40" strokeType="OUTSIDE" strokeWidth="0.0" text="Application by OOPtimistic team">
-               <font>
-                  <Font name="Century Gothic Bold" size="13.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="16.0" />
-               </HBox.margin>
-            </Text>
-         </children></HBox>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="968.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.DictionaryController">
    <left>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="275.0" spacing="4.0" BorderPane.alignment="CENTER">
          <children>
@@ -93,7 +35,7 @@
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#search" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: #bfd9ff;">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#search" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -101,6 +43,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>
@@ -114,62 +59,132 @@
          </BorderPane.margin>
       </VBox>
    </left>
-   <right>
-      <Pane prefHeight="692.0" prefWidth="50.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button disable="true" layoutX="7.0" layoutY="40.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
-               <tooltip>
-                  <Tooltip text="Tra cứu từ điển" />
-               </tooltip>
-               <graphic>
-                  <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/dictionary.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button layoutX="7.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/wordle.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Game rèn từ vựng" />
-               </tooltip></Button>
-            <Button layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/google_translate.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button layoutX="7.0" layoutY="220.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;" text="Theme" />
-            <Button layoutX="7.0" layoutY="280.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;" text="About" />
-         </children>
-         <BorderPane.margin>
-            <Insets right="6.0" />
-         </BorderPane.margin>
-      </Pane>
-   </right>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f0f7ff; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="667.0" style="-fx-background-color: #f0f7ff; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="12.0" right="6.0" top="40.0" />
          </BorderPane.margin>
          <children>
-            <Label layoutX="30.0" layoutY="20.0" prefHeight="60.0" prefWidth="460.0" text="WORD">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Label>
-            <Button layoutX="500.0" layoutY="25.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" text="Button" />
-            <Button layoutX="555.0" layoutY="25.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" text="Button" />
-            <Button layoutX="610.0" layoutY="25.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" text="Button" />
-            <TextArea fx:id="wordDetails" editable="false" layoutX="30.0" layoutY="80.0" prefHeight="538.0" prefWidth="607.0" />
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="667.0" spacing="8.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="40.0" prefWidth="476.0" text="supercalifragilisticexpialidocious">
+                     <font>
+                        <Font name="Calibri" size="36.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="4.0" top="12.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/speaker.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="547.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="595.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="8.0" right="8.0" />
+               </padding>
+            </HBox>
+            <VBox layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="667.0" spacing="6.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="667.0" text="adjective • (&quot;noun&quot; if it is also a noun) • (&quot;verb&quot; if it is also a verb) ">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="643.0" />
+                  <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="50.0" prefRowCount="2" prefWidth="643.0" style="-fx-background-color: transparent;" stylesheets="@../css/textarea.css" text="UK pronunciation: /ˌsuː.pə.kæl.ɪ.frædʒ.ɪˌlɪs.tɪk.eks.pi.æl.ɪˈdəʊ.ʃəs/&#10;US pronunciation: /ˌsuː.pɚ.kæl.ɪ.frædʒ.əˌlɪs.tɪk.eks.pi.æl.ɪˈdoʊ.ʃəs/" wrapText="true">
+                     <font>
+                        <Font name="Cambria" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TextArea>
+                  <Line endX="643.0" layoutX="23.0" layoutY="49.0">
+                     <VBox.margin>
+                        <Insets top="4.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label layoutX="22.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" text="Word meaning:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" style="-fx-background-color: transparent;" stylesheets="@../css/textarea.css" text="English: extremely good&#10;Tiếng Việt: cực kì tốt&#10;line_3&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_max" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TextArea>
+                  <Line endX="643.0" layoutX="23.0" layoutY="116.0">
+                     <VBox.margin>
+                        <Insets top="4.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label layoutX="22.0" layoutY="124.0" prefHeight="30.0" prefWidth="84.0" text="Example:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" style="-fx-background-color: transparent;" stylesheets="@../css/textarea.css" text="• Life on the set of the 1964 musical wasn't always supercalifragilisticexpialidocious.&#10;• He can also spell words backward, including supercalifragilisticexpialidocious.&#10;• The third upcoming event? Well, it's just &quot;supercalifragilisticexpialidocious&quot;.&#10;line_4&#10;line_5&#10;line_max" wrapText="true">
+                     <font>
+                        <Font name="System Italic" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TextArea>
+               </children>
+               <padding>
+                  <Insets left="12.0" right="12.0" />
+               </padding>
+            </VBox>
          </children>
       </Pane>
    </center>

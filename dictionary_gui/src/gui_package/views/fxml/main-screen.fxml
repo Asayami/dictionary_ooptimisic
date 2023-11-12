@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.ButtonController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.MainController">
    <top>
       <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #77a4ed;" BorderPane.alignment="CENTER">
          <children>
@@ -42,12 +45,12 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
+            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" onMouseEntered="#close_button_highlight" onMouseExited="#close_button_reset" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
                <HBox.margin>
                   <Insets top="-8.0" />
                </HBox.margin>
                <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="button_close_icon" fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/button_close.png" />
                      </image>
@@ -70,7 +73,110 @@
             </Text>
          </children></HBox>
    </bottom>
+   <right>
+      <Pane prefHeight="692.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="ButtonDictionary" layoutX="7.0" layoutY="40.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dictionaryScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+               <tooltip>
+                  <Tooltip style="-fx-background-color: #77a4ed;" text="Tra cứu từ điển">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Tooltip>
+               </tooltip>
+               <graphic>
+                  <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/dictionary.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="ButtonGame" layoutX="7.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/wordle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip style="-fx-background-color: #77a4ed;" text="Game rèn từ vựng">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Tooltip>
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="ButtonTranslate" layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/google_translate.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip style="-fx-background-color: #77a4ed;" text="Dịch văn bản">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></Button>
+            <Button fx:id="ButtonTheme" layoutX="7.0" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/211677_image_icon.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip style="-fx-background-color: #77a4ed;" text="Đổi hình nền">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></Button>
+            <Button layoutX="7.0" layoutY="280.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutPopup" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 10;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/information-mark.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip style="-fx-background-color: #77a4ed;" text="Về chúng tôi">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets right="6.0" />
+         </BorderPane.margin>
+      </Pane>
+   </right>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="WorkPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bfd9ff;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

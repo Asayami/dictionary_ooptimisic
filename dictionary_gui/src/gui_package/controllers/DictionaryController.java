@@ -1,6 +1,5 @@
 package gui_package.controllers;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,14 +12,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DictionaryController implements Initializable {
@@ -96,6 +94,27 @@ public class DictionaryController implements Initializable {
     public void translateScene(ActionEvent event) throws IOException {
         fxmlURL = DictionaryController.class.getResource("/fxml/translate-screen.fxml");
         loadScene(fxmlURL, event);
+    }
+
+    public void aboutPopup(ActionEvent event) throws IOException {
+        fxmlURL = DictionaryController.class.getResource("/fxml/about-popup.fxml");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
+        if (stage == null) {
+            stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        }
+        x = stage.getX();
+        y = stage.getY();
+
+        Stage popup = new Stage();
+        Scene scene = new Scene(root, 350, 230);
+        popup.setTitle("About us");
+        popup.initStyle(StageStyle.UNDECORATED);
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.setResizable(false);
+        popup.setScene(scene);
+        popup.show();
+        popup.setX(x + 337);
+        popup.setY(y + 249);
     }
 
     public void titleBarDragged(MouseEvent event) {

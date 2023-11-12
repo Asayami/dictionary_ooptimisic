@@ -4,23 +4,13 @@
     -fx-background-insets: 0;
     -fx-background-radius: 0px;
     -fx-text-fill: #FFFFFF;
-    -fx-font-size:14px;
+    -fx-font-size: 14px;
 }
 
 #button_minimize:hover {
-    -fx-max-width: infinity;
     -fx-background-color: #b8d3ff;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0px;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size:14px;
 }
 
 #button_close:hover {
-    -fx-max-width: infinity;
     -fx-background-color: #e81123;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0px;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size:14px;
 }
