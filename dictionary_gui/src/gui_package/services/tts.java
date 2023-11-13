@@ -25,7 +25,7 @@ public class tts extends Thread {
             boolean status = voice.speak(word);
             voice.deallocate();
         } else {
-            System.out.println("Error");
+            System.out.println("TTS Error");
         }
     }
 }
