@@ -44,6 +44,10 @@ public class MainController implements Initializable {
     @FXML
     private Pane WorkPane;
 
+    private Node dictionaryNode;
+    private Node gameNode;
+    private Node translateNode;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: open Dictionary
@@ -61,25 +65,64 @@ public class MainController implements Initializable {
     }
 
     public void dictionaryScene(ActionEvent event) throws IOException {
-        fxmlURL = MainController.class.getResource("/fxml/dictionary-screen.fxml");
-        WorkPane.getChildren().clear();
-        WorkPane.getChildren().add(FXMLLoader.load(fxmlURL));
+        if (dictionaryNode == null) {
+            fxmlURL = MainController.class.getResource("/fxml/dictionary-screen.fxml");
+            assert fxmlURL != null;
+            dictionaryNode = FXMLLoader.load(fxmlURL);
+            WorkPane.getChildren().add(dictionaryNode);
+        }
+        dictionaryNode.setDisable(false);
+        dictionaryNode.setVisible(true);
+        if (gameNode != null) {
+            gameNode.setDisable(true);
+            gameNode.setVisible(false);
+        }
+        if (translateNode != null) {
+            translateNode.setDisable(true);
+            translateNode.setVisible(false);
+        }
         resetButtons();
         ButtonDictionary.setDisable(true);
     }
 
     public void gameScene(ActionEvent event) throws IOException {
-        fxmlURL = MainController.class.getResource("/fxml/game-screen.fxml");
-        WorkPane.getChildren().clear();
-        WorkPane.getChildren().add(FXMLLoader.load(fxmlURL));
+        if (gameNode == null) {
+            fxmlURL = MainController.class.getResource("/fxml/game-screen.fxml");
+            assert fxmlURL != null;
+            gameNode = FXMLLoader.load(fxmlURL);
+            WorkPane.getChildren().add(gameNode);
+        }
+        gameNode.setDisable(false);
+        gameNode.setVisible(true);
+        if (dictionaryNode != null) {
+            dictionaryNode.setDisable(true);
+            dictionaryNode.setVisible(false);
+        }
+        if (translateNode != null) {
+            translateNode.setDisable(true);
+            translateNode.setVisible(false);
+        }
         resetButtons();
         ButtonGame.setDisable(true);
     }
 
     public void translateScene(ActionEvent event) throws IOException {
-        fxmlURL = MainController.class.getResource("/fxml/translate-screen.fxml");
-        WorkPane.getChildren().clear();
-        WorkPane.getChildren().add(FXMLLoader.load(fxmlURL));
+        if (translateNode == null) {
+            fxmlURL = MainController.class.getResource("/fxml/translate-screen.fxml");
+            assert fxmlURL != null;
+            translateNode = FXMLLoader.load(fxmlURL);
+            WorkPane.getChildren().add(translateNode);
+        }
+        translateNode.setDisable(false);
+        translateNode.setVisible(true);
+        if (dictionaryNode != null) {
+            dictionaryNode.setDisable(true);
+            dictionaryNode.setVisible(false);
+        }
+        if (gameNode != null) {
+            gameNode.setDisable(true);
+            gameNode.setVisible(false);
+        }
         resetButtons();
         ButtonTranslate.setDisable(true);
     }
