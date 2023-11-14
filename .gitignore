@@ -21,10 +21,12 @@ dictionary_gui/.idea/modules.xml
 dictionary_gui/.idea/jarRepositories.xml
 dictionary_gui/.idea/encodings.xml
 dictionary_gui/.idea/compiler.xml
+dictionary_gui/.idea/dbnavigator.xml
 dictionary_gui/.idea/.name
 
 # IML files
 dictionary_cmdline/src/*.iml
+dictionary_gui/*.iml
 
 # Target files
 dictionary_gui/target/

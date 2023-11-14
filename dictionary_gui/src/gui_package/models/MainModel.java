@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.*;
 
 public class MainModel {
-    static String jdbcUrl = "jdbc:sqlite:/C:src\\gui_package\\models\\database.db";
+    static String jdbcUrl = "jdbc:sqlite:src\\gui_package\\models\\database.db";
     static Connection connection;
     static Statement statement;
 
@@ -63,19 +63,13 @@ public class MainModel {
     }
 
     public static ResultSet getWordByString(String wordString) throws SQLException {
-        String sql = "SELECT *" +
-                     "FROM words" +
-                     "WHERE Word LIKE '" + wordString + "'" +
-                     "UNION ALL" +
-                     "SELECT *" +
-                     "FROM words" +
-                     "WHERE Word LIKE '" + wordString + "%'" +
-                     "UNION ALL" +
-                     "SELECT *" +
-                     "FROM words" +
-                     "WHERE Word LIKE '%" + wordString + "%'" +
-                     "GROUP BY Word" +
-                     "HAVING COUNT(*) <= 1;";
+        String sql = "SELECT DISTINCT * FROM (SELECT * " +
+                     "FROM words WHERE Word LIKE '" + wordString + "' " +
+                     "UNION ALL SELECT * FROM words " +
+                     "WHERE Word LIKE '" + wordString + "%' " +
+                     "UNION ALL SELECT * FROM words " +
+                     "WHERE Word LIKE '%" + wordString + "%' " +
+                     "GROUP BY Word);";
         return statement.executeQuery(sql);
     }
 
@@ -83,4 +77,11 @@ public class MainModel {
         statement.close();
         connection.close();
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        ResultSet a = getWordByString("house");
+//        while (a.next()) {
+//            System.out.println(a.getString(2));
+//        }
+//    }
 }
