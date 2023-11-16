@@ -1,3 +1,26 @@
+## 16-11-2023
+
+### Added
+
+* Dialog Box
+* Add/Edit Word scene
+* Images
+
+### Changed
+
+* Update content of "textarea.css"
+* Update dictionary view to allow scrolling
+
+### Removed
+
+* Remove images "delete.png" and "delete_hover.png"
+
+## 14-11-2023
+
+### Changed
+
+* Update database models
+
 ## 13-11-2023
 
 ### Added
