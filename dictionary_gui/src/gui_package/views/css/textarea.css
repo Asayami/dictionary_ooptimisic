@@ -1,13 +1,23 @@
 .text-area {
     -fx-background-color: transparent;
 }
+
 .text-area .viewport {
     -fx-background-color: transparent;
 }
+
 .text-area .content {
-    -fx-cursor: default;
     -fx-background-color: white;
     -fx-background-radius: 10;
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 1;
+    -fx-opacity: 0;
+}
+
+#dictionary_box .content {
+    -fx-cursor: default;
 }
 
 #member_list .content {

@@ -1,26 +1,19 @@
 package gui_package.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DictionaryController {
+public class DictionaryController implements Initializable {
     private final ArrayList<String> words = new ArrayList<>(
             Arrays.asList("asshole", "bitch", "cunt", "dickhead", "retard", "motherfucker", "nibba"));
     private String lastWord;
@@ -30,6 +23,25 @@ public class DictionaryController {
 
     @FXML
     private ListView<String> listView;
+
+    @FXML
+    private TextArea meaningBox;
+
+    @FXML
+    private TextArea exampleBox;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // TODO: disable copying
+        meaningBox.setTextFormatter(new TextFormatter<String>(change ->  {
+            change.setAnchor(change.getCaretPosition());
+            return change ;
+        }));
+        exampleBox.setTextFormatter(new TextFormatter<String>(change ->  {
+            change.setAnchor(change.getCaretPosition());
+            return change ;
+        }));
+    }
 
     @FXML
     void search(ActionEvent event) {
@@ -56,5 +68,4 @@ public class DictionaryController {
             return searchWordsArray.stream().allMatch(word -> input.toLowerCase().contains(word.toLowerCase()));
         }).collect(Collectors.toList());
     }
-
 }
