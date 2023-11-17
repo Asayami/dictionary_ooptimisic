@@ -18,6 +18,8 @@ import static gui_package.models.MainModel.getWord;
 import static gui_package.models.MainModel.removeWord;
 
 public class EditAddController {
+    private double x;
+    private double y;
     DictionaryController dic = new DictionaryController();
 
     private Word currentWord;
@@ -48,6 +50,19 @@ public class EditAddController {
 
     @FXML
     private Button removeWordButton;
+
+    @FXML
+    public void titleBarDragged(MouseEvent event) {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
+
+    @FXML
+    public void titleBarPressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
 
     public void close_button_highlight(MouseEvent mouseEvent) {
         ColorAdjust colorAdjust = new ColorAdjust();

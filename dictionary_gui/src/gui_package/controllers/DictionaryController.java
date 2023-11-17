@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -87,12 +88,15 @@ public class DictionaryController implements Initializable {
     private BorderPane editBorderPane;
 
     @FXML
-    void search(ActionEvent event) throws SQLException {
+    void search(KeyEvent event) throws SQLException {
         listView.getItems().clear();
         ResultSet resultSet = getWordByString(searchBar.getText());
         while (resultSet.next()) {
             String sword = resultSet.getString("Word");
-            setForListView.add(sword);
+            if (sword.isEmpty()) {
+                continue;
+            }
+            setForListView.add(sword.toLowerCase());
         }
 
         // listView.getItems().addAll((getWordByString("")));
@@ -124,6 +128,7 @@ public class DictionaryController implements Initializable {
         }
         listView.getSelectionModel().clearSelection();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: disable copying
@@ -168,29 +173,14 @@ public class DictionaryController implements Initializable {
         y = stage.getY();
 
         Stage popup = new Stage();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 560, 610);
         popup.setTitle("Edit word");
         popup.initStyle(StageStyle.UNDECORATED);
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setResizable(false);
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                popup.setX(event.getScreenX() - xOffset);
-                popup.setY(event.getScreenY() - yOffset);
-            }
-        });
         popup.setScene(scene);
         popup.show();
-        popup.setX(x + 337);
-        popup.setY(y + 249);
+        popup.setX(x + 232);
+        popup.setY(y + 79);
     }
 }

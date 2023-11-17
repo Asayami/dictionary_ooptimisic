@@ -14,13 +14,30 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="560.0" style="-fx-background-color: #bfd9ff; -fx-border-color: #aecaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.EditAddController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="610.0" prefWidth="560.0" style="-fx-background-color: #bfd9ff; -fx-border-color: #aecaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.EditAddController">
    <center>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="540.0" spacing="4.0" BorderPane.alignment="CENTER">
          <children>
+            <Label layoutX="10.0" layoutY="14.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="• Word:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="wordTypeTextField1" layoutX="10.0" layoutY="38.0" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" style="-fx-background-color: white; -fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </TextField>
+            <Line endX="540.0" layoutX="11.0" layoutY="77.0" />
             <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="• Word Type:">
                <VBox.margin>
-                  <Insets top="4.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font size="15.0" />
@@ -59,7 +76,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
+            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -78,7 +95,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
+            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
