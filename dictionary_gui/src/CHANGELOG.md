@@ -1,3 +1,15 @@
+## 17-11-2023
+
+### Changed
+
+* Update Dictionary, Add/Edit Word scene
+* Search bar now updates on user input
+* Search bar now displays word in lowercase
+
+### Removed
+
+* Remove image "magnifying_glass.png"
+
 ## 16-11-2023
 
 ### Added
