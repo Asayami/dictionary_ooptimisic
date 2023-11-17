@@ -35,11 +35,11 @@
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#search" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/add.png" />
+                              <Image url="@../images/magnifying_glass.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -67,7 +67,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="667.0" spacing="8.0" style="-fx-background-color: transparent;">
                <children>
-                  <Label alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="40.0" prefWidth="476.0" text="supercalifragilisticexpialidocious">
+                  <Label fx:id="searchedWordLabel" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="40.0" prefWidth="476.0" text="supercalifragilisticexpialidocious">
                      <font>
                         <Font name="Calibri" size="36.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <Insets left="4.0" top="12.0" />
                      </HBox.margin>
                   </Label>
-                  <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="pronunciationButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Pronunciation" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
                      <HBox.margin>
                         <Insets top="8.0" />
                      </HBox.margin>
@@ -90,7 +90,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="547.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="copiedTextButton" layoutX="547.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyLabel" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
                      <HBox.margin>
                         <Insets top="8.0" />
                      </HBox.margin>
@@ -105,7 +105,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="595.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="editWordButton" layoutX="595.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editScene" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent;">
                      <HBox.margin>
                         <Insets top="8.0" />
                      </HBox.margin>
@@ -127,13 +127,13 @@
             </HBox>
             <VBox layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="667.0" spacing="6.0" style="-fx-background-color: transparent;">
                <children>
-                  <Label prefHeight="30.0" prefWidth="667.0" text="adjective • (&quot;noun&quot; if it is also a noun) • (&quot;verb&quot; if it is also a verb) ">
+                  <Label fx:id="wordFormLabel" prefHeight="30.0" prefWidth="667.0" text="adjective • (&quot;noun&quot; if it is also a noun) • (&quot;verb&quot; if it is also a verb) ">
                      <font>
                         <Font name="System Italic" size="18.0" />
                      </font>
                   </Label>
                   <Line endX="643.0" />
-                  <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="50.0" prefRowCount="2" prefWidth="643.0" stylesheets="@../css/textarea.css" text="UK pronunciation: /ˌsuː.pə.kæl.ɪ.frædʒ.ɪˌlɪs.tɪk.eks.pi.æl.ɪˈdəʊ.ʃəs/&#10;US pronunciation: /ˌsuː.pɚ.kæl.ɪ.frædʒ.əˌlɪs.tɪk.eks.pi.æl.ɪˈdoʊ.ʃəs/" wrapText="true">
+                  <TextArea fx:id="wordPronunciationTextArea" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="50.0" prefRowCount="2" prefWidth="643.0" stylesheets="@../css/textarea.css" text="UK pronunciation: /ˌsuː.pə.kæl.ɪ.frædʒ.ɪˌlɪs.tɪk.eks.pi.æl.ɪˈdəʊ.ʃəs/&#10;US pronunciation: /ˌsuː.pɚ.kæl.ɪ.frædʒ.əˌlɪs.tɪk.eks.pi.æl.ɪˈdoʊ.ʃəs/" wrapText="true">
                      <font>
                         <Font name="Cambria" size="16.0" />
                      </font>
@@ -151,7 +151,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea id="dictionary_box" fx:id="meaningBox" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="644.0" stylesheets="@../css/textarea.css" text="English: extremely good&#10;Tiếng Việt: cực kì tốt&#10;line_3&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_8&#10;line_9&#10;line_10&#10;line_11" wrapText="true">
+                  <TextArea fx:id="wordMeaningTextArea" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="English: extremely good&#10;Tiếng Việt: cực kì tốt&#10;line_3&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_max" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -169,7 +169,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea id="dictionary_box" fx:id="exampleBox" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="644.0" stylesheets="@../css/textarea.css" text="• Life on the set of the 1964 musical wasn't always supercalifragilisticexpialidocious.&#10;• He can also spell words backward, including supercalifragilisticexpialidocious.&#10;• The third upcoming event? Well, it's just &quot;supercalifragilisticexpialidocious&quot;.&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_8&#10;line_9&#10;line_10" wrapText="true">
+                  <TextArea fx:id="wordExampleTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="• Life on the set of the 1964 musical wasn't always supercalifragilisticexpialidocious.&#10;• He can also spell words backward, including supercalifragilisticexpialidocious.&#10;• The third upcoming event? Well, it's just &quot;supercalifragilisticexpialidocious&quot;.&#10;line_4&#10;line_5&#10;line_max" wrapText="true">
                      <font>
                         <Font name="System Italic" size="16.0" />
                      </font>
