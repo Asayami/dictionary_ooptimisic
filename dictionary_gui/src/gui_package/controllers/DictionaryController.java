@@ -36,15 +36,11 @@ import static gui_package.models.MainModel.*;
 import static gui_package.services.tts.speak;
 
 public class DictionaryController implements Initializable {
-    private final Set<String> setForListView = new HashSet<>();
     private String lastWord;
     private Word currentWord;
     protected int currentWordId = -1;
     private Node editNode;
-    private URL fxmlURL;
     private Stage stage;
-    private double x;
-    private double y;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -89,6 +85,7 @@ public class DictionaryController implements Initializable {
 
     @FXML
     void search(KeyEvent event) throws SQLException {
+        List<String> ls = new ArrayList<>();
         listView.getItems().clear();
         ResultSet resultSet = getWordByString(searchBar.getText());
         while (resultSet.next()) {
@@ -96,11 +93,11 @@ public class DictionaryController implements Initializable {
             if (sword.isEmpty()) {
                 continue;
             }
-            setForListView.add(sword.toLowerCase());
+            ls.add(sword.toLowerCase());
         }
 
-        // listView.getItems().addAll((getWordByString("")));
-        listView.getItems().addAll(searchList(searchBar.getText(), setForListView));
+        ls.sort(Comparator.comparingInt(String::length));
+        listView.getItems().addAll(ls);
     }
 
     @FXML
@@ -119,8 +116,7 @@ public class DictionaryController implements Initializable {
             wordMeaningTextArea.setText(Objects.requireNonNull(currentWord).getWord_explain());
             if (currentWord.getExample() == null) { //this doesn't really work
                 wordExampleTextArea.setText("No example located in database!\n" + "Từ này chưa có ví dụ!");
-            }
-            else {
+            } else {
                 wordExampleTextArea.setText(Objects.requireNonNull(currentWord).getExample());
             }
 //            wordExampleTextArea.setScrollable(true);
@@ -132,11 +128,11 @@ public class DictionaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: disable copying
-        wordMeaningTextArea.setTextFormatter(new TextFormatter<String>(change ->  {
+        wordMeaningTextArea.setTextFormatter(new TextFormatter<String>(change -> {
             change.setAnchor(change.getCaretPosition());
-            return change ;
+            return change;
         }));
-        wordExampleTextArea.setTextFormatter(new TextFormatter<String>(change ->  {
+        wordExampleTextArea.setTextFormatter(new TextFormatter<String>(change -> {
             change.setAnchor(change.getCaretPosition());
             return change;
         }));
@@ -145,13 +141,6 @@ public class DictionaryController implements Initializable {
     @FXML
     public void Pronunciation(ActionEvent event) {
         tts.speak(searchedWordLabel.getText());
-    }
-
-    private List<String> searchList(String searchWords, Set<String> listOfStrings) {
-        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
-        return listOfStrings.stream().filter(input -> {
-            return searchWordsArray.stream().allMatch(word -> input.toLowerCase().contains(word.toLowerCase()));
-        }).collect(Collectors.toList());
     }
 
     @FXML
@@ -164,13 +153,13 @@ public class DictionaryController implements Initializable {
 
     @FXML
     private void editScene(ActionEvent event) throws IOException {
-        fxmlURL = EditAddController.class.getResource("/fxml/edit-add-box.fxml");
+        URL fxmlURL = EditAddController.class.getResource("/fxml/edit-add-box.fxml");
         Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
         if (stage == null) {
             stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         }
-        x = stage.getX();
-        y = stage.getY();
+        double x = stage.getX();
+        double y = stage.getY();
 
         Stage popup = new Stage();
         Scene scene = new Scene(root, 560, 610);

@@ -4,6 +4,7 @@ module main_package {
     requires java.sql;
     requires org.slf4j;
     requires freetts;
+    requires com.google.gson;
 
     opens gui_package to javafx.fxml;
     exports gui_package;
