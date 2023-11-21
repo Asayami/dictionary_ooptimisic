@@ -2,9 +2,12 @@ package gui_package.services;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -12,9 +15,13 @@ import com.google.gson.JsonElement;
 
 public class googleTranslator {
 
+    private static String encodeValue(String value) throws UnsupportedEncodingException {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
+    }
+
     public static String translate(String text, String targetLanguage) {
         try {
-            String url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" + targetLanguage + "&dt=t&q=" + text;
+            String url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" + targetLanguage + "&dt=t&q=" + encodeValue(text);
             URL apiUrl = URI.create(url).toURL();
 
             HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
