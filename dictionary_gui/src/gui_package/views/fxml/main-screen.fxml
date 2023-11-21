@@ -23,7 +23,7 @@
                   <Insets left="4.0" />
                </HBox.margin>
                <image>
-                  <Image url="@../images/google_translate.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="1024.0" text="Dictionary Ultra Pro" textFill="WHITE">

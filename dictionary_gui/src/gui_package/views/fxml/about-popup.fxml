@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/google_translate.png" />
+                  <Image url="@../images/logo.png" />
                </image>
                <HBox.margin>
                   <Insets left="4.0" />
@@ -57,7 +57,7 @@
                   <Font name="Constantia Bold" size="18.0" />
                </font>
             </Label>
-            <TextArea id="member_list" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="132.0" prefRowCount="6" prefWidth="334.0" stylesheets="@../css/textarea.css" text="Project Manager: Bùi Tuấn Minh&#10;Developers:&#10;• Phan Vũ Liêm&#10;• Bùi Thành Lộc&#10;• Trương Quang Minh&#10;Designed by Hoàng Minh Nghĩa" wrapText="true">
+            <TextArea id="member_list" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="132.0" prefRowCount="6" prefWidth="334.0" stylesheets="@../css/textarea.css" text="Project Manager: Bùi Tuấn Minh&#10;Developers:&#10;• Phan Vũ Liêm&#10;• Bùi Thành Lộc&#10;• Trương Quang Minh&#10;App designed by Hoàng Minh Nghĩa" wrapText="true">
                <font>
                   <Font name="Cambria" size="17.0" />
                </font>
