@@ -1,3 +1,14 @@
+## 21-11-2023
+
+### Added
+
+* Application icon
+
+### Changed
+
+* Update Display icon on title bar
+* Update Controllers
+
 ## 17-11-2023
 
 ### Changed
