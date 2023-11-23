@@ -2,7 +2,6 @@ package gui_package.services;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -15,12 +14,14 @@ import com.google.gson.JsonElement;
 
 public class googleTranslator {
 
-    private static String encodeValue(String value) throws UnsupportedEncodingException {
+    private static String encodeValue(String value) {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
     public static String translate(String text, String targetLanguage) {
         try {
+            text = text.trim();
+
             String url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" + targetLanguage + "&dt=t&q=" + encodeValue(text);
             URL apiUrl = URI.create(url).toURL();
 
@@ -39,7 +40,6 @@ public class googleTranslator {
             connection.disconnect();
 
             // Xử lý phản hồi JSON
-
             return processTranslationResponse(response.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,19 +51,19 @@ public class googleTranslator {
     private static String processTranslationResponse(String jsonResponse) {
         Gson gson = new Gson();
 
-        // Phân tích JSON thành một JsonArray
-        JsonArray jsonArray = gson.fromJson(jsonResponse, JsonArray.class);
+        // Phân tích JSON thành một JsonArray, ta lấy phần tử đầu tiên vì nó chứa từ đã được dịch
+        JsonArray jsonArray = gson.fromJson(jsonResponse, JsonArray.class).get(0).getAsJsonArray();
 
-        // Trích xuất kết quả dịch thuật từ JsonArray
-        String translation = "";
-        if (jsonArray != null && !jsonArray.isEmpty()) {
-            JsonArray translationArray = jsonArray.get(0).getAsJsonArray();
-            if (translationArray != null && !translationArray.isEmpty()) {
-                JsonElement translationElement = translationArray.get(0).getAsJsonArray().get(0);
-                translation = translationElement.getAsString();
+        // API có thể tách câu được dịch ra làm các thành phần nhỏ
+        // Do đó, JsonArray chứa nhiều Elements, mỗi Element lại là một JsonArray con
+        // Trong đó, phần tử đầu tiên của chúng là cụm từ đã được dịch, ta trích xuất chúng
+        StringBuilder translation = new StringBuilder();
+        for (JsonElement miniArray : jsonArray) {
+            if (miniArray != null) {
+                translation.append(miniArray.getAsJsonArray().get(0).getAsString());
             }
         }
 
-        return translation;
+        return translation.toString();
     }
 }
