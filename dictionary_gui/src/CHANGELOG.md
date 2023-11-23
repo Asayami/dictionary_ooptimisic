@@ -1,3 +1,19 @@
+## 23-11-2023
+
+### Added
+
+* Translator functionalities
+* Dialog box core functionalities
+
+### Changed
+
+* Update Game, Dialog and Translator controllers
+* Update "textarea.css"
+
+### Fixed
+
+* Fixed an issue where translated text was not fully extracted from google translate api's json
+
 ## 21-11-2023
 
 ### Added
