@@ -1,6 +1,9 @@
 package gui_package.models;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 public class MainModel {
@@ -82,15 +85,21 @@ public class MainModel {
         return statement.executeQuery(sql);
     }
 
+    public static String getWordleWord() throws SQLException {
+        String sql = "SELECT * FROM wordle_wordList ORDER BY RANDOM() LIMIT 1;";
+        return statement.executeQuery(sql).getString("Word");
+    }
+
     public static void closeConnection() throws SQLException {
         statement.close();
         connection.close();
     }
 
-//    public static void main(String[] args) throws SQLException {
+//    public static void main(String[] args) throws SQLException, UnsupportedEncodingException {
 //        ResultSet a = getWordByString("house");
 //        while (a.next()) {
 //            System.out.println(a.getString(2));
 //        }
+//        System.out.println(getWordleWord());
 //    }
 }
