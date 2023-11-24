@@ -2,33 +2,18 @@ package gui_package.controllers;
 
 import gui_package.models.MainModel;
 import gui_package.models.Word;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.w3c.dom.events.Event;
 
-import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 
 public class GameController {
@@ -44,8 +29,7 @@ public class GameController {
 
     private boolean isGameFinished = false;
 
-    public GameController() throws SQLException {
-        //clear();
+    public GameController() {
     }
 
     @FXML
@@ -66,10 +50,46 @@ public class GameController {
 
     @FXML
     private void gameInfo(ActionEvent event) {
-        Button ts = DialogController.appear(event, true, "", "");
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "How To Play", "• Đoán một từ có 5 chữ cái có nghĩa và được phép đoán 6 lần.\n• Màu của ô chữ sẽ thay đổi dựa trên độ tương đồng với từ cần tìm.");
         ts.setOnAction(eventHandler -> {
             //run when press okay
-            System.out.println("Pressed Okay");
+            DialogController.okay();
+        });
+    }
+
+    @FXML
+    private void restartGame(ActionEvent event) {
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?");
+        ts.setOnAction(eventHandler -> {
+            try {
+                Scene scene = c11.getScene();
+                //5x6 board
+                for (int i = 1; i <= 6; i++) {
+                    for (int j = 1; j <= 5; j++) {
+
+                        Label label = (Label) scene.lookup("#c" + i + j);
+                        label.setText("");
+                        StackPane stackPane = (StackPane) label.getParent();
+                        stackPane.setStyle("-fx-background-color: white;-fx-background-radius: 5;-fx-border-color: #d3d6da;-fx-border-radius:5;-fx-border-width:2;");
+                    }
+                }
+
+                //A-Z keyboard
+                for (char c = 'A'; c <= 'Z'; c++) {
+                    StackPane stackPaneChar = (StackPane) (scene.lookup("#" + c));
+                    stackPaneChar.setStyle("-fx-background-color: #d3d6da;-fx-background-radius:5;");
+                    Label labelChar = (Label) stackPaneChar.getChildren().get(0);
+                    labelChar.setStyle("-fx-text-fill: black;");
+                }
+
+                wordRow = "";
+                currentRow = 1;
+                selectedWord = MainModel.getWordleWord().toUpperCase();
+                isGameFinished = false;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            //run when press okay
             DialogController.okay();
         });
     }
@@ -77,7 +97,7 @@ public class GameController {
     private void addCharacter(MouseEvent event, String character) {
         if (currentRow <= 6 && wordRow.length() < 5 && !isGameFinished) {
             wordRow += character;
-            Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + Integer.toString(currentRow) + Integer.toString(wordRow.length()));
+            Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + wordRow.length());
             label.setText(character);
             label.setTextFill(Color.BLACK);
         }
@@ -85,7 +105,7 @@ public class GameController {
 
     private void backspace(MouseEvent event) {
         if (!wordRow.isEmpty()) {
-            Label label = (Label) ((StackPane) event.getSource()).getScene().lookup("#c" + Integer.toString(currentRow) + Integer.toString(wordRow.length()));
+            Label label = (Label) ((StackPane) event.getSource()).getScene().lookup("#c" + currentRow + wordRow.length());
             label.setText("");
             wordRow = wordRow.substring(0, wordRow.length() - 1);
         }
@@ -96,9 +116,9 @@ public class GameController {
             Word checkValidWord = MainModel.getWord(wordRow);
             if (checkValidWord.getWord_target() != null) {
                 for (int i = 0; i < wordRow.length(); i++) {
-                    Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + Integer.toString(currentRow) + Integer.toString(i + 1));
+                    Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1));
                     label.setTextFill(Color.WHITE);
-                    StackPane stackPane = (StackPane) ((Label) event.getSource()).getScene().lookup("#c" + Integer.toString(currentRow) + Integer.toString(i + 1)).getParent();
+                    StackPane stackPane = (StackPane) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1)).getParent();
                     char c = wordRow.charAt(i);
                     StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
                     Label labelChar = (Label) stackPaneChar.getChildren().get(0);
@@ -118,6 +138,7 @@ public class GameController {
                 }
                 if (wordRow.equals(selectedWord)) {
                     isGameFinished = true;
+                    gameFinishNoti();
                 }
                 currentRow += 1;
                 wordRow = "";
@@ -125,16 +146,12 @@ public class GameController {
         }
     }
 
-    private void clear() {
+    private void gameFinishNoti() {
         Scene scene = c11.getScene();
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 1; j <= 5; j++) {
-                Label label = (Label) scene.lookup("#c" + Integer.toString(i) + Integer.toString(j));
-                label.setText("");
-                StackPane stackPane = (StackPane) label.getParent();
-                stackPane.setStyle("-fx-background-color: white;");
-            }
-        }
+        Button ts = DialogController.appear(scene, false, "Congratulation !!!", "You completed this game in " + currentRow + " word(s)."); //chinh true thanh false de an nut cancel
+        ts.setOnAction(eventHandler -> {
+            //run when press okay
+            DialogController.okay();
+        });
     }
-
 }

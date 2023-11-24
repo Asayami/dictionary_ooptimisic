@@ -1,17 +1,12 @@
 package gui_package.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,12 +14,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class DialogController {
 
     /*
-    Button ts = DialogController.appear(event, true, "title", "message"); //chinh true thanh false de an nut cancel
+    Button ts = DialogController.appear(scene, true, "title", "message"); //chinh true thanh false de an nut cancel
     ts.setOnAction(eventHandler -> {
         //run when press okay
         System.out.println("Pressed Okay");
@@ -49,8 +43,8 @@ public class DialogController {
     public DialogController() {
     }
 
-    public static Button appear(ActionEvent event, boolean isCancelDisplay, String title, String message) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public static Button appear(Scene sourceScene, boolean isCancelDisplay, String title, String message) {
+        Stage stage = (Stage) sourceScene.getWindow();
         double x = stage.getX();
         double y = stage.getY();
         if (popupStage == null) {
@@ -76,10 +70,14 @@ public class DialogController {
             cancelButton.setDisable(true);
         }
         popupStage.show();
+        /*
+        double heightDiff = messageLabel.getPrefHeight() > 60 ? messageLabel.getHeight() - 60 : 0; //getHeight can only get after stage show
+        popupStage.setHeight(300); // Only fking way to change height, no auto
+        */
         return okayButton;
     }
 
-    public void cancel(ActionEvent event) {
+    public void cancel() {
         popupStage.hide();
     }
 
