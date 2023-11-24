@@ -54,6 +54,10 @@ public class TranslatorController implements Initializable {
         label_left.setText(label_right.getText());
         label_right.setText(temp);
 
+        temp = textArea_userInput.getText();
+        textArea_userInput.setText(textArea_translation.getText());
+        textArea_translation.setText(temp);
+
         if (currentLanguage.equals("vi")) {
             currentLanguage = "en";
         } else {
