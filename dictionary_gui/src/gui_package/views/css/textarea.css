@@ -25,3 +25,7 @@
     -fx-background-color: #f0f7ff;
     -fx-background-radius: 10;
 }
+
+#translation_box .text-input, .text-input:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
+}
