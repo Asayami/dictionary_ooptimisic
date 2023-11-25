@@ -43,7 +43,7 @@ public class DialogController {
     public DialogController() {
     }
 
-    public static Button appear(Scene sourceScene, boolean isCancelDisplay, String title, String message) {
+    public static Button appear(Scene sourceScene, boolean isCancelDisplay, String title, String message, double stageHeight) {
         Stage stage = (Stage) sourceScene.getWindow();
         double x = stage.getX();
         double y = stage.getY();
@@ -69,6 +69,7 @@ public class DialogController {
             cancelButton.setVisible(false);
             cancelButton.setDisable(true);
         }
+        popupStage.setHeight(stageHeight);
         popupStage.show();
         /*
         double heightDiff = messageLabel.getPrefHeight() > 60 ? messageLabel.getHeight() - 60 : 0; //getHeight can only get after stage show

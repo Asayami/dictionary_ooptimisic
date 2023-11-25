@@ -50,7 +50,7 @@ public class GameController {
 
     @FXML
     private void gameInfo(ActionEvent event) {
-        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "How To Play", "• Đoán một từ có 5 chữ cái có nghĩa và được phép đoán 6 lần.\n• Màu của ô chữ sẽ thay đổi dựa trên độ tương đồng với từ cần tìm.");
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "How To Play", "• Đoán một từ có 5 chữ cái có nghĩa và được phép đoán 6 lần.\n• Màu của ô chữ sẽ thay đổi dựa trên độ tương đồng với từ cần tìm.", 184);
         ts.setOnAction(eventHandler -> {
             //run when press okay
             DialogController.okay();
@@ -59,7 +59,7 @@ public class GameController {
 
     @FXML
     private void restartGame(ActionEvent event) {
-        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?");
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?", 174);
         ts.setOnAction(eventHandler -> {
             try {
                 Scene scene = c11.getScene();
@@ -89,6 +89,16 @@ public class GameController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            //run when press okay
+            DialogController.okay();
+        });
+    }
+
+    @FXML
+    private void userStatistic(ActionEvent event) {
+        String message = "Games Played: 2.\nWin Rate: 100%.\nCurrent Streak: 2.\nMax Streak: 2.\nGuess Distribution: 3.5.";
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Statistics", message, 200); //chinh true thanh false de an nut cancel
+        ts.setOnAction(eventHandler -> {
             //run when press okay
             DialogController.okay();
         });
@@ -148,7 +158,7 @@ public class GameController {
 
     private void gameFinishNoti() {
         Scene scene = c11.getScene();
-        Button ts = DialogController.appear(scene, false, "Congratulation !!!", "You completed this game in " + currentRow + " word(s)."); //chinh true thanh false de an nut cancel
+        Button ts = DialogController.appear(scene, false, "Congratulation !!!", "You completed this game in " + currentRow + " word(s).", 174); //chinh true thanh false de an nut cancel
         ts.setOnAction(eventHandler -> {
             //run when press okay
             DialogController.okay();
