@@ -316,8 +316,9 @@ public class GameController {
                 statistics.setBestStreak(streak);
             }
             statistics.setTotalWins(statistics.getTotalWins() + 1);
+        } else {
+            statistics.setCurrStreak(0);
         }
-        statistics.setCurrStreak(0);
         statistics.addCount(currentRow);
         statistics.setGameCount(statistics.getGameCount() + 1);
     }

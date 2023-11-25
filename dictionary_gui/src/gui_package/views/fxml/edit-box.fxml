@@ -113,7 +113,7 @@
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/google_translate.png" />
+                  <Image url="@../images/logo.png" />
                </image>
                <HBox.margin>
                   <Insets left="4.0" />
@@ -177,7 +177,7 @@
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets bottom="4.0" />
+            <Insets bottom="4.0" top="-16.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>

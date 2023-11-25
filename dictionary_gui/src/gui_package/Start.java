@@ -18,7 +18,7 @@ public class Start extends Application {
         Image icon = new Image(String.valueOf(Start.class.getResource("views/images/logo.png")));
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("views/fxml/main-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
-        stage.setTitle("Dictionary Ultra Vip Pro Plus+");
+        stage.setTitle("Dictionary Ultra Pro");
         stage.getIcons().add(icon);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
