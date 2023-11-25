@@ -1,5 +1,6 @@
 package gui_package.controllers;
 
+import gui_package.Start;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -138,7 +140,8 @@ public class MainController implements Initializable {
 
         Stage popup = new Stage();
         Scene scene = new Scene(root, 350, 230);
-        popup.setTitle("About us");
+        popup.setTitle("Dictionary Ultra Pro");
+        popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popup.initStyle(StageStyle.UNDECORATED);
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setResizable(false);

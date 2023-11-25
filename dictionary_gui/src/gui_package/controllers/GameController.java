@@ -1,19 +1,29 @@
 package gui_package.controllers;
 
+import gui_package.Start;
 import gui_package.models.MainModel;
-import gui_package.models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 
 public class GameController {
@@ -23,11 +33,24 @@ public class GameController {
 
     private int currentRow = 1;
 
+    private int streak = 0;
+
     private String wordRow = "";
 
     private String selectedWord = "WHERE";//MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
+
+    private boolean hasInitStats = true;
+
+    @FXML
+    private Stage stage;
+    private Stage howToPlay;
+    private Stage gameStats;
+    private Stage gameEnd;
+
+    private wordleStatisticsController statistics;
+    private wordleEndController endScreen;
 
     public GameController() {
     }
@@ -49,17 +72,43 @@ public class GameController {
     }
 
     @FXML
-    private void gameInfo(ActionEvent event) {
-        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "How To Play", "• Đoán một từ có 5 chữ cái có nghĩa và được phép đoán 6 lần.\n• Màu của ô chữ sẽ thay đổi dựa trên độ tương đồng với từ cần tìm.", 184);
-        ts.setOnAction(eventHandler -> {
-            //run when press okay
-            DialogController.okay();
-        });
+    private void gameInfo(ActionEvent event) throws IOException {
+        if (howToPlay != null) {
+            howToPlay.show();
+            stage.getScene().getRoot().setEffect(new BoxBlur());
+        } else {
+            FXMLLoader loader = new FXMLLoader(GameController.class.getResource("/fxml/wordle_howtoplay.fxml"));
+            Parent root = loader.load();
+            if (stage == null) {
+                stage = (Stage) (c11.getScene().getWindow());
+            }
+            double x = stage.getX();
+            double y = stage.getY();
+
+            howToPlay = new Stage();
+            Scene scene = new Scene(root, 280, 300);
+            howToPlay.setTitle("Dictionary Ultra Pro");
+            howToPlay.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+            howToPlay.initStyle(StageStyle.UNDECORATED);
+            howToPlay.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                if (! isNowFocused) {
+                    howToPlay.hide();
+                    stage.getScene().getRoot().setEffect(null);
+                }
+            });
+            howToPlay.setResizable(false);
+            howToPlay.setScene(scene);
+            howToPlay.show();
+            howToPlay.setX(x + 372);
+            howToPlay.setY(y + 234);
+
+            stage.getScene().getRoot().setEffect(new BoxBlur());
+        }
     }
 
     @FXML
     private void restartGame(ActionEvent event) {
-        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?", 174);
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?");
         ts.setOnAction(eventHandler -> {
             try {
                 Scene scene = c11.getScene();
@@ -82,6 +131,21 @@ public class GameController {
                     labelChar.setStyle("-fx-text-fill: black;");
                 }
 
+
+                if (gameStats == null) {
+                    hasInitStats = false;
+                    try {
+                        userStatistic(new ActionEvent());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                if (!isGameFinished) {
+                    statistics.setGameCount(statistics.getGameCount() + 1);
+                    streak = 0;
+                }
+
                 wordRow = "";
                 currentRow = 1;
                 selectedWord = MainModel.getWordleWord().toUpperCase();
@@ -95,13 +159,47 @@ public class GameController {
     }
 
     @FXML
-    private void userStatistic(ActionEvent event) {
-        String message = "Games Played: 2.\nWin Rate: 100%.\nCurrent Streak: 2.\nMax Streak: 2.\nGuess Distribution: 3.5.";
-        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Statistics", message, 200); //chinh true thanh false de an nut cancel
-        ts.setOnAction(eventHandler -> {
-            //run when press okay
-            DialogController.okay();
-        });
+    private void userStatistic(ActionEvent event) throws IOException {
+        if (gameStats != null) {
+            statistics.update();
+            gameStats.show();
+            stage.getScene().getRoot().setEffect(new BoxBlur());
+        } else {
+            FXMLLoader loader = new FXMLLoader(GameController.class.getResource("/fxml/wordle_statistics.fxml"));
+            Parent root = loader.load();
+            if (stage == null) {
+                stage = (Stage) (c11.getScene().getWindow());
+            }
+            double x = stage.getX();
+            double y = stage.getY();
+
+            gameStats = new Stage();
+            Scene scene = new Scene(root, 400, 360);
+            gameStats.setTitle("Dictionary Ultra Pro");
+            gameStats.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+            gameStats.initStyle(StageStyle.UNDECORATED);
+            gameStats.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                if (! isNowFocused) {
+                    gameStats.hide();
+                    stage.getScene().getRoot().setEffect(null);
+                }
+            });
+            gameStats.setResizable(false);
+            gameStats.setScene(scene);
+
+            if (hasInitStats) {
+                gameStats.show();
+                stage.getScene().getRoot().setEffect(new BoxBlur());
+            } else {
+                hasInitStats = true;
+            }
+
+            gameStats.setX(x + 312);
+            gameStats.setY(y + 204);
+
+
+            statistics = loader.getController();
+        }
     }
 
     private void addCharacter(MouseEvent event, String character) {
@@ -123,8 +221,8 @@ public class GameController {
 
     private void enter(MouseEvent event) throws SQLException {
         if (wordRow.length() == 5 && currentRow <= 6) {
-            Word checkValidWord = MainModel.getWord(wordRow);
-            if (checkValidWord.getWord_target() != null) {
+            String checkValidWord = MainModel.verifyWordleWord(wordRow);
+            if (checkValidWord != null) {
                 for (int i = 0; i < wordRow.length(); i++) {
                     Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1));
                     label.setTextFill(Color.WHITE);
@@ -150,6 +248,12 @@ public class GameController {
                     isGameFinished = true;
                     gameFinishNoti();
                 }
+
+                if (currentRow == 6) {
+                    isGameFinished = false;
+                    gameFinishNoti();
+                }
+
                 currentRow += 1;
                 wordRow = "";
             }
@@ -157,11 +261,64 @@ public class GameController {
     }
 
     private void gameFinishNoti() {
-        Scene scene = c11.getScene();
-        Button ts = DialogController.appear(scene, false, "Congratulation !!!", "You completed this game in " + currentRow + " word(s).", 174); //chinh true thanh false de an nut cancel
-        ts.setOnAction(eventHandler -> {
-            //run when press okay
-            DialogController.okay();
-        });
+        if (gameEnd != null) {
+            gameEnd.show();
+            stage.getScene().getRoot().setEffect(new BoxBlur());
+        } else {
+            FXMLLoader loader = new FXMLLoader(GameController.class.getResource("/fxml/wordle_endscreen.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (stage == null) {
+                stage = (Stage) (c11.getScene().getWindow());
+            }
+            double x = stage.getX();
+            double y = stage.getY();
+
+            gameEnd = new Stage();
+            Scene scene = new Scene(root, 240, 210);
+            gameEnd.setTitle("Dictionary Ultra Pro");
+            gameEnd.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+            gameEnd.initStyle(StageStyle.UNDECORATED);
+            gameEnd.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                if (! isNowFocused) {
+                    gameEnd.hide();
+                    stage.getScene().getRoot().setEffect(null);
+                }
+            });
+            gameEnd.setResizable(false);
+            gameEnd.setScene(scene);
+            gameEnd.show();
+            gameEnd.setX(x + 392);
+            gameEnd.setY(y + 279);
+
+            stage.getScene().getRoot().setEffect(new BoxBlur());
+            endScreen = loader.getController();
+        }
+        endScreen.update(isGameFinished, selectedWord.toLowerCase(), currentRow);
+
+        if (gameStats == null) {
+            hasInitStats = false;
+            try {
+                userStatistic(new ActionEvent());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (isGameFinished) {
+            streak++;
+            statistics.setCurrStreak(streak);
+            if (streak > statistics.getBestStreak()) {
+                statistics.setBestStreak(streak);
+            }
+            statistics.setTotalWins(statistics.getTotalWins() + 1);
+        }
+        statistics.setCurrStreak(0);
+        statistics.addCount(currentRow);
+        statistics.setGameCount(statistics.getGameCount() + 1);
     }
 }

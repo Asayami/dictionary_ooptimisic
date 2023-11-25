@@ -7,7 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 public class MainModel {
-    static String jdbcUrl = "jdbc:sqlite:src\\gui_package\\models\\database.db"; // jdbc:sqlite:src\\gui_package\\models\\database.db jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db
+    // "jdbc:sqlite:src\\gui_package\\models\\database.db" || "jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db"
+    static String jdbcUrl = "jdbc:sqlite:dictionary_gui\\src\\gui_package\\models\\database.db";
     static Connection connection;
     static Statement statement;
 
@@ -22,11 +23,11 @@ public class MainModel {
 
     public static void createWord(Word word) throws SQLException {
         String sql = "INSERT INTO words (Word, Type, Meaning, Pronunciation, Example, Synonym, Antonyms) " +
-                     "VALUES ('" + word.getWord_target() +
-                     "', '" + word.getWord_type() + "', '" +
-                     word.getWord_explain() + "', '" +
-                     word.getPronunciation() + "', '" +
-                     word.getExample() + "', '', '')";
+                "VALUES ('" + word.getWord_target() +
+                "', '" + word.getWord_type() + "', '" +
+                word.getWord_explain() + "', '" +
+                word.getPronunciation() + "', '" +
+                word.getExample() + "', '', '')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
         statement.close();
@@ -64,14 +65,14 @@ public class MainModel {
 
     public static void updateWord(int id, Word word) throws SQLException {
         String sql = "UPDATE words SET" +
-                     " Word = '" + word.getWord_target() + "'," +
-                     " Type = '" + word.getWord_type() + "'," +
-                     " Meaning = '" + word.getWord_explain() + "'," +
-                     " Pronunciation = '" + word.getPronunciation() + "'," +
-                     " Example = '" + word.getExample() + "'," +
-                     " Synonym = ''," +
-                     " Antonyms = ''" +
-                     "WHERE Id = " + id + ";";
+                " Word = '" + word.getWord_target() + "'," +
+                " Type = '" + word.getWord_type() + "'," +
+                " Meaning = '" + word.getWord_explain() + "'," +
+                " Pronunciation = '" + word.getPronunciation() + "'," +
+                " Example = '" + word.getExample() + "'," +
+                " Synonym = ''," +
+                " Antonyms = ''" +
+                "WHERE Id = " + id + ";";
         statement.executeUpdate(sql);
     }
 
@@ -88,6 +89,14 @@ public class MainModel {
     public static String getWordleWord() throws SQLException {
         String sql = "SELECT * FROM wordle_wordList ORDER BY RANDOM() LIMIT 1;";
         return statement.executeQuery(sql).getString("Word");
+    }
+
+    public static String verifyWordleWord(String word) throws SQLException {
+        String currWord = statement.executeQuery("SELECT * FROM wordle_wordList WHERE Word LIKE '" + word + "'").getString("Word");
+        if (currWord == null) {
+            currWord = statement.executeQuery("SELECT * FROM wordle_wildcard WHERE Word LIKE '" + word + "'").getString("Word");
+        }
+        return currWord;
     }
 
     public static void closeConnection() throws SQLException {
