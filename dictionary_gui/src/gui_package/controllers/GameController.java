@@ -37,7 +37,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = "WHERE";//MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
@@ -52,11 +52,12 @@ public class GameController {
     private wordleStatisticsController statistics;
     private wordleEndController endScreen;
 
-    public GameController() {
+    public GameController() throws SQLException {
     }
 
     @FXML
     private void mouseClick(MouseEvent event) throws SQLException {
+        SoundController.makeSound("click");
         String objectId = event.getPickResult().getIntersectedNode().getId();
         if (Objects.equals(objectId, "backspaceButton")) {
             backspace(event);
@@ -73,6 +74,7 @@ public class GameController {
 
     @FXML
     private void gameInfo(ActionEvent event) throws IOException {
+        SoundController.makeSound("click");
         if (howToPlay != null) {
             howToPlay.show();
             stage.getScene().getRoot().setEffect(new BoxBlur());
@@ -108,6 +110,7 @@ public class GameController {
 
     @FXML
     private void restartGame(ActionEvent event) {
+        SoundController.makeSound("click");
         Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?");
         ts.setOnAction(eventHandler -> {
             try {
@@ -160,6 +163,7 @@ public class GameController {
 
     @FXML
     private void userStatistic(ActionEvent event) throws IOException {
+        SoundController.makeSound("click");
         if (gameStats != null) {
             statistics.update();
             gameStats.show();
