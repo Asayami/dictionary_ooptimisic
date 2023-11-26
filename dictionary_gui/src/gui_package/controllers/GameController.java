@@ -37,7 +37,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = "WHERE"; //MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
@@ -52,12 +52,8 @@ public class GameController {
     private wordleStatisticsController statistics;
     private wordleEndController endScreen;
 
-    public GameController() throws SQLException {
-    }
-
     @FXML
     private void mouseClick(MouseEvent event) throws SQLException {
-        SoundController.makeSound("click");
         String objectId = event.getPickResult().getIntersectedNode().getId();
         if (Objects.equals(objectId, "backspaceButton")) {
             backspace(event);
@@ -74,7 +70,6 @@ public class GameController {
 
     @FXML
     private void gameInfo(ActionEvent event) throws IOException {
-        SoundController.makeSound("click");
         if (howToPlay != null) {
             howToPlay.show();
             stage.getScene().getRoot().setEffect(new BoxBlur());
@@ -110,7 +105,6 @@ public class GameController {
 
     @FXML
     private void restartGame(ActionEvent event) {
-        SoundController.makeSound("click");
         Button ts = DialogController.appear(((Node) event.getSource()).getScene(), true, "Alert", "Do you want to start a new game ?");
         ts.setOnAction(eventHandler -> {
             try {
@@ -163,7 +157,6 @@ public class GameController {
 
     @FXML
     private void userStatistic(ActionEvent event) throws IOException {
-        SoundController.makeSound("click");
         if (gameStats != null) {
             statistics.update();
             gameStats.show();
@@ -226,6 +219,7 @@ public class GameController {
     private void enter(MouseEvent event) throws SQLException {
         if (wordRow.length() == 5 && currentRow <= 6) {
             String checkValidWord = MainModel.verifyWordleWord(wordRow);
+            String temp = selectedWord;
             if (checkValidWord != null) {
                 for (int i = 0; i < wordRow.length(); i++) {
                     Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1));
@@ -234,20 +228,32 @@ public class GameController {
                     char c = wordRow.charAt(i);
                     StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
                     Label labelChar = (Label) stackPaneChar.getChildren().get(0);
-                    if (selectedWord.indexOf(c) != -1) {
-                        if (selectedWord.charAt(i) == c) {
-                            stackPane.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
-                            stackPaneChar.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
-                        } else {
-                            stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
-                            stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
-                        }
+                    if (temp.indexOf(c) != -1 && temp.charAt(i) == c) {
+                        temp = temp.replaceFirst(String.valueOf(c), "0");
+
+                        stackPane.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
+                        stackPaneChar.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
                     } else {
                         stackPane.setStyle("-fx-background-color: #787c7e;-fx-background-radius:5;");
                         stackPaneChar.setStyle("-fx-background-color: #787c7e;-fx-background-radius:5;");
                     }
                     labelChar.setStyle("-fx-text-fill: white;");
                 }
+
+                for (int i = 0; i < wordRow.length(); i++) {
+                    Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1));
+                    label.setTextFill(Color.WHITE);
+                    StackPane stackPane = (StackPane) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1)).getParent();
+                    char c = wordRow.charAt(i);
+                    StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
+                    if (temp.indexOf(c) != -1 && temp.charAt(i) != c) {
+                        temp = temp.replaceFirst(String.valueOf(c), "0");
+
+                        stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
+                        stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
+                    }
+                }
+
                 if (wordRow.equals(selectedWord)) {
                     isGameFinished = true;
                     gameFinishNoti();
