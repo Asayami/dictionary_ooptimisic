@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="968.0" style="-fx-background-color: #bfd9ff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.GameController">
+<BorderPane fx:id="gameBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="968.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.GameController">
    <center>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="600.0" style="-fx-background-color: #f0f7ff; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="600.0" styleClass="gameVBox" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0">
                <children>
@@ -652,7 +652,7 @@
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="93.0" prefWidth="146.0" text="Enter">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="93.0" prefWidth="146.0" style="-fx-text-fill: black;" text="Enter">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -664,7 +664,7 @@
                   </StackPane>
                   <StackPane fx:id="Z" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="1">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="112.0" prefWidth="128.0" text="Z">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="112.0" prefWidth="128.0" style="-fx-text-fill: black;" text="Z">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -676,7 +676,7 @@
                   </StackPane>
                   <StackPane fx:id="X" layoutX="94.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="2">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="105.0" prefWidth="86.0" text="X">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="105.0" prefWidth="86.0" style="-fx-text-fill: black;" text="X">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -688,7 +688,7 @@
                   </StackPane>
                   <StackPane fx:id="C" layoutX="146.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="3">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="106.0" prefWidth="86.0" text="C">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="106.0" prefWidth="86.0" style="-fx-text-fill: black;" text="C">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -700,7 +700,7 @@
                   </StackPane>
                   <StackPane fx:id="V" layoutX="198.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="4">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="110.0" prefWidth="95.0" text="V">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="110.0" prefWidth="95.0" style="-fx-text-fill: black;" text="V">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -712,7 +712,7 @@
                   </StackPane>
                   <StackPane fx:id="B" layoutX="250.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="5">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="107.0" prefWidth="95.0" text="B">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="107.0" prefWidth="95.0" style="-fx-text-fill: black;" text="B">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -724,7 +724,7 @@
                   </StackPane>
                   <StackPane fx:id="N" layoutX="302.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="6">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="98.0" prefWidth="97.0" text="N">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="98.0" prefWidth="97.0" style="-fx-text-fill: black;" text="N">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -736,7 +736,7 @@
                   </StackPane>
                   <StackPane fx:id="M" layoutX="354.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #d3d6da; -fx-background-radius: 5;" GridPane.columnIndex="7">
                      <children>
-                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="141.0" prefWidth="135.0" text="M">
+                        <Label alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="141.0" prefWidth="135.0" style="-fx-text-fill: black;" text="M">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>

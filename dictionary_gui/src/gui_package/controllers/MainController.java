@@ -9,12 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
@@ -31,6 +35,9 @@ public class MainController implements Initializable {
     private double y;
     private Stage stage;
     private URL fxmlURL;
+
+    @FXML
+    private BorderPane parent;
 
     @FXML
     private Button ButtonDictionary;
@@ -50,11 +57,16 @@ public class MainController implements Initializable {
     @FXML
     private Pane WorkPane;
 
+    @FXML
+    private BorderPane gameBorderPane;
+
     private Node dictionaryNode;
     private Node gameNode;
     private Node translateNode;
 
     public static boolean isMusicOn = true;
+
+    public static boolean isLightTheme = true;
 
     Media bgmMedia = new Media(Objects.requireNonNull(SoundController.class.getResource("/sounds/bgm.mp3")).toString());
     MediaPlayer mediaPlayer = new MediaPlayer(bgmMedia);
@@ -107,6 +119,7 @@ public class MainController implements Initializable {
             assert fxmlURL != null;
             gameNode = FXMLLoader.load(fxmlURL);
             WorkPane.getChildren().add(gameNode);
+            loadTheme((BorderPane) gameNode.getScene().lookup("#gameBorderPane"));
         }
         gameNode.setDisable(false);
         gameNode.setVisible(true);
@@ -129,6 +142,7 @@ public class MainController implements Initializable {
             assert fxmlURL != null;
             translateNode = FXMLLoader.load(fxmlURL);
             WorkPane.getChildren().add(translateNode);
+            loadTheme((BorderPane) translateNode.getScene().lookup("#translateBorderPane"));
         }
         translateNode.setDisable(false);
         translateNode.setVisible(true);
@@ -156,12 +170,14 @@ public class MainController implements Initializable {
 
         Stage popup = new Stage();
         Scene scene = new Scene(root, 350, 230);
-        popup.setTitle("Dictionary Ultra Pro");
         popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popup.initStyle(StageStyle.UNDECORATED);
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setResizable(false);
         popup.setScene(scene);
+        MainController.loadTheme((BorderPane) scene.lookup("#popUpBorderPane"));
+        MainController.loadTheme((HBox) scene.lookup("#popUpHBox"));
+        MainController.loadTheme((Button) scene.lookup("#popUpCloseButton"));
         popup.show();
         popup.setX(x + 337);
         popup.setY(y + 249);
@@ -180,6 +196,23 @@ public class MainController implements Initializable {
             musicChangeImage.setImage(image);
             isMusicOn = true;
             mediaPlayer.play();
+        }
+    }
+
+    public void changeTheme(ActionEvent event) throws InterruptedException {
+        SoundController.makeSound("click");
+        isLightTheme = !isLightTheme;
+        loadTheme(parent);
+        if (translateNode != null) {
+            loadTheme((BorderPane) translateNode.getScene().lookup("#translateBorderPane"));
+        }
+        if (gameNode != null) {
+            loadTheme((BorderPane) gameNode.getScene().lookup("#gameBorderPane"));
+        }
+        if (dictionaryNode != null) {
+            ListView listView = (ListView) dictionaryNode.getScene().lookup("#listView");
+            loadTheme((BorderPane) dictionaryNode.getScene().lookup("#dictionaryBorderPane"));
+            loadTheme(listView);
         }
     }
 
@@ -220,5 +253,16 @@ public class MainController implements Initializable {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(0.0);
         button_close_icon.setEffect(colorAdjust);
+    }
+
+    public static void loadTheme(Region borderPane) {
+        if (isLightTheme) {
+            borderPane.getStylesheets().add(Objects.requireNonNull(MainController.class.getResource("/css/lightMode.css")).toExternalForm());
+            borderPane.getStylesheets().remove(Objects.requireNonNull(MainController.class.getResource("/css/darkMode.css")).toExternalForm());
+        } else {
+            borderPane.getStylesheets().add(Objects.requireNonNull(MainController.class.getResource("/css/darkMode.css")).toExternalForm());
+            borderPane.getStylesheets().remove(Objects.requireNonNull(MainController.class.getResource("/css/lightMode.css")).toExternalForm());
+            borderPane.getStylesheets().remove(Objects.requireNonNull(MainController.class.getResource("/css/lightMode.css")).toExternalForm());
+        }
     }
 }

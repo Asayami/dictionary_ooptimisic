@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="610.0" prefWidth="560.0" style="-fx-background-color: #bfd9ff; -fx-border-color: #aecaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.EditAddController">
+<BorderPane fx:id="editBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="610.0" prefWidth="560.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.EditAddController">
    <center>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="540.0" spacing="3.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,7 +26,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <TextField fx:id="wordTypeTextField1" layoutX="10.0" layoutY="38.0" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" style="-fx-background-color: white; -fx-background-radius: 10;">
+            <TextField fx:id="wordTypeTextField1" layoutX="10.0" layoutY="38.0" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
                <font>
                   <Font size="14.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="wordTypeTextField" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" style="-fx-background-color: white; -fx-background-radius: 10;">
+            <TextField fx:id="wordTypeTextField" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -59,7 +59,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="pronunciationTextField" layoutX="22.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" promptText="Example" style="-fx-background-color: white; -fx-background-radius: 10;">
+            <TextField fx:id="pronunciationTextField" layoutX="22.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -76,7 +76,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
+            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/lightMode.css" wrapText="true">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -95,7 +95,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/textarea.css" wrapText="true">
+            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/lightMode.css" wrapText="true">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -109,7 +109,7 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="560.0" style="-fx-background-color: #77a4ed;" BorderPane.alignment="CENTER">
+      <HBox fx:id="editHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="560.0" styleClass="programBarHBox" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -127,7 +127,7 @@
                   <Insets left="4.0" />
                </HBox.margin>
             </Label>
-            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" onMouseEntered="#close_button_highlight" onMouseExited="#close_button_reset" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
+            <Button id="editCloseButton" fx:id="editCloseButton" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" onMouseEntered="#close_button_highlight" onMouseExited="#close_button_reset" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/lightMode.css">
                <graphic>
                   <ImageView fx:id="button_close_icon" fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -145,7 +145,7 @@
    <bottom>
       <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="560.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="removeWordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeSelectedWord" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0; -fx-border-color: #77a4ed; -fx-border-radius: 5;" text="Delete" textFill="#77a4ed">
+            <Button fx:id="removeWordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeSelectedWord" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0; -fx-border-color: #77a4ed; -fx-border-radius: 5; -fx-text-fill: #77a4ed;" text="Delete" textFill="#77a4ed">
                <HBox.margin>
                   <Insets right="140.0" />
                </HBox.margin>
@@ -156,7 +156,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="cancelButton" defaultButton="true" layoutX="264.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0; -fx-border-color: #77a4ed; -fx-border-radius: 5;" text="Cancel" textFill="#77a4ed">
+            <Button fx:id="cancelButton" defaultButton="true" layoutX="264.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0; -fx-border-color: #77a4ed; -fx-border-radius: 5; -fx-text-fill: #77a4ed;" text="Cancel" textFill="#77a4ed">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

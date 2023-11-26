@@ -22,6 +22,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -85,7 +86,7 @@ public class DictionaryController implements Initializable {
     private ImageView editWordImage;
 
     @FXML
-    private BorderPane editBorderPane;
+    private BorderPane dictionaryBorderPane;
 
     @FXML
     void search(KeyEvent event) throws SQLException {
@@ -176,15 +177,16 @@ public class DictionaryController implements Initializable {
         Stage popUp = new Stage();
         Scene scene = new Scene(root, 560, 610);
         popUp.setTitle("Add a new word!");
-
 //        Label label = (Label) scene.lookup("#editOrAddWordLabel");
 //        label.setText("Add a new word!");
-        popUp.setTitle("Dictionary Ultra Pro");
         popUp.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popUp.initStyle(StageStyle.UNDECORATED);
         popUp.initModality(Modality.APPLICATION_MODAL);
         popUp.setResizable(false);
         popUp.setScene(scene);
+        MainController.loadTheme((BorderPane) scene.lookup("#addBorderPane"));
+        MainController.loadTheme((HBox) scene.lookup("#addHBox"));
+        MainController.loadTheme((Button) scene.lookup("#addCloseButton"));
         popUp.show();
         popUp.setX(x + 232);
         popUp.setY(y + 79);
@@ -208,6 +210,9 @@ public class DictionaryController implements Initializable {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setResizable(false);
         popup.setScene(scene);
+        MainController.loadTheme((BorderPane) scene.lookup("#editBorderPane"));
+        MainController.loadTheme((HBox) scene.lookup("#editHBox"));
+        MainController.loadTheme((Button) scene.lookup("#editCloseButton"));
         popup.show();
         popup.setX(x + 232);
         popup.setY(y + 79);

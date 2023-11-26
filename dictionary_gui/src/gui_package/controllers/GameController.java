@@ -41,6 +41,8 @@ public class GameController {
 
     private boolean isGameFinished = false;
 
+    private boolean isWin = false;
+
     private boolean hasInitStats = true;
 
     @FXML
@@ -93,7 +95,7 @@ public class GameController {
             howToPlay.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
             howToPlay.initStyle(StageStyle.UNDECORATED);
             howToPlay.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-                if (! isNowFocused) {
+                if (!isNowFocused) {
                     howToPlay.hide();
                     stage.getScene().getRoot().setEffect(null);
                 }
@@ -144,7 +146,7 @@ public class GameController {
                     }
                 }
 
-                if (!isGameFinished) {
+                if (!isWin) {
                     statistics.setGameCount(statistics.getGameCount() + 1);
                     streak = 0;
                 }
@@ -152,7 +154,7 @@ public class GameController {
                 wordRow = "";
                 currentRow = 1;
                 selectedWord = MainModel.getWordleWord().toUpperCase();
-                isGameFinished = false;
+                isWin = false;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -183,7 +185,7 @@ public class GameController {
             gameStats.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
             gameStats.initStyle(StageStyle.UNDECORATED);
             gameStats.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-                if (! isNowFocused) {
+                if (!isNowFocused) {
                     gameStats.hide();
                     stage.getScene().getRoot().setEffect(null);
                 }
@@ -250,11 +252,11 @@ public class GameController {
                 }
                 if (wordRow.equals(selectedWord)) {
                     isGameFinished = true;
+                    isWin = true;
                     gameFinishNoti();
-                }
-
-                if (currentRow == 6) {
-                    isGameFinished = false;
+                } else if (currentRow == 6) {
+                    isGameFinished = true;
+                    isWin = false;
                     gameFinishNoti();
                 }
 
@@ -288,7 +290,7 @@ public class GameController {
             gameEnd.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
             gameEnd.initStyle(StageStyle.UNDECORATED);
             gameEnd.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-                if (! isNowFocused) {
+                if (!isNowFocused) {
                     gameEnd.hide();
                     stage.getScene().getRoot().setEffect(null);
                 }
@@ -302,7 +304,7 @@ public class GameController {
             stage.getScene().getRoot().setEffect(new BoxBlur());
             endScreen = loader.getController();
         }
-        endScreen.update(isGameFinished, selectedWord.toLowerCase(), currentRow);
+        endScreen.update(isWin, selectedWord.toLowerCase(), currentRow);
 
         if (gameStats == null) {
             hasInitStats = false;
@@ -313,7 +315,7 @@ public class GameController {
             }
         }
 
-        if (isGameFinished) {
+        if (isWin) {
             streak++;
             statistics.setCurrStreak(streak);
             if (streak > statistics.getBestStreak()) {
