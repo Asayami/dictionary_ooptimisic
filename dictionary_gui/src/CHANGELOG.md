@@ -1,3 +1,19 @@
+## 26-11-2023
+
+### Added
+
+* New music and extra functionalities
+
+### Changed
+
+* Update Wordle how-to-play, statistics menus along with the respective functionalities
+* Update Dictionary
+* Update Database to hold new tables for wordle words
+
+### Fixed
+
+* Fixed wordle game logic not accounting for duplicated characters
+
 ## 23-11-2023
 
 ### Added
