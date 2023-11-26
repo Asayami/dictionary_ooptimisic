@@ -7,8 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 public class MainModel {
-    // "jdbc:sqlite:src\\gui_package\\models\\database.db" || "jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db"
-    static String jdbcUrl = "jdbc:sqlite:dictionary_gui\\src\\gui_package\\models\\database.db";
+    static String jdbcUrl = "jdbc:sqlite:dictionary_gui\\src\\gui_package\\models\\database.db"; // jdbc:sqlite:src\\gui_package\\models\\database.db jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db
     static Connection connection;
     static Statement statement;
 
@@ -63,6 +62,12 @@ public class MainModel {
         return returnWord;
     }
 
+    public static boolean findWord(String matchWord) throws SQLException {
+        String sql = "SELECT * FROM words WHERE Word LIKE '" + matchWord + "'";
+        ResultSet result = statement.executeQuery(sql);
+        return result.getString("Word") == null;
+    }
+
     public static void updateWord(int id, Word word) throws SQLException {
         String sql = "UPDATE words SET" +
                 " Word = '" + word.getWord_target() + "'," +
@@ -76,8 +81,26 @@ public class MainModel {
         statement.executeUpdate(sql);
     }
 
+    public static void updateWord(int id, String wordType, String wordMeaning,
+                                  String wordPro, String wordEx) throws SQLException {
+        String sql = "UPDATE words SET" +
+                " Type = '" + wordType + "'," +
+                " Meaning = '" + wordMeaning + "'," +
+                " Pronunciation = '" + wordPro + "'," +
+                " Example = '" + wordEx + "'," +
+                " Synonym = ''," +
+                " Antonyms = ''" +
+                "WHERE Id = " + id + ";";
+        statement.executeUpdate(sql);
+    }
+
     public static void removeWord(int id) throws SQLException {
         String sql = "DELETE FROM words WHERE Id=" + id + ";";
+        statement.executeUpdate(sql);
+    }
+
+    public static void removeWord(String matchWord) throws SQLException {
+        String sql = "DELETE FROM words WHERE Word LIKE " + "'" + matchWord + "'" + ";";
         statement.executeUpdate(sql);
     }
 

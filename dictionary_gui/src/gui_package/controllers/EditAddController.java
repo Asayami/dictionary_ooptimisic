@@ -14,13 +14,11 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.*;
 
-import static gui_package.models.MainModel.getWord;
-import static gui_package.models.MainModel.removeWord;
+import static gui_package.models.MainModel.*;
 
 public class EditAddController {
     private double x;
     private double y;
-    DictionaryController dic = new DictionaryController();
 
     private Word currentWord;
 
@@ -37,6 +35,9 @@ public class EditAddController {
     private ImageView editWordImage;
 
     @FXML
+    private TextField wordTargetTextField;
+
+    @FXML
     private TextField wordTypeTextField;
 
     @FXML
@@ -50,6 +51,21 @@ public class EditAddController {
 
     @FXML
     private Button removeWordButton;
+
+    @FXML
+    private TextField addWordTarget;
+
+    @FXML
+    private TextField addWordType;
+
+    @FXML
+    private TextField addWordPronunciation;
+
+    @FXML
+    private TextArea addWordMeaning;
+
+    @FXML
+    private TextArea addWordExample;
 
     @FXML
     public void titleBarDragged(MouseEvent event) {
@@ -83,9 +99,18 @@ public class EditAddController {
 
     @FXML
     public void removeSelectedWord() throws SQLException {
+//        System.out.println(dic.getSelectedWord().getWord_target());
+//        System.out.println("Removing: " + dic.currentWord.getWord_target());
         removeWordButton.setOnAction(event -> {
             try {
-                removeWord(dic.currentWordId);
+                removeWord(DictionaryController.currentWordId);
+            } catch (NullPointerException e) {
+                // when dic.currentWordId is null
+                try {
+                    removeWord(DictionaryController.currentWord.getWord_target());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -94,10 +119,33 @@ public class EditAddController {
 
     @FXML
     public void editedWordContent() throws SQLException {
-        currentWord = getWord(dic.currentWordId);
-        currentWord.setWord_type(wordTypeTextField.getText());
-        currentWord.setPronunciation((pronunciationTextField).getText());
-        currentWord.setWord_explain((meaningTextArea).getText());
-        currentWord.setExample(exampleTextArea.getText());
+        Word currWord = DictionaryController.currentWord;
+        wordTargetTextField.setText(currWord.getWord_target());
+        wordTargetTextField.setEditable(false);
+        if (currWord == null) {
+            // print: you can only edit a word if you have selected a word
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+        } else {
+            updateWord(DictionaryController.currentWordId, wordTypeTextField.getText(),
+                    meaningTextArea.getText(), pronunciationTextField.getText(), exampleTextArea.getText());
+        }
+//        editOrAddLabel.setText("Edit Word");
     }
+
+    @FXML
+    public void addWord() throws SQLException {
+//        editOrAddLabel.setText("Add a new word!");
+        if (findWord(addWordTarget.getText())) {
+            Word word = new Word(addWordTarget.getText(), addWordType.getText(),
+                    addWordMeaning.getText(), addWordPronunciation.getText(), addWordExample.getText());
+            createWord(word);
+        } else {
+            System.out.println("This word already exists in the database!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+            //
+        }
+    }
+
 }

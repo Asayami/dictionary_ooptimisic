@@ -35,7 +35,7 @@
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="addWordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addScene" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -151,7 +151,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea id="dictionary_box" fx:id="wordMeaningTextArea" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="English: extremely good&#10;Tiếng Việt: cực kì tốt&#10;line_3&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_max" wrapText="true">
+                  <TextArea fx:id="wordMeaningTextArea" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="English: extremely good&#10;Tiếng Việt: cực kì tốt&#10;line_3&#10;line_4&#10;line_5&#10;line_6&#10;line_7&#10;line_max" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -169,7 +169,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea id="dictionary_box" fx:id="wordExampleTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="• Life on the set of the 1964 musical wasn't always supercalifragilisticexpialidocious.&#10;• He can also spell words backward, including supercalifragilisticexpialidocious.&#10;• The third upcoming event? Well, it's just &quot;supercalifragilisticexpialidocious&quot;.&#10;line_4&#10;line_5&#10;line_max" wrapText="true">
+                  <TextArea fx:id="wordExampleTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/textarea.css" text="• Life on the set of the 1964 musical wasn't always supercalifragilisticexpialidocious.&#10;• He can also spell words backward, including supercalifragilisticexpialidocious.&#10;• The third upcoming event? Well, it's just &quot;supercalifragilisticexpialidocious&quot;.&#10;line_4&#10;line_5&#10;line_max" wrapText="true">
                      <font>
                         <Font name="System Italic" size="16.0" />
                      </font>
