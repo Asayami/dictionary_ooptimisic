@@ -1,6 +1,7 @@
 package gui_package.controllers;
 
 import gui_package.Start;
+import gui_package.models.MainModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +15,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 public class MainController implements Initializable {
@@ -50,10 +54,18 @@ public class MainController implements Initializable {
     private Node gameNode;
     private Node translateNode;
 
+    public static boolean isMusicOn = true;
+
+    Media bgmMedia = new Media(Objects.requireNonNull(SoundController.class.getResource("/sounds/bgm.mp3")).toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(bgmMedia);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: open Dictionary
         try {
+            mediaPlayer.setAutoPlay(true);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
             dictionaryScene(new ActionEvent());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -67,6 +79,7 @@ public class MainController implements Initializable {
     }
 
     public void dictionaryScene(ActionEvent event) throws IOException {
+        SoundController.makeSound("tab");
         if (dictionaryNode == null) {
             fxmlURL = MainController.class.getResource("/fxml/dictionary-screen.fxml");
             assert fxmlURL != null;
@@ -88,6 +101,7 @@ public class MainController implements Initializable {
     }
 
     public void gameScene(ActionEvent event) throws IOException {
+        SoundController.makeSound("tab");
         if (gameNode == null) {
             fxmlURL = MainController.class.getResource("/fxml/game-screen.fxml");
             assert fxmlURL != null;
@@ -109,6 +123,7 @@ public class MainController implements Initializable {
     }
 
     public void translateScene(ActionEvent event) throws IOException {
+        SoundController.makeSound("tab");
         if (translateNode == null) {
             fxmlURL = MainController.class.getResource("/fxml/translate-screen.fxml");
             assert fxmlURL != null;
@@ -130,6 +145,7 @@ public class MainController implements Initializable {
     }
 
     public void aboutPopup(ActionEvent event) throws IOException {
+        SoundController.makeSound("click");
         fxmlURL = MainController.class.getResource("/fxml/about-popup.fxml");
         Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
         if (stage == null) {
@@ -151,6 +167,22 @@ public class MainController implements Initializable {
         popup.setY(y + 249);
     }
 
+    public void musicStateChange(ActionEvent event) {
+        SoundController.makeSound("click");
+        ImageView musicChangeImage = (ImageView) ((Node) event.getSource()).getScene().lookup("#musicChangeImage");
+        if (isMusicOn) {
+            Image image = new Image(Objects.requireNonNull(getClass().getResource("/images/soundOn.png")).toExternalForm());
+            musicChangeImage.setImage(image);
+            isMusicOn = false;
+            mediaPlayer.pause();
+        } else {
+            Image image = new Image(Objects.requireNonNull(getClass().getResource("/images/soundOff.png")).toExternalForm());
+            musicChangeImage.setImage(image);
+            isMusicOn = true;
+            mediaPlayer.play();
+        }
+    }
+
     public void titleBarDragged(MouseEvent event) {
         stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         stage.setX(event.getScreenX() - x);
@@ -163,11 +195,18 @@ public class MainController implements Initializable {
     }
 
     public void minimized(ActionEvent event) {
+        SoundController.makeSound("click");
         stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         stage.setIconified(true);
     }
 
     public void close(ActionEvent event) {
+        SoundController.makeSound("click");
+        try {
+            MainModel.closeConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         javafx.application.Platform.exit();
     }
 

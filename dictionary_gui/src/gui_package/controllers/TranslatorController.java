@@ -50,6 +50,7 @@ public class TranslatorController implements Initializable {
 
     @FXML
     public void swap_labels(ActionEvent event) {
+        SoundController.makeSound("click");
         String temp = label_left.getText();
         label_left.setText(label_right.getText());
         label_right.setText(temp);

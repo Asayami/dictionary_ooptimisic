@@ -192,7 +192,7 @@ public class DictionaryController implements Initializable {
 
     @FXML
     private void editScene(ActionEvent event) throws IOException {
-        URL fxmlURL = EditAddController.class.getResource("/fxml/edit-box.fxml");
+        URL fxmlURL = DictionaryController.class.getResource("/fxml/edit-box.fxml");
         Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
         if (stage == null) {
             stage = (Stage) (((Node) event.getSource()).getScene().getWindow());

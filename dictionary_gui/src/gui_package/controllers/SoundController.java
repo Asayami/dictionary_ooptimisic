@@ -3,7 +3,7 @@ package gui_package.controllers;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
+import java.util.Objects;
 
 public class SoundController extends Thread {
     String option;
@@ -18,15 +18,18 @@ public class SoundController extends Thread {
     }
 
     public static void makeSound(String option) {
-        String filename = "";
-        if (option == "click") {
-
-        } else if (option == "popup") {
-
+        if (MainController.isMusicOn) {
+            String filename = "";
+            if (Objects.equals(option, "click")) {
+                filename = "click.mp3";
+            } else if (Objects.equals(option, "popup")) {
+                filename = "popup.mp3";
+            } else if (Objects.equals(option, "tab")) {
+                filename = "tab.mp3";
+            }
+            Media hit = new Media(Objects.requireNonNull(SoundController.class.getResource("/sounds/" + filename)).toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
-        Media hit = new Media(new File(filename).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-
     }
 }

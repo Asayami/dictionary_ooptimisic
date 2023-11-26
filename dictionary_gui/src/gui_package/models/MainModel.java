@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 public class MainModel {
-    static String jdbcUrl = "jdbc:sqlite:dictionary_gui\\src\\gui_package\\models\\database.db"; // jdbc:sqlite:src\\gui_package\\models\\database.db jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db
+    static String jdbcUrl = "jdbc:sqlite:src\\gui_package\\models\\database.db"; // jdbc:sqlite:src\\gui_package\\models\\database.db jdbc:sqlite:dictionary_gui\src\gui_package\models\database.db
     static Connection connection;
     static Statement statement;
 
