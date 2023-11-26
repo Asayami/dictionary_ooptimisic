@@ -246,7 +246,7 @@ public class GameController {
                     StackPane stackPane = (StackPane) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1)).getParent();
                     char c = wordRow.charAt(i);
                     StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
-                    if (temp.indexOf(c) != -1 && temp.charAt(i) != c) {
+                    if (temp.indexOf(c) != -1 && temp.charAt(i) != c && temp.charAt(i) != '0') {
                         temp = temp.replaceFirst(String.valueOf(c), "0");
 
                         stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
