@@ -5,6 +5,7 @@ module main_package {
     requires org.slf4j;
     requires freetts;
     requires com.google.gson;
+    requires javafx.media;
 
     opens gui_package to javafx.fxml;
     exports gui_package;

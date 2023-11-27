@@ -30,3 +30,5 @@ dictionary_gui/*.iml
 
 # Target files
 dictionary_gui/target/
+
+.idea/

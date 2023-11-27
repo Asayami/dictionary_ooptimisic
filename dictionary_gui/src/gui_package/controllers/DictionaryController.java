@@ -1,5 +1,6 @@
 package gui_package.controllers;
 
+import gui_package.Start;
 import gui_package.models.Word;
 import gui_package.services.tts;
 import javafx.beans.value.ChangeListener;
@@ -21,6 +22,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,8 +39,8 @@ import static gui_package.services.tts.speak;
 
 public class DictionaryController implements Initializable {
     private String lastWord;
-    private Word currentWord;
-    protected int currentWordId = -1;
+    static Word currentWord;
+    protected static int currentWordId = -1;
     private Node editNode;
     private Stage stage;
     private double xOffset = 0;
@@ -66,6 +68,9 @@ public class DictionaryController implements Initializable {
     private TextArea wordExampleTextArea;
 
     @FXML
+    private Button addWordButton;
+
+    @FXML
     private Button pronunciationButton;
 
     @FXML
@@ -81,7 +86,7 @@ public class DictionaryController implements Initializable {
     private ImageView editWordImage;
 
     @FXML
-    private BorderPane editBorderPane;
+    private BorderPane dictionaryBorderPane;
 
     @FXML
     void search(KeyEvent event) throws SQLException {
@@ -99,6 +104,14 @@ public class DictionaryController implements Initializable {
         ls.sort(Comparator.comparingInt(String::length));
         listView.getItems().addAll(ls);
     }
+
+//    public Word getSelectedWord() throws SQLException {
+//        if (selectedItem == null) {
+//            return null;
+//        } else {
+//            return getWord(selectedItem);
+//        }
+//    }
 
     @FXML
     private void listViewClicked(MouseEvent event) throws SQLException {
@@ -152,8 +165,36 @@ public class DictionaryController implements Initializable {
     }
 
     @FXML
+    private void addScene(ActionEvent event) throws IOException {
+        URL fxmlURL = EditAddController.class.getResource("/fxml/add-box.fxml");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
+        if (stage == null) {
+            stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        }
+        double x = stage.getX();
+        double y = stage.getY();
+
+        Stage popUp = new Stage();
+        Scene scene = new Scene(root, 560, 610);
+        popUp.setTitle("Dictionary Ultra Pro");
+//        Label label = (Label) scene.lookup("#editOrAddWordLabel");
+//        label.setText("Add a new word!");
+        popUp.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+        popUp.initStyle(StageStyle.UNDECORATED);
+        popUp.initModality(Modality.APPLICATION_MODAL);
+        popUp.setResizable(false);
+        popUp.setScene(scene);
+        MainController.loadTheme((BorderPane) scene.lookup("#addBorderPane"));
+        MainController.loadTheme((HBox) scene.lookup("#addHBox"));
+        MainController.loadTheme((Button) scene.lookup("#addCloseButton"));
+        popUp.show();
+        popUp.setX(x + 232);
+        popUp.setY(y + 79);
+    }
+
+    @FXML
     private void editScene(ActionEvent event) throws IOException {
-        URL fxmlURL = EditAddController.class.getResource("/fxml/edit-add-box.fxml");
+        URL fxmlURL = DictionaryController.class.getResource("/fxml/edit-box.fxml");
         Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
         if (stage == null) {
             stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
@@ -163,11 +204,15 @@ public class DictionaryController implements Initializable {
 
         Stage popup = new Stage();
         Scene scene = new Scene(root, 560, 610);
-        popup.setTitle("Edit word");
+        popup.setTitle("Dictionary Ultra Pro");
+        popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popup.initStyle(StageStyle.UNDECORATED);
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setResizable(false);
         popup.setScene(scene);
+        MainController.loadTheme((BorderPane) scene.lookup("#editBorderPane"));
+        MainController.loadTheme((HBox) scene.lookup("#editHBox"));
+        MainController.loadTheme((Button) scene.lookup("#editCloseButton"));
         popup.show();
         popup.setX(x + 232);
         popup.setY(y + 79);

@@ -50,9 +50,14 @@ public class TranslatorController implements Initializable {
 
     @FXML
     public void swap_labels(ActionEvent event) {
+        SoundController.makeSound("click");
         String temp = label_left.getText();
         label_left.setText(label_right.getText());
         label_right.setText(temp);
+
+        temp = textArea_userInput.getText();
+        textArea_userInput.setText(textArea_translation.getText());
+        textArea_translation.setText(temp);
 
         if (currentLanguage.equals("vi")) {
             currentLanguage = "en";
