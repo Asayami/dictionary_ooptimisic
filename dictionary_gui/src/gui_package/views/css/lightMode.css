@@ -119,8 +119,8 @@
 
 #member_list .content {
     -fx-cursor: default;
-    -fx-background-color: #f0f7ff;
-    -fx-background-radius: 10;
+    -fx-background-image: url('../images/popUpBG_1.png');
+    -fx-border-radius: 10;
 }
 
 #translation_box .text-input, .text-input:focused {

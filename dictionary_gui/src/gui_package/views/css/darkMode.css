@@ -125,7 +125,7 @@
 
 #member_list .content {
     -fx-cursor: default;
-    -fx-background-color: #9ea0a8;
+    -fx-background-image: url('../images/popUpBG_2.png') !important;
     -fx-background-radius: 10;
 }
 
