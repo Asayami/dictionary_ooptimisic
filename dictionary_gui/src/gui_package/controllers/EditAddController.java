@@ -4,6 +4,7 @@ import gui_package.models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -101,7 +102,7 @@ public class EditAddController {
     public void removeSelectedWord(ActionEvent event) throws SQLException {
 //        System.out.println(dic.getSelectedWord().getWord_target());
 //        System.out.println("Removing: " + dic.currentWord.getWord_target());
-        Button okButton = DialogController.appear(event, true, "Confirm Removal",
+        Button okButton = DialogController.appear(((Node) event.getSource()).getScene(), true, "Confirm Removal",
                 "Are you sure you want to remove this word?");
         okButton.setOnAction(eventHandler -> {
             try {
@@ -149,5 +150,6 @@ public class EditAddController {
             //
         }
     }
+
 
 }

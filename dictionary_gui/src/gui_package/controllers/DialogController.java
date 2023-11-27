@@ -1,17 +1,12 @@
 package gui_package.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,7 +14,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class DialogController {
 
@@ -49,8 +43,8 @@ public class DialogController {
     public DialogController() {
     }
 
-    public static Button appear(ActionEvent event, boolean isCancelDisplay, String title, String message) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public static Button appear(Scene event, boolean isCancelDisplay, String title, String message) {
+        Stage stage = (Stage) ((Node) event.getRoot()).getScene().getWindow();
         double x = stage.getX();
         double y = stage.getY();
         if (popupStage == null) {
