@@ -145,7 +145,7 @@
     <bottom>
         <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="560.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="cancelButton" defaultButton="true" layoutX="264.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0; -fx-border-color: #77a4ed; -fx-border-radius: 5; -fx-text-fill: #77a4ed;" text="Huỷ" textFill="#77a4ed">
+                <Button fx:id="cancelButton" defaultButton="true" layoutX="264.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="80.0" styleClass="editCancelButton" stylesheets="@../css/lightMode.css" text="Huỷ" textFill="#77a4ed">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -153,7 +153,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="setEditButton" layoutX="290.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addWord" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #77a4ed; -fx-background-radius: 5;" text="Okay" textFill="WHITE">
+                <Button fx:id="setEditButton" layoutX="290.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addWord" prefHeight="30.0" prefWidth="80.0" styleClass="editOkayButton" stylesheets="@../css/lightMode.css" text="Okay" textFill="WHITE">
                     <HBox.margin>
                         <Insets left="140.0" right="20.0" />
                     </HBox.margin>

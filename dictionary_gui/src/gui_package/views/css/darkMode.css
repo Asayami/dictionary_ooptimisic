@@ -132,3 +132,17 @@
 #translation_box .text-input, .text-input:focused {
     -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
 }
+
+.editCancelButton {
+    -fx-background-color: #797d85;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-border-color: #62636e;
+    -fx-border-radius: 5;
+    -fx-text-fill: white;
+}
+
+.editOkayButton {
+    -fx-background-color:  #62636e;
+    -fx-background-radius: 5;
+}

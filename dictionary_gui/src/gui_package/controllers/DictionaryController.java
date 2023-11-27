@@ -187,6 +187,8 @@ public class DictionaryController implements Initializable {
         MainController.loadTheme((BorderPane) scene.lookup("#addBorderPane"));
         MainController.loadTheme((HBox) scene.lookup("#addHBox"));
         MainController.loadTheme((Button) scene.lookup("#addCloseButton"));
+        MainController.loadTheme((Button) scene.lookup("#cancelButton"));
+        MainController.loadTheme((Button) scene.lookup("#setEditButton"));
         popUp.show();
         popUp.setX(x + 232);
         popUp.setY(y + 79);
@@ -213,6 +215,9 @@ public class DictionaryController implements Initializable {
         MainController.loadTheme((BorderPane) scene.lookup("#editBorderPane"));
         MainController.loadTheme((HBox) scene.lookup("#editHBox"));
         MainController.loadTheme((Button) scene.lookup("#editCloseButton"));
+        MainController.loadTheme((Button) scene.lookup("#removeWordButton"));
+        MainController.loadTheme((Button) scene.lookup("#cancelButton"));
+        MainController.loadTheme((Button) scene.lookup("#setEditButton"));
         popup.show();
         popup.setX(x + 232);
         popup.setY(y + 79);
