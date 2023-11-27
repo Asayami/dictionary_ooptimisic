@@ -210,8 +210,8 @@ public class MainController implements Initializable {
         popup.setResizable(false);
         popup.setScene(scene);
         MainController.loadTheme((BorderPane) scene.lookup("#popUpBorderPane"));
-        MainController.loadTheme((HBox) scene.lookup("#popUpHBox"));
-        MainController.loadTheme((Button) scene.lookup("#popUpCloseButton"));
+        MainController.loadTheme((HBox) scene.lookup("#popUpTitleBar"));
+        MainController.loadTheme((Button) scene.lookup("#popupCloseButton"));
         popup.show();
         popup.setX(x + 337);
         popup.setY(y + 249);

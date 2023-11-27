@@ -1,74 +1,62 @@
 .borderPane {
-    -fx-background-color: #50577A;
+    -fx-background-color: #4f505c;
 }
 
 .aboutPopup, .addEdit {
-    -fx-background-color: #50577A;
-    -fx-border-color: #3c4263;
+    -fx-background-color: #4f505c;
+    -fx-border-color: #6b6b6e;
 }
 
-.programBarHBox {
-    -fx-background-color: #404258;
+.titleBar {
+    -fx-background-color: #62636e;
 }
 
 .gameVBox {
-    -fx-background-color: #6B728E !important;
+    -fx-background-color: #9ea0a8 !important;
     -fx-background-radius: 5;
 }
 
 .translateVBox {
-    -fx-background-color:  #6B728E !important;
+    -fx-background-color: #9ea0a8 !important;
     -fx-background-radius: 10;
 }
 
 .dictionaryWordInfoPane {
-    -fx-background-color: #6B728E !important;
+    -fx-background-color: #9ea0a8 !important;
     -fx-background-radius: 10;
 }
 
 .button {
     -fx-max-width: infinity;
-    -fx-background-color: #404258;
+    -fx-background-color: #62636e;
     -fx-background-insets: 0;
     -fx-background-radius: 0px;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
 }
 
-#addCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
-#editCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
-#popUpCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
 #button_minimize:hover {
-    -fx-background-color: #5f6282;
+    -fx-background-color: #757680;
 }
 
-#button_close:hover {
+#button_close:hover, #editCloseButton:hover, #addCloseButton:hover, #popupCloseButton:hover {
     -fx-background-color: #e81123;
 }
 
 .tabButton {
-    -fx-background-color: #404258;
+    -fx-background-color: #62636e;
     -fx-background-radius: 10;
 }
 
 .list-cell {
     -fx-background-radius: 10;
-    -fx-background-color: #6B728E;
+    -fx-background-color: #9ea0a8;
     -fx-text-fill: white;
 }
 
 .list-view {
     -fx-background-radius: 10;
-    -fx-background-color: #6B728E;
+    -fx-background-color: #9ea0a8;
 }
 
 .list-view .scroll-bar:vertical .increment-button,
@@ -87,11 +75,11 @@
 }
 
 .list-view .scroll-bar:vertical .thumb {
-    -fx-background-color: #50577A;
+    -fx-background-color: #4f505c;
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: #404258;
+    -fx-background-color: #62636e;
 }
 
 .label {
@@ -108,7 +96,7 @@
 }
 
 .text-area .content {
-    -fx-background-color: #848aa1 !important;
+    -fx-background-color: #797d85 !important;
     -fx-background-radius: 10;
 }
 
@@ -118,7 +106,7 @@
 }
 
 .translateEngVieLabel {
-    -fx-background-color: #848aa1 !important;
+    -fx-background-color: #797d85 !important;
     -fx-background-radius: 10;
     -fx-border-color:  #77a4ed;
     -fx-border-radius: 10;
@@ -126,7 +114,7 @@
 }
 
 .text-field {
-    -fx-background-color: #848aa1 !important;;
+    -fx-background-color: #797d85 !important;;
     -fx-background-radius: 10;
     -fx-text-fill: white;
 }
@@ -137,7 +125,7 @@
 
 #member_list .content {
     -fx-cursor: default;
-    -fx-background-color: #6B728E;
+    -fx-background-color: #9ea0a8;
     -fx-background-radius: 10;
 }
 

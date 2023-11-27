@@ -7,7 +7,7 @@
     -fx-border-color: #aecaf2;
 }
 
-.programBarHBox {
+.titleBar {
     -fx-background-color: #77a4ed;
 }
 
@@ -35,23 +35,11 @@
     -fx-font-size: 14px;
 }
 
-#addCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
-#editCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
-#popUpCloseButton:hover {
-    -fx-background-color: #e81123;
-}
-
 #button_minimize:hover {
     -fx-background-color: #b8d3ff;
 }
 
-#button_close:hover {
+#button_close:hover, #editCloseButton:hover, #addCloseButton:hover, #popupCloseButton:hover {
     -fx-background-color: #e81123;
 }
 

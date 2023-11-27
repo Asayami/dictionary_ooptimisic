@@ -109,7 +109,7 @@
       </VBox>
    </center>
    <top>
-      <HBox fx:id="editHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="560.0" styleClass="programBarHBox" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
+      <HBox fx:id="editHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="560.0" styleClass="titleBar" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>

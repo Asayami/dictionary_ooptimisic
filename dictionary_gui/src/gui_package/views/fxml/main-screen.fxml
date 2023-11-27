@@ -12,11 +12,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.MainController">
     <top>
-        <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" styleClass="programBarHBox" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" styleClass="titleBar" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
@@ -64,14 +63,14 @@
     <bottom>
         <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
             <children>
-                <Text fill="#ffffff40" stroke="#23020240" strokeType="OUTSIDE" text="Application by OOPtimistic team">
-                    <font>
-                        <Font name="Century Gothic Bold" size="13.0" />
-                    </font>
-                    <HBox.margin>
-                        <Insets right="16.0" />
-                    </HBox.margin>
-                </Text>
+            <Label opacity="0.25" text="Application by OOPtimistic team" textFill="#2638ff">
+               <font>
+                  <Font name="Century Gothic Bold" size="13.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="16.0" />
+               </HBox.margin>
+            </Label>
             </children>
         </HBox>
     </bottom>
@@ -87,7 +86,11 @@
                         </Tooltip>
                     </tooltip>
                     <graphic>
-                        <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="bookImageView" />
+                        <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/dictionary.png" />
+                            </image>
+                        </ImageView>
                     </graphic>
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -95,7 +98,11 @@
                 </Button>
                 <Button fx:id="ButtonGame" layoutX="7.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="gameImageView" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/wordle.png" />
+                            </image>
+                        </ImageView>
                     </graphic>
                     <tooltip>
                         <Tooltip style="-fx-background-color: #77a4ed;" text="Game rèn từ vựng">
@@ -110,7 +117,11 @@
                 </Button>
                 <Button fx:id="ButtonTranslate" layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="transImageView" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/google_translate.png" />
+                            </image>
+                        </ImageView>
                     </graphic>
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -128,7 +139,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../images/darklight.jpg" />
                             </image>
@@ -150,7 +161,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fx:id="musicChangeImage" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="musicChangeImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../images/soundOff.png" />
                             </image>
@@ -172,9 +183,12 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="popUpImageView">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/information.png" />
+                            </image>
                             <effect>
-                                <ColorAdjust brightness="0.01" />
+                                <ColorAdjust brightness="1.0" />
                             </effect>
                         </ImageView>
                     </graphic>
