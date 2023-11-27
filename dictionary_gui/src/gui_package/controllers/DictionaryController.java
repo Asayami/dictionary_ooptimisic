@@ -176,7 +176,7 @@ public class DictionaryController implements Initializable {
 
         Stage popUp = new Stage();
         Scene scene = new Scene(root, 560, 610);
-        popUp.setTitle("Add a new word!");
+        popUp.setTitle("Dictionary Ultra Pro");
 //        Label label = (Label) scene.lookup("#editOrAddWordLabel");
 //        label.setText("Add a new word!");
         popUp.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));

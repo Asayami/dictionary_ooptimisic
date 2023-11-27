@@ -2,6 +2,11 @@
     -fx-background-color: #bfd9ff;
 }
 
+.aboutPopup, .addEdit {
+    -fx-background-color: #bfd9ff;
+    -fx-border-color: #aecaf2;
+}
+
 .programBarHBox {
     -fx-background-color: #77a4ed;
 }
@@ -132,20 +137,4 @@
 
 #translation_box .text-input, .text-input:focused {
     -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
-}
-
-.bookImageView {
-    -fx-image: url("../images/dictionary.png");
-}
-
-.gameImageView {
-    -fx-image: url("../images/wordle.png");
-}
-
-.transImageView {
-        -fx-image: url("../images/google_translate.png");
-}
-
-.popUpImageView {
-    -fx-image: url("../images/information.png");
 }

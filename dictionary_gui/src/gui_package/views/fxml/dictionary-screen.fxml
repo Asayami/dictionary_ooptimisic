@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="dictionaryBorderPane" fx:id="dictionaryBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="968.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.DictionaryController">
+<BorderPane fx:id="dictionaryBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="968.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.DictionaryController">
     <left>
         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="275.0" spacing="4.0" BorderPane.alignment="CENTER">
             <children>
@@ -68,7 +68,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="667.0" spacing="8.0" style="-fx-background-color: transparent;">
                     <children>
-                        <Label fx:id="searchedWordLabel" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="40.0" prefWidth="476.0" text="Welcome !!!">
+                        <Label fx:id="searchedWordLabel" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="40.0" prefWidth="476.0" text="welcome">
                             <font>
                                 <Font name="Calibri" size="36.0" />
                             </font>
@@ -152,7 +152,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <TextArea fx:id="wordMeaningTextArea" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/lightMode.css" text="English: to meet and speak to someone in a friendly way when they arrive&#10;Tiếng Việt: chào mừng" wrapText="true">
+                        <TextArea id="dictionary_box" fx:id="wordMeaningTextArea" editable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="210.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/lightMode.css" text="English: to meet and speak to someone in a friendly way when they arrive&#10;Tiếng Việt: chào mừng" wrapText="true">
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font>
@@ -170,7 +170,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <TextArea fx:id="wordExampleTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/lightMode.css" text="• Welcome to Dictionary Ultra Pro Max !!!" wrapText="true">
+                        <TextArea id="dictionary_box" fx:id="wordExampleTextArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="1" prefHeight="166.0" prefRowCount="8" prefWidth="643.0" stylesheets="@../css/lightMode.css" text="• Welcome to Dictionary Ultra Pro !!!&#10;• The OOPtimistic team welcomes y'all." wrapText="true">
                             <font>
                                 <Font name="System Italic" size="16.0" />
                             </font>

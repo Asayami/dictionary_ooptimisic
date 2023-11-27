@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -112,6 +113,37 @@ public class MainController implements Initializable {
         ButtonDictionary.setDisable(true);
     }
 
+    private void gameInfoFirstTime(Stage primaryStage) {
+        FXMLLoader loader = new FXMLLoader(GameController.class.getResource("/fxml/wordle_howtoplay.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        double x = primaryStage.getX();
+        double y = primaryStage.getY();
+
+        Stage howToPlay = new Stage();
+        Scene scene = new Scene(root, 280, 300);
+        howToPlay.setTitle("Dictionary Ultra Pro");
+        howToPlay.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+        howToPlay.initStyle(StageStyle.UNDECORATED);
+        howToPlay.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                howToPlay.close();
+                primaryStage.getScene().getRoot().setEffect(null);
+            }
+        });
+        howToPlay.setResizable(false);
+        howToPlay.setScene(scene);
+        howToPlay.show();
+        howToPlay.setX(x + 372);
+        howToPlay.setY(y + 234);
+
+        primaryStage.getScene().getRoot().setEffect(new BoxBlur());
+    }
+
     public void gameScene(ActionEvent event) throws IOException {
         SoundController.makeSound("tab");
         if (gameNode == null) {
@@ -120,6 +152,7 @@ public class MainController implements Initializable {
             gameNode = FXMLLoader.load(fxmlURL);
             WorkPane.getChildren().add(gameNode);
             loadTheme((BorderPane) gameNode.getScene().lookup("#gameBorderPane"));
+            gameInfoFirstTime((Stage) gameNode.getScene().getWindow());
         }
         gameNode.setDisable(false);
         gameNode.setVisible(true);
@@ -170,6 +203,7 @@ public class MainController implements Initializable {
 
         Stage popup = new Stage();
         Scene scene = new Scene(root, 350, 230);
+        popup.setTitle("Dictionary Ultra Pro");
         popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popup.initStyle(StageStyle.UNDECORATED);
         popup.initModality(Modality.APPLICATION_MODAL);
