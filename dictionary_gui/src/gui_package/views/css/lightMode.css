@@ -140,3 +140,12 @@
     -fx-background-color:  #77a4ed;
     -fx-background-radius: 5;
 }
+
+.dialogBorderPane {
+    -fx-background-color: #f0f7ff;
+    -fx-border-color: #aecaf2;
+}
+
+.dialogLine {
+    -fx-stroke: #bfd9ff;
+}

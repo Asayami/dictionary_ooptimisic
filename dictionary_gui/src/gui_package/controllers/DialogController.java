@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -72,6 +74,10 @@ public class DialogController {
             cancelButton.setVisible(false);
             cancelButton.setDisable(true);
         }
+        MainController.loadTheme((BorderPane) scene.lookup("#borderPane"));
+        MainController.loadTheme((Button) scene.lookup("#button_cancel"));
+        MainController.loadTheme((Button) scene.lookup("#button_okay"));
+        MainController.loadTheme((Pane) scene.lookup("#dialogPane"));
         popupStage.show();
         return okayButton;
     }

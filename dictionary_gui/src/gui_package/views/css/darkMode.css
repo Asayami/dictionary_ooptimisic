@@ -137,12 +137,22 @@
     -fx-background-color: #797d85;
     -fx-background-radius: 5;
     -fx-background-insets: 0;
-    -fx-border-color: #62636e;
-    -fx-border-radius: 5;
     -fx-text-fill: white;
 }
 
 .editOkayButton {
-    -fx-background-color:  #62636e;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #62636e;
     -fx-background-radius: 5;
+    -fx-border-color: #62636e;
+    -fx-border-radius: 5;
+}
+
+.dialogBorderPane {
+    -fx-background-color: #9ea0a8;
+    -fx-border-color: #6b6b6e;
+}
+
+.dialogLine {
+    -fx-stroke: #62636e;
 }
