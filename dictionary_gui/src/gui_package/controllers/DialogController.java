@@ -1,12 +1,13 @@
 package gui_package.controllers;
 
+import gui_package.Start;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,23 +39,25 @@ public class DialogController {
         }
     }
 
-    private static final Scene scene = new Scene(root, 480, 174);
+    private static final Scene scene = new Scene(root, 480, 178);
 
     public DialogController() {
     }
 
     public static Button appear(Scene event, boolean isCancelDisplay, String title, String message) {
-        Stage stage = (Stage) ((Node) event.getRoot()).getScene().getWindow();
+        Stage stage = (Stage) (event.getWindow());
         double x = stage.getX();
         double y = stage.getY();
         if (popupStage == null) {
             popupStage = new Stage();
+            popupStage.setTitle("Dictionary Ultra Pro");
+            popupStage.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
             popupStage.initStyle(StageStyle.UNDECORATED);
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setResizable(false);
             popupStage.setScene(scene);
-            popupStage.setX(x + 200);
-            popupStage.setY(y + 249);
+            popupStage.setX(x + 272);
+            popupStage.setY(y + 295);
         }
         Button cancelButton = (Button) popupStage.getScene().lookup("#button_cancel");
         Button okayButton = (Button) popupStage.getScene().lookup("#button_okay");
