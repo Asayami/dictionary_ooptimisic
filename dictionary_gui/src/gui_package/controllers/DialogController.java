@@ -59,7 +59,7 @@ public class DialogController {
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setResizable(false);
             popupStage.setScene(scene);
-            popupStage.setX(x + 337);
+            popupStage.setX(x + 200);
             popupStage.setY(y + 249);
         }
         Button cancelButton = (Button) popupStage.getScene().lookup("#button_cancel");
@@ -88,4 +88,7 @@ public class DialogController {
     }
 
 
+    public void okay(ActionEvent actionEvent) {
+        popupStage.hide();
+    }
 }
