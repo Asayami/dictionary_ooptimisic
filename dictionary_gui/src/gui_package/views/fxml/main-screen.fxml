@@ -64,7 +64,7 @@
     <bottom>
         <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
             <children>
-                <Text fill="#2638ff40" strokeType="OUTSIDE" strokeWidth="0.0" text="Application by OOPtimistic team">
+                <Text fill="#ffffff40" stroke="#23020240" strokeType="OUTSIDE" text="Application by OOPtimistic team">
                     <font>
                         <Font name="Century Gothic Bold" size="13.0" />
                     </font>
@@ -87,11 +87,7 @@
                         </Tooltip>
                     </tooltip>
                     <graphic>
-                        <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/dictionary.png" />
-                            </image>
-                        </ImageView>
+                        <ImageView blendMode="SCREEN" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="bookImageView" />
                     </graphic>
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -99,11 +95,7 @@
                 </Button>
                 <Button fx:id="ButtonGame" layoutX="7.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/wordle.png" />
-                            </image>
-                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="gameImageView" />
                     </graphic>
                     <tooltip>
                         <Tooltip style="-fx-background-color: #77a4ed;" text="Game rèn từ vựng">
@@ -118,11 +110,7 @@
                 </Button>
                 <Button fx:id="ButtonTranslate" layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/google_translate.png" />
-                            </image>
-                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="transImageView" />
                     </graphic>
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -140,7 +128,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../images/darklight.jpg" />
                             </image>
@@ -162,7 +150,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fx:id="musicChangeImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="musicChangeImage" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../images/soundOff.png" />
                             </image>
@@ -184,12 +172,9 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/information.png" />
-                            </image>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="popUpImageView">
                             <effect>
-                                <ColorAdjust brightness="1.0" />
+                                <ColorAdjust brightness="0.01" />
                             </effect>
                         </ImageView>
                     </graphic>
