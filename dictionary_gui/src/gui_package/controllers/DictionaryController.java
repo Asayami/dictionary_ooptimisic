@@ -221,6 +221,11 @@ public class DictionaryController implements Initializable {
         MainController.loadTheme((Button) scene.lookup("#removeWordButton"));
         MainController.loadTheme((Button) scene.lookup("#cancelButton"));
         MainController.loadTheme((Button) scene.lookup("#setEditButton"));
+        ((TextField) scene.lookup("#wordTypeTextField1")).setText(currentWord.getWord_target());
+        ((TextField) scene.lookup("#wordTypeTextField")).setText(currentWord.getWord_type());
+        ((TextField) scene.lookup("#pronunciationTextField")).setText(currentWord.getPronunciation());
+        ((TextArea) scene.lookup("#meaningTextArea")).setText(currentWord.getWord_explain());
+        ((TextArea) scene.lookup("#exampleTextArea")).setText(currentWord.getExample());
         popup.show();
         popup.setX(x + 232);
         popup.setY(y + 79);

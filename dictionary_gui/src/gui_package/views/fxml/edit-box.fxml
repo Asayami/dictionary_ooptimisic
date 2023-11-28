@@ -26,7 +26,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <TextField fx:id="wordTypeTextField1" layoutX="10.0" layoutY="38.0" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
+            <TextField fx:id="wordTypeTextField1" editable="false" layoutX="10.0" layoutY="38.0" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" stylesheets="@../css/lightMode.css">
                <font>
                   <Font size="14.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="wordTypeTextField" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
+            <TextField fx:id="wordTypeTextField" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="30.0" stylesheets="@../css/lightMode.css">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -59,7 +59,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="pronunciationTextField" layoutX="22.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" promptText="Example" stylesheets="@../css/lightMode.css">
+            <TextField fx:id="pronunciationTextField" layoutX="22.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" stylesheets="@../css/lightMode.css">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -76,7 +76,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/lightMode.css" wrapText="true">
+            <TextArea fx:id="meaningTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" stylesheets="@../css/lightMode.css" wrapText="true">
                <VBox.margin>
                   <Insets bottom="4.0" />
                </VBox.margin>
@@ -95,7 +95,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" promptText="Example" stylesheets="@../css/lightMode.css" wrapText="true">
+            <TextArea fx:id="exampleTextArea" layoutX="10.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="541.0" stylesheets="@../css/lightMode.css" wrapText="true">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
