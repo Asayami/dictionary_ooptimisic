@@ -56,6 +56,9 @@ public class MainController implements Initializable {
     private ImageView button_close_icon;
 
     @FXML
+    private ImageView customImage;
+
+    @FXML
     private Pane WorkPane;
 
     @FXML
@@ -76,9 +79,12 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: open Dictionary
         try {
+            // mediaPlayer.setVolume(0.1);
             mediaPlayer.setAutoPlay(true);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
+            customImage.setLayoutX(778);
+            // customImage.setLayoutX(848);
             dictionaryScene(new ActionEvent());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -98,6 +104,7 @@ public class MainController implements Initializable {
             assert fxmlURL != null;
             dictionaryNode = FXMLLoader.load(fxmlURL);
             WorkPane.getChildren().add(dictionaryNode);
+            customImage.toFront();
         }
         dictionaryNode.setDisable(false);
         dictionaryNode.setVisible(true);
@@ -153,6 +160,7 @@ public class MainController implements Initializable {
             WorkPane.getChildren().add(gameNode);
             loadTheme((BorderPane) gameNode.getScene().lookup("#gameBorderPane"));
             gameInfoFirstTime((Stage) gameNode.getScene().getWindow());
+            customImage.toFront();
         }
         gameNode.setDisable(false);
         gameNode.setVisible(true);
@@ -176,6 +184,7 @@ public class MainController implements Initializable {
             translateNode = FXMLLoader.load(fxmlURL);
             WorkPane.getChildren().add(translateNode);
             loadTheme((BorderPane) translateNode.getScene().lookup("#translateBorderPane"));
+            customImage.toFront();
         }
         translateNode.setDisable(false);
         translateNode.setVisible(true);

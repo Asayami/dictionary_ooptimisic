@@ -145,7 +145,7 @@
    <bottom>
       <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="560.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="removeWordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeSelectedWord" prefHeight="30.0" prefWidth="80.0" styleClass="editCancelButton" stylesheets="@../css/lightMode.css" text="Xoá" textFill="#77a4ed">
+            <Button fx:id="removeWordButton" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeSelectedWord" prefHeight="30.0" prefWidth="80.0" styleClass="editCancelButton" stylesheets="@../css/lightMode.css" text="Xoá" textFill="#77a4ed">
                <HBox.margin>
                   <Insets right="140.0" />
                </HBox.margin>

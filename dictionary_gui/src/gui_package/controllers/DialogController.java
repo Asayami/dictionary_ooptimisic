@@ -3,6 +3,7 @@ package gui_package.controllers;
 import gui_package.Start;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -47,9 +49,6 @@ public class DialogController {
     }
 
     public static Button appear(Scene event, boolean isCancelDisplay, String title, String message) {
-        Stage stage = (Stage) (event.getWindow());
-        double x = stage.getX();
-        double y = stage.getY();
         if (popupStage == null) {
             popupStage = new Stage();
             popupStage.setTitle("Dictionary Ultra Pro");
@@ -58,8 +57,10 @@ public class DialogController {
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setResizable(false);
             popupStage.setScene(scene);
-            popupStage.setX(x + 272);
-            popupStage.setY(y + 295);
+
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            popupStage.setX((primScreenBounds.getWidth() - 480) / 2);
+            popupStage.setY((primScreenBounds.getHeight() - 178) / 2);
         }
         Button cancelButton = (Button) popupStage.getScene().lookup("#button_cancel");
         Button okayButton = (Button) popupStage.getScene().lookup("#button_okay");
