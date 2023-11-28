@@ -4,16 +4,13 @@ import gui_package.models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
-import java.util.*;
 
 import static gui_package.models.MainModel.*;
 
@@ -150,6 +147,4 @@ public class EditAddController {
             });
         }
     }
-
-
 }

@@ -66,9 +66,13 @@ public class wordleStatisticsController {
 
         if (gameCount != 0) {
             winningRate = ((double) totalWins / gameCount) * 100;
-            guessDist = (double) (count_1 + count_2 * 2 + count_3 * 3 + count_4 * 4 + count_5 * 5 + count_6 * 6) / gameCount;
         } else {
             winningRate = 0;
+        }
+
+        if (totalWins != 0) {
+            guessDist = (double) (count_1 + count_2 * 2 + count_3 * 3 + count_4 * 4 + count_5 * 5 + count_6 * 6) / totalWins;
+        } else {
             guessDist = 0;
         }
 

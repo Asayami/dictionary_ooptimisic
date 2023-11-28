@@ -5,7 +5,6 @@ import gui_package.models.MainModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,10 +19,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 
 public class GameController {
@@ -37,7 +34,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = "DADDY"; //= MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
@@ -146,7 +143,7 @@ public class GameController {
                     }
                 }
 
-                if (!isWin) {
+                if (!isWin && !isGameFinished) {
                     statistics.setGameCount(statistics.getGameCount() + 1);
                     streak = 0;
                 }
@@ -155,6 +152,7 @@ public class GameController {
                 currentRow = 1;
                 selectedWord = MainModel.getWordleWord().toUpperCase();
                 isWin = false;
+                isGameFinished = false;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -265,7 +263,7 @@ public class GameController {
                         stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
                     }
                 }
-                
+
                 if (wordRow.equals(selectedWord)) {
                     isGameFinished = true;
                     isWin = true;
@@ -338,10 +336,10 @@ public class GameController {
                 statistics.setBestStreak(streak);
             }
             statistics.setTotalWins(statistics.getTotalWins() + 1);
+            statistics.addCount(currentRow);
         } else {
             statistics.setCurrStreak(0);
         }
-        statistics.addCount(currentRow);
         statistics.setGameCount(statistics.getGameCount() + 1);
     }
 }

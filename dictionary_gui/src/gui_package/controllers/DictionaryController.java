@@ -3,11 +3,7 @@ package gui_package.controllers;
 import gui_package.Start;
 import gui_package.models.Word;
 import gui_package.services.tts;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,10 +28,8 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static gui_package.models.MainModel.*;
-import static gui_package.services.tts.speak;
 
 public class DictionaryController implements Initializable {
     private String lastWord;
@@ -43,8 +37,6 @@ public class DictionaryController implements Initializable {
     protected static int currentWordId = -1;
     private Node editNode;
     private Stage stage;
-    private double xOffset = 0;
-    private double yOffset = 0;
 
     @FXML
     private TextField searchBar;
@@ -105,14 +97,6 @@ public class DictionaryController implements Initializable {
         listView.getItems().addAll(ls);
     }
 
-//    public Word getSelectedWord() throws SQLException {
-//        if (selectedItem == null) {
-//            return null;
-//        } else {
-//            return getWord(selectedItem);
-//        }
-//    }
-
     @FXML
     private void listViewClicked(MouseEvent event) throws SQLException {
         String selectedItem = listView.getSelectionModel().getSelectedItem();
@@ -122,7 +106,6 @@ public class DictionaryController implements Initializable {
             lastWord = "";
         }
         if (selectedItem != null && !selectedItem.equals(lastWord)) {
-//            System.out.println(selectedItem);
             searchedWordLabel.setText(selectedItem);
             wordFormLabel.setText(Objects.requireNonNull(currentWord).getWord_type());
             wordPronunciationTextArea.setText(Objects.requireNonNull(currentWord).getPronunciation());
