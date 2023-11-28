@@ -95,20 +95,18 @@ public class DictionaryController implements Initializable {
         String selectedItem = listView.getSelectionModel().getSelectedItem();
         currentWord = getWord(selectedItem);
         currentWordId = currentWord.getId();
-        if (lastWord == null) {
-            lastWord = "";
-        }
+        if (lastWord == null) lastWord = "";
         if (selectedItem != null && !selectedItem.equals(lastWord)) {
             searchedWordLabel.setText(selectedItem);
             wordFormLabel.setText(Objects.requireNonNull(currentWord).getWord_type());
             wordPronunciationTextArea.setText(Objects.requireNonNull(currentWord).getPronunciation());
             wordMeaningTextArea.setText(Objects.requireNonNull(currentWord).getWord_explain());
-            if (currentWord.getExample() == null) { //this doesn't really work
+            System.out.println(currentWord.getExample());
+            if (Objects.equals(currentWord.getExample(), "")) { //this doesn't really work
                 wordExampleTextArea.setText("No example located in database!\n" + "Từ này chưa có ví dụ!");
             } else {
                 wordExampleTextArea.setText(Objects.requireNonNull(currentWord).getExample());
             }
-//            wordExampleTextArea.setScrollable(true);
             lastWord = selectedItem;
         }
         listView.getSelectionModel().clearSelection();
@@ -206,10 +204,7 @@ public class DictionaryController implements Initializable {
             popup.setY(y + 79);
         } else {
             Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Alert", "Hãy chọn 1 từ để chỉnh sửa"); //chinh true thanh false de an nut cancel
-            ts.setOnAction(eventHandler -> {
-                //run when press okay
-                DialogController.okay();
-            });
+            ts.setOnAction(eventHandler -> DialogController.okay());
         }
     }
 

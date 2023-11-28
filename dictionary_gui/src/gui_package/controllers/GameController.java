@@ -34,7 +34,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = "DADDY"; //= MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
@@ -117,7 +117,6 @@ public class GameController {
                 //5x6 board
                 for (int i = 1; i <= 6; i++) {
                     for (int j = 1; j <= 5; j++) {
-
                         Label label = (Label) scene.lookup("#c" + i + j);
                         label.setText("");
                         StackPane stackPane = (StackPane) label.getParent();
@@ -132,7 +131,6 @@ public class GameController {
                     Label labelChar = (Label) stackPaneChar.getChildren().get(0);
                     labelChar.setStyle("-fx-text-fill: black;");
                 }
-
 
                 if (gameStats == null) {
                     hasInitStats = false;
@@ -200,8 +198,6 @@ public class GameController {
 
             gameStats.setX(x + 312);
             gameStats.setY(y + 204);
-
-
             statistics = loader.getController();
         }
     }
@@ -239,7 +235,6 @@ public class GameController {
                     if (temp.indexOf(c) != -1 && temp.charAt(i) == c) {
                         flag[i] = true;
                         temp = temp.replaceFirst(String.valueOf(c), "0");
-
                         stackPane.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
                         stackPaneChar.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
                     } else {
@@ -258,7 +253,6 @@ public class GameController {
                     if (temp.indexOf(c) != -1 && temp.charAt(i) != c && !flag[i]) {
                         flag[i] = true;
                         temp = temp.replaceFirst(String.valueOf(c), "0");
-
                         stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
                         stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
                     }
@@ -273,7 +267,6 @@ public class GameController {
                     isWin = false;
                     gameFinishNoti();
                 }
-
                 currentRow += 1;
                 wordRow = "";
             }
