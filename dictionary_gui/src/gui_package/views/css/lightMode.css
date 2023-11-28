@@ -123,6 +123,16 @@
     -fx-border-radius: 10;
 }
 
+#translation_box {
+    -fx-border-color: #bfd9ff;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+#translation_box .content {
+    -fx-background-color: white;
+}
+
 #translation_box .text-input, .text-input:focused {
     -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
 }

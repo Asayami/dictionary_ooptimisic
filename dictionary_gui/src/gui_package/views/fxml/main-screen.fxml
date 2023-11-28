@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="borderPane" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.MainController">
@@ -74,10 +75,20 @@
             </children>
         </HBox>
     </bottom>
-    <right>
-        <Pane prefHeight="692.0" prefWidth="50.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="ButtonDictionary" layoutX="7.0" layoutY="40.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dictionaryScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+    <center>
+        <Pane fx:id="WorkPane" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="customImage" blendMode="MULTIPLY" fitHeight="240.0" fitWidth="240.0" layoutX="728.0" layoutY="460.0" opacity="0.25" preserveRatio="true">
+               <image>
+                  <Image url="@../images/customImage.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+    </center>
+   <right>
+      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="50.0" spacing="24.0" BorderPane.alignment="CENTER">
+         <children>
+                <Button fx:id="ButtonDictionary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dictionaryScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <tooltip>
                         <Tooltip style="-fx-background-color: #77a4ed;" text="Tra cứu từ điển">
                             <font>
@@ -95,8 +106,11 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
                 </Button>
-                <Button fx:id="ButtonGame" layoutX="7.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+                <Button fx:id="ButtonGame" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gameScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -115,7 +129,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="ButtonTranslate" layoutX="7.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+                <Button fx:id="ButtonTranslate" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#translateScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -134,7 +148,7 @@
                         </Tooltip>
                     </tooltip>
                 </Button>
-                <Button fx:id="ButtonTheme" layoutX="7.0" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeTheme" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+                <Button fx:id="ButtonTheme" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeTheme" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -156,7 +170,7 @@
                         </Tooltip>
                     </tooltip>
                 </Button>
-                <Button layoutX="7.0" layoutY="280.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#musicStateChange" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#musicStateChange" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -178,7 +192,7 @@
                         </Tooltip>
                     </tooltip>
                 </Button>
-                <Button layoutX="7.0" layoutY="340.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutPopup" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
+                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutPopup" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -200,13 +214,10 @@
                         </Tooltip>
                     </tooltip>
                 </Button>
-            </children>
-            <BorderPane.margin>
-                <Insets right="6.0" />
-            </BorderPane.margin>
-        </Pane>
-    </right>
-    <center>
-        <Pane fx:id="WorkPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-    </center>
+         </children>
+         <BorderPane.margin>
+            <Insets right="6.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
 </BorderPane>

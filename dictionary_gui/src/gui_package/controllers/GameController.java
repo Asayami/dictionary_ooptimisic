@@ -229,6 +229,7 @@ public class GameController {
         if (wordRow.length() == 5 && currentRow <= 6) {
             String checkValidWord = MainModel.verifyWordleWord(wordRow);
             String temp = selectedWord;
+            boolean[] flag = new boolean[5];
             if (checkValidWord != null) {
                 for (int i = 0; i < wordRow.length(); i++) {
                     Label label = (Label) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1));
@@ -238,6 +239,7 @@ public class GameController {
                     StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
                     Label labelChar = (Label) stackPaneChar.getChildren().get(0);
                     if (temp.indexOf(c) != -1 && temp.charAt(i) == c) {
+                        flag[i] = true;
                         temp = temp.replaceFirst(String.valueOf(c), "0");
 
                         stackPane.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
@@ -255,7 +257,8 @@ public class GameController {
                     StackPane stackPane = (StackPane) ((Label) event.getSource()).getScene().lookup("#c" + currentRow + (i + 1)).getParent();
                     char c = wordRow.charAt(i);
                     StackPane stackPaneChar = (StackPane) ((Label) event.getSource()).getScene().lookup("#" + c);
-                    if (temp.indexOf(c) != -1 && temp.charAt(i) != c && temp.charAt(i) != '0') {
+                    if (temp.indexOf(c) != -1 && temp.charAt(i) != c && !flag[i]) {
+                        flag[i] = true;
                         temp = temp.replaceFirst(String.valueOf(c), "0");
 
                         stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");

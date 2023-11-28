@@ -108,13 +108,13 @@
 .translateEngVieLabel {
     -fx-background-color: #797d85 !important;
     -fx-background-radius: 10;
-    -fx-border-color:  #77a4ed;
+    -fx-border-color:  #62636e !important;
     -fx-border-radius: 10;
     -fx-border-width: 2;
 }
 
 .text-field {
-    -fx-background-color: #797d85 !important;;
+    -fx-background-color: #797d85 !important;
     -fx-background-radius: 10;
     -fx-text-fill: white;
 }
@@ -127,6 +127,17 @@
     -fx-cursor: default;
     -fx-background-image: url('../images/popUpBG_2.png') !important;
     -fx-background-radius: 10;
+}
+
+#translation_box {
+    -fx-border-color: #4f505c !important;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-accent: #4f505c !important;
+}
+
+#translation_box .content {
+    -fx-background-color: #c3c5c9 !important;
 }
 
 #translation_box .text-input, .text-input:focused {
