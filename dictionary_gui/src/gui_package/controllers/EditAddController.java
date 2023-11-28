@@ -121,6 +121,4 @@ public class EditAddController {
             ts.setOnAction(eventHandler -> DialogController.okay());
         }
     }
-
-
 }

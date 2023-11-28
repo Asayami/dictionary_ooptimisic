@@ -90,14 +90,6 @@ public class DictionaryController implements Initializable {
         listView.getItems().addAll(ls);
     }
 
-//    public Word getSelectedWord() throws SQLException {
-//        if (selectedItem == null) {
-//            return null;
-//        } else {
-//            return getWord(selectedItem);
-//        }
-//    }
-
     @FXML
     private void listViewClicked(MouseEvent event) throws SQLException {
         String selectedItem = listView.getSelectionModel().getSelectedItem();
@@ -107,7 +99,6 @@ public class DictionaryController implements Initializable {
             lastWord = "";
         }
         if (selectedItem != null && !selectedItem.equals(lastWord)) {
-//            System.out.println(selectedItem);
             searchedWordLabel.setText(selectedItem);
             wordFormLabel.setText(Objects.requireNonNull(currentWord).getWord_type());
             wordPronunciationTextArea.setText(Objects.requireNonNull(currentWord).getPronunciation());

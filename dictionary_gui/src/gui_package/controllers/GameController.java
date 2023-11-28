@@ -34,7 +34,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = "DADDY"; //= MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
@@ -143,7 +143,7 @@ public class GameController {
                     }
                 }
 
-                if (!isWin) {
+                if (!isWin && !isGameFinished) {
                     statistics.setGameCount(statistics.getGameCount() + 1);
                     streak = 0;
                 }
@@ -152,6 +152,7 @@ public class GameController {
                 currentRow = 1;
                 selectedWord = MainModel.getWordleWord().toUpperCase();
                 isWin = false;
+                isGameFinished = false;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -335,10 +336,10 @@ public class GameController {
                 statistics.setBestStreak(streak);
             }
             statistics.setTotalWins(statistics.getTotalWins() + 1);
+            statistics.addCount(currentRow);
         } else {
             statistics.setCurrStreak(0);
         }
-        statistics.addCount(currentRow);
         statistics.setGameCount(statistics.getGameCount() + 1);
     }
 }
