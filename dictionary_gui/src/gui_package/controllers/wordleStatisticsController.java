@@ -78,7 +78,7 @@ public class wordleStatisticsController {
         streakBest.setText(String.valueOf(bestStreak));
         guessDistribution.setText(String.format("%.1f", guessDist));
     }
-    
+
     public void addCount(int count) {
         switch (count) {
             case 1 -> count_1++;

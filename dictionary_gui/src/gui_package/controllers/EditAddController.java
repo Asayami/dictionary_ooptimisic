@@ -4,16 +4,13 @@ import gui_package.models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
-import java.util.*;
 
 import static gui_package.models.MainModel.*;
 
@@ -21,22 +18,12 @@ public class EditAddController {
     private double x;
     private double y;
 
-    private Word currentWord;
 
     @FXML
     private Button setEditButton;
 
     @FXML
-    private Button button_close;
-
-    @FXML
     private ImageView button_close_icon;
-
-    @FXML
-    private ImageView editWordImage;
-
-    @FXML
-    private TextField wordTargetTextField;
 
     @FXML
     private TextField wordTypeTextField;
@@ -99,21 +86,14 @@ public class EditAddController {
     }
 
     @FXML
-    public void removeSelectedWord(ActionEvent event) throws SQLException {
-//        System.out.println(dic.getSelectedWord().getWord_target());
-//        System.out.println("Removing: " + dic.currentWord.getWord_target());
+    public void removeSelectedWord(ActionEvent event) {
         Button okButton = DialogController.appear(((Node) event.getSource()).getScene(), true, "Confirm Removal",
                 "Are you sure you want to remove this word?");
         okButton.setOnAction(eventHandler -> {
             try {
                 removeWord(DictionaryController.currentWordId);
-            } catch (NullPointerException e) {
-                // when dic.currentWordId is null
-                try {
-                    removeWord(DictionaryController.currentWord.getWord_target());
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Success", "Từ đã được xoá, hãy tìm kiếm lại để xem thay đổi."); //chinh true thanh false de an nut cancel
+                ts.setOnAction(eventHandlers -> DialogController.okay());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -122,15 +102,10 @@ public class EditAddController {
 
     @FXML
     public void editedWordContent(ActionEvent event) throws SQLException {
-        Word currWord = DictionaryController.currentWord;
-        wordTargetTextField.setText(currWord.getWord_target());
-        wordTargetTextField.setEditable(false);
         updateWord(DictionaryController.currentWordId, wordTypeTextField.getText(),
                 meaningTextArea.getText(), pronunciationTextField.getText(), exampleTextArea.getText());
         Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Success", "Từ đã được cập nhật thành công, hãy tìm kiếm lại để xem thay đổi."); //chinh true thanh false de an nut cancel
-        ts.setOnAction(eventHandler -> {
-            DialogController.okay();
-        });
+        ts.setOnAction(eventHandler -> DialogController.okay());
     }
 
     @FXML
@@ -140,14 +115,10 @@ public class EditAddController {
                     addWordMeaning.getText(), addWordPronunciation.getText(), addWordExample.getText());
             createWord(word);
             Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Success", "Từ đã được thêm thành công, hãy tìm kiếm lại để tìm từ."); //chinh true thanh false de an nut cancel
-            ts.setOnAction(eventHandler -> {
-                DialogController.okay();
-            });
+            ts.setOnAction(eventHandler -> DialogController.okay());
         } else {
             Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Error", "Từ đã tồn tại, vui lòng sửa từ nếu muốn thay đổi thông tin từ."); //chinh true thanh false de an nut cancel
-            ts.setOnAction(eventHandler -> {
-                DialogController.okay();
-            });
+            ts.setOnAction(eventHandler -> DialogController.okay());
         }
     }
 

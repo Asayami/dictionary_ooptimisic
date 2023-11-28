@@ -90,8 +90,7 @@ public class DialogController {
     public static void okay() {
         popupStage.hide();
     }
-
-
+    
     public void okay(ActionEvent actionEvent) {
         popupStage.hide();
     }

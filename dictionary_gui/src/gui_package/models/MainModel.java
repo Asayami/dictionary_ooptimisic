@@ -18,11 +18,11 @@ public class MainModel {
 
     public static void createWord(Word word) throws SQLException {
         String sql = "INSERT INTO words (Word, Type, Meaning, Pronunciation, Example, Synonym, Antonyms) " +
-                "VALUES ('" + word.getWord_target() +
-                "', '" + word.getWord_type() + "', '" +
-                word.getWord_explain() + "', '" +
-                word.getPronunciation() + "', '" +
-                word.getExample() + "', '', '')";
+                     "VALUES ('" + word.getWord_target() +
+                     "', '" + word.getWord_type() + "', '" +
+                     word.getWord_explain() + "', '" +
+                     word.getPronunciation() + "', '" +
+                     word.getExample() + "', '', '')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
         statement.close();
@@ -64,29 +64,16 @@ public class MainModel {
         return result.getString("Word") == null;
     }
 
-    public static void updateWord(int id, Word word) throws SQLException {
-        String sql = "UPDATE words SET" +
-                " Word = '" + word.getWord_target() + "'," +
-                " Type = '" + word.getWord_type() + "'," +
-                " Meaning = '" + word.getWord_explain() + "'," +
-                " Pronunciation = '" + word.getPronunciation() + "'," +
-                " Example = '" + word.getExample() + "'," +
-                " Synonym = ''," +
-                " Antonyms = ''" +
-                "WHERE Id = " + id + ";";
-        statement.executeUpdate(sql);
-    }
-
     public static void updateWord(int id, String wordType, String wordMeaning,
                                   String wordPro, String wordEx) throws SQLException {
         String sql = "UPDATE words SET" +
-                " Type = '" + wordType + "'," +
-                " Meaning = '" + wordMeaning + "'," +
-                " Pronunciation = '" + wordPro + "'," +
-                " Example = '" + wordEx + "'," +
-                " Synonym = ''," +
-                " Antonyms = ''" +
-                "WHERE Id = " + id + ";";
+                     " Type = '" + wordType + "'," +
+                     " Meaning = '" + wordMeaning + "'," +
+                     " Pronunciation = '" + wordPro + "'," +
+                     " Example = '" + wordEx + "'," +
+                     " Synonym = ''," +
+                     " Antonyms = ''" +
+                     "WHERE Id = " + id + ";";
         statement.executeUpdate(sql);
     }
 

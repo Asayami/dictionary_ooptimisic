@@ -22,7 +22,7 @@ public class tts extends Thread {
         if (voice != null) {
             voice.allocate();
             voice.setRate(140);
-            boolean status = voice.speak(word);
+            voice.speak(word);
             voice.deallocate();
         } else {
             System.out.println("TTS Error");

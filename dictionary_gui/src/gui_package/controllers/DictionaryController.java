@@ -3,11 +3,7 @@ package gui_package.controllers;
 import gui_package.Start;
 import gui_package.models.Word;
 import gui_package.services.tts;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,19 +28,14 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static gui_package.models.MainModel.*;
-import static gui_package.services.tts.speak;
 
 public class DictionaryController implements Initializable {
     private String lastWord;
     static Word currentWord;
     protected static int currentWordId = -1;
-    private Node editNode;
     private Stage stage;
-    private double xOffset = 0;
-    private double yOffset = 0;
 
     @FXML
     private TextField searchBar;
@@ -77,13 +68,7 @@ public class DictionaryController implements Initializable {
     private Button copiedTextButton;
 
     @FXML
-    private Button removeWordButton;
-
-    @FXML
     private Button editWordButton;
-
-    @FXML
-    private ImageView editWordImage;
 
     @FXML
     private BorderPane dictionaryBorderPane;
@@ -92,7 +77,7 @@ public class DictionaryController implements Initializable {
     void search(KeyEvent event) throws SQLException {
         List<String> ls = new ArrayList<>();
         listView.getItems().clear();
-        ResultSet resultSet = getWordByString(searchBar.getText());
+        ResultSet resultSet = getWordByString(sanitizeInput(searchBar.getText()));
         while (resultSet.next()) {
             String sword = resultSet.getString("Word");
             if (sword.isEmpty()) {
@@ -179,8 +164,6 @@ public class DictionaryController implements Initializable {
         Stage popUp = new Stage();
         Scene scene = new Scene(root, 560, 610);
         popUp.setTitle("Dictionary Ultra Pro");
-//        Label label = (Label) scene.lookup("#editOrAddWordLabel");
-//        label.setText("Add a new word!");
         popUp.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
         popUp.initStyle(StageStyle.UNDECORATED);
         popUp.initModality(Modality.APPLICATION_MODAL);
@@ -199,7 +182,7 @@ public class DictionaryController implements Initializable {
     @FXML
     private void editScene(ActionEvent event) throws IOException {
         SoundController.makeSound("click");
-        if(currentWord != null) {
+        if (currentWord != null) {
             URL fxmlURL = DictionaryController.class.getResource("/fxml/edit-box.fxml");
             Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
             if (stage == null) {
@@ -230,13 +213,22 @@ public class DictionaryController implements Initializable {
             popup.show();
             popup.setX(x + 232);
             popup.setY(y + 79);
-        }
-        else {
-            Button ts = DialogController.appear(((Node)event.getSource()).getScene(), false, "Alert", "Hãy chọn 1 từ để chỉnh sửa"); //chinh true thanh false de an nut cancel
+        } else {
+            Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Alert", "Hãy chọn 1 từ để chỉnh sửa"); //chinh true thanh false de an nut cancel
             ts.setOnAction(eventHandler -> {
                 //run when press okay
                 DialogController.okay();
             });
         }
+    }
+
+    public static String sanitizeInput(String input) {
+        StringBuilder filteredInput = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (c != '\'' && c != '"' && c != '<' && c != '>') {
+                filteredInput.append(c);
+            }
+        }
+        return filteredInput.toString();
     }
 }

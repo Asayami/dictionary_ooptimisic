@@ -61,9 +61,6 @@ public class MainController implements Initializable {
     @FXML
     private Pane WorkPane;
 
-    @FXML
-    private BorderPane gameBorderPane;
-
     private Node dictionaryNode;
     private Node gameNode;
     private Node translateNode;
@@ -122,7 +119,7 @@ public class MainController implements Initializable {
 
     private void gameInfoFirstTime(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(GameController.class.getResource("/fxml/wordle_howtoplay.fxml"));
-        Parent root = null;
+        Parent root;
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -242,7 +239,7 @@ public class MainController implements Initializable {
         }
     }
 
-    public void changeTheme(ActionEvent event) throws InterruptedException {
+    public void changeTheme(ActionEvent event) {
         SoundController.makeSound("click");
         isLightTheme = !isLightTheme;
         loadTheme(parent);
