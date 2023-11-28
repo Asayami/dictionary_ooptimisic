@@ -37,7 +37,7 @@ public class GameController {
 
     private String wordRow = "";
 
-    private String selectedWord = MainModel.getWordleWord().toUpperCase();
+    private String selectedWord = "DOORS";//MainModel.getWordleWord().toUpperCase();
 
     private boolean isGameFinished = false;
 
