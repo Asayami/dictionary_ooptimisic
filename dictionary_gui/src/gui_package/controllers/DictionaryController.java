@@ -199,35 +199,44 @@ public class DictionaryController implements Initializable {
     @FXML
     private void editScene(ActionEvent event) throws IOException {
         SoundController.makeSound("click");
-        URL fxmlURL = DictionaryController.class.getResource("/fxml/edit-box.fxml");
-        Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
-        if (stage == null) {
-            stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-        }
-        double x = stage.getX();
-        double y = stage.getY();
+        if(currentWord != null) {
+            URL fxmlURL = DictionaryController.class.getResource("/fxml/edit-box.fxml");
+            Parent root = FXMLLoader.load(Objects.requireNonNull(fxmlURL));
+            if (stage == null) {
+                stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+            }
+            double x = stage.getX();
+            double y = stage.getY();
 
-        Stage popup = new Stage();
-        Scene scene = new Scene(root, 560, 610);
-        popup.setTitle("Dictionary Ultra Pro");
-        popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
-        popup.initStyle(StageStyle.UNDECORATED);
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.setResizable(false);
-        popup.setScene(scene);
-        MainController.loadTheme((BorderPane) scene.lookup("#editBorderPane"));
-        MainController.loadTheme((HBox) scene.lookup("#editHBox"));
-        MainController.loadTheme((Button) scene.lookup("#editCloseButton"));
-        MainController.loadTheme((Button) scene.lookup("#removeWordButton"));
-        MainController.loadTheme((Button) scene.lookup("#cancelButton"));
-        MainController.loadTheme((Button) scene.lookup("#setEditButton"));
-        ((TextField) scene.lookup("#wordTypeTextField1")).setText(currentWord.getWord_target());
-        ((TextField) scene.lookup("#wordTypeTextField")).setText(currentWord.getWord_type());
-        ((TextField) scene.lookup("#pronunciationTextField")).setText(currentWord.getPronunciation());
-        ((TextArea) scene.lookup("#meaningTextArea")).setText(currentWord.getWord_explain());
-        ((TextArea) scene.lookup("#exampleTextArea")).setText(currentWord.getExample());
-        popup.show();
-        popup.setX(x + 232);
-        popup.setY(y + 79);
+            Stage popup = new Stage();
+            Scene scene = new Scene(root, 560, 610);
+            popup.setTitle("Dictionary Ultra Pro");
+            popup.getIcons().add(new Image(String.valueOf(Start.class.getResource("views/images/logo.png"))));
+            popup.initStyle(StageStyle.UNDECORATED);
+            popup.initModality(Modality.APPLICATION_MODAL);
+            popup.setResizable(false);
+            popup.setScene(scene);
+            MainController.loadTheme((BorderPane) scene.lookup("#editBorderPane"));
+            MainController.loadTheme((HBox) scene.lookup("#editHBox"));
+            MainController.loadTheme((Button) scene.lookup("#editCloseButton"));
+            MainController.loadTheme((Button) scene.lookup("#removeWordButton"));
+            MainController.loadTheme((Button) scene.lookup("#cancelButton"));
+            MainController.loadTheme((Button) scene.lookup("#setEditButton"));
+            ((TextField) scene.lookup("#wordTypeTextField1")).setText(currentWord.getWord_target());
+            ((TextField) scene.lookup("#wordTypeTextField")).setText(currentWord.getWord_type());
+            ((TextField) scene.lookup("#pronunciationTextField")).setText(currentWord.getPronunciation());
+            ((TextArea) scene.lookup("#meaningTextArea")).setText(currentWord.getWord_explain());
+            ((TextArea) scene.lookup("#exampleTextArea")).setText(currentWord.getExample());
+            popup.show();
+            popup.setX(x + 232);
+            popup.setY(y + 79);
+        }
+        else {
+            Button ts = DialogController.appear(((Node)event.getSource()).getScene(), false, "Alert", "Hãy chọn 1 từ để chỉnh sửa"); //chinh true thanh false de an nut cancel
+            ts.setOnAction(eventHandler -> {
+                //run when press okay
+                DialogController.okay();
+            });
+        }
     }
 }

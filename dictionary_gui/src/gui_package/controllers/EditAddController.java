@@ -121,33 +121,33 @@ public class EditAddController {
     }
 
     @FXML
-    public void editedWordContent() throws SQLException {
+    public void editedWordContent(ActionEvent event) throws SQLException {
         Word currWord = DictionaryController.currentWord;
         wordTargetTextField.setText(currWord.getWord_target());
         wordTargetTextField.setEditable(false);
-        if (currWord == null) {
-            // print: you can only edit a word if you have selected a word
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.showAndWait();
-        } else {
-            updateWord(DictionaryController.currentWordId, wordTypeTextField.getText(),
-                    meaningTextArea.getText(), pronunciationTextField.getText(), exampleTextArea.getText());
-        }
-//        editOrAddLabel.setText("Edit Word");
+        updateWord(DictionaryController.currentWordId, wordTypeTextField.getText(),
+                meaningTextArea.getText(), pronunciationTextField.getText(), exampleTextArea.getText());
+        Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Success", "Từ đã được cập nhật thành công, hãy tìm kiếm lại để xem thay đổi."); //chinh true thanh false de an nut cancel
+        ts.setOnAction(eventHandler -> {
+            DialogController.okay();
+        });
     }
 
     @FXML
-    public void addWord() throws SQLException {
-//        editOrAddLabel.setText("Add a new word!");
+    public void addWord(ActionEvent event) throws SQLException {
         if (findWord(addWordTarget.getText())) {
             Word word = new Word(addWordTarget.getText(), addWordType.getText(),
                     addWordMeaning.getText(), addWordPronunciation.getText(), addWordExample.getText());
             createWord(word);
+            Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Success", "Từ đã được thêm thành công, hãy tìm kiếm lại để tìm từ."); //chinh true thanh false de an nut cancel
+            ts.setOnAction(eventHandler -> {
+                DialogController.okay();
+            });
         } else {
-            System.out.println("This word already exists in the database!");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.showAndWait();
-            //
+            Button ts = DialogController.appear(((Node) event.getSource()).getScene(), false, "Error", "Từ đã tồn tại, vui lòng sửa từ nếu muốn thay đổi thông tin từ."); //chinh true thanh false de an nut cancel
+            ts.setOnAction(eventHandler -> {
+                DialogController.okay();
+            });
         }
     }
 
