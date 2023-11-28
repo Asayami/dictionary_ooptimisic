@@ -78,7 +78,7 @@
     <center>
         <Pane fx:id="WorkPane" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="customImage" blendMode="MULTIPLY" fitHeight="240.0" fitWidth="240.0" layoutX="728.0" layoutY="460.0" opacity="0.25" preserveRatio="true">
+            <ImageView fx:id="customImage" fitHeight="240.0" fitWidth="240.0" layoutX="728.0" layoutY="460.0" opacity="0.25" preserveRatio="true">
                <image>
                   <Image url="@../images/customImage.png" />
                </image>
