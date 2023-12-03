@@ -101,7 +101,6 @@ public class DictionaryController implements Initializable {
             wordFormLabel.setText(Objects.requireNonNull(currentWord).getWord_type());
             wordPronunciationTextArea.setText(Objects.requireNonNull(currentWord).getPronunciation());
             wordMeaningTextArea.setText(Objects.requireNonNull(currentWord).getWord_explain());
-            System.out.println(currentWord.getExample());
             if (Objects.equals(currentWord.getExample(), "")) { //this doesn't really work
                 wordExampleTextArea.setText("No example located in database!\n" + "Từ này chưa có ví dụ!");
             } else {
@@ -208,6 +207,7 @@ public class DictionaryController implements Initializable {
         }
     }
 
+    // just a poor SQL errors prevention (SQL Injection), need upgrade
     public static String sanitizeInput(String input) {
         StringBuilder filteredInput = new StringBuilder();
         for (char c : input.toCharArray()) {

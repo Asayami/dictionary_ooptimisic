@@ -1,5 +1,7 @@
 package gui_package.models;
 
+import gui_package.controllers.DictionaryController;
+
 import java.sql.*;
 
 public class MainModel {
@@ -18,11 +20,11 @@ public class MainModel {
 
     public static void createWord(Word word) throws SQLException {
         String sql = "INSERT INTO words (Word, Type, Meaning, Pronunciation, Example, Synonym, Antonyms) " +
-                     "VALUES ('" + word.getWord_target() +
-                     "', '" + word.getWord_type() + "', '" +
-                     word.getWord_explain() + "', '" +
-                     word.getPronunciation() + "', '" +
-                     word.getExample() + "', '', '')";
+                     "VALUES ('" + DictionaryController.sanitizeInput(word.getWord_target()) +
+                     "', '" + DictionaryController.sanitizeInput(word.getWord_type()) + "', '" +
+                     DictionaryController.sanitizeInput(word.getWord_explain()) + "', '" +
+                     DictionaryController.sanitizeInput(word.getPronunciation()) + "', '" +
+                     DictionaryController.sanitizeInput(word.getExample()) + "', '', '')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
         statement.close();
@@ -47,11 +49,11 @@ public class MainModel {
         String sql = "SELECT * FROM words WHERE Word LIKE '" + matchWord + "'";
         ResultSet result = statement.executeQuery(sql);
         int word_id = result.getInt("Id");
-        String word_target = result.getString("Word");
-        String word_type = result.getString("Type");
-        String word_explain = result.getString("Meaning");
-        String word_pronunciation = result.getString("Pronunciation");
-        String word_example = result.getString("Example");
+        String word_target = DictionaryController.sanitizeInput(result.getString("Word"));
+        String word_type = DictionaryController.sanitizeInput(result.getString("Type"));
+        String word_explain = DictionaryController.sanitizeInput(result.getString("Meaning"));
+        String word_pronunciation = DictionaryController.sanitizeInput(result.getString("Pronunciation"));
+        String word_example = DictionaryController.sanitizeInput(result.getString("Example"));
 
         Word returnWord = new Word(word_target, word_type, word_explain, word_pronunciation, word_example);
         returnWord.setId(word_id);
@@ -67,14 +69,16 @@ public class MainModel {
     public static void updateWord(int id, String wordType, String wordMeaning,
                                   String wordPro, String wordEx) throws SQLException {
         String sql = "UPDATE words SET" +
-                     " Type = '" + wordType + "'," +
-                     " Meaning = '" + wordMeaning + "'," +
-                     " Pronunciation = '" + wordPro + "'," +
-                     " Example = '" + wordEx + "'," +
+                     " Type = '" + DictionaryController.sanitizeInput(wordType) + "'," +
+                     " Meaning = '" + DictionaryController.sanitizeInput(wordMeaning) + "'," +
+                     " Pronunciation = '" + DictionaryController.sanitizeInput(wordPro) + "'," +
+                     " Example = '" + DictionaryController.sanitizeInput(wordEx) + "'," +
                      " Synonym = ''," +
                      " Antonyms = ''" +
                      "WHERE Id = " + id + ";";
+        System.out.println(sql);
         statement.executeUpdate(sql);
+
     }
 
     public static void removeWord(int id) throws SQLException {
