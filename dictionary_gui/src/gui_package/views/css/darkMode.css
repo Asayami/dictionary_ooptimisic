@@ -167,3 +167,7 @@
 .dialogLine {
     -fx-stroke: #62636e;
 }
+
+.toolTip {
+    -fx-background-color: #62636e;
+}

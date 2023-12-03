@@ -90,7 +90,7 @@
          <children>
                 <Button fx:id="ButtonDictionary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dictionaryScene" prefHeight="36.0" prefWidth="36.0" styleClass="tabButton" stylesheets="@../css/lightMode.css">
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Tra cứu từ điển">
+                        <Tooltip styleClass="toolTip" text="Tra cứu từ điển">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -119,7 +119,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Game rèn từ vựng">
+                        <Tooltip styleClass="toolTip" text="Game rèn từ vựng">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -141,7 +141,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Dịch văn bản">
+                        <Tooltip styleClass="toolTip" text="Dịch văn bản">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -163,7 +163,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Đổi giao diện sáng/tối">
+                        <Tooltip styleClass="toolTip" text="Đổi giao diện sáng/tối">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -185,7 +185,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Tắt / Bật âm">
+                        <Tooltip styleClass="toolTip" text="Tắt / Bật âm">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -207,7 +207,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip style="-fx-background-color: #77a4ed;" text="Về chúng tôi">
+                        <Tooltip styleClass="toolTip" text="Về chúng tôi">
                             <font>
                                 <Font size="14.0" />
                             </font>
