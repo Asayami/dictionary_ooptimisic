@@ -22,9 +22,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-
 public class GameController {
-
     @FXML
     private Label c11;
 
@@ -42,6 +40,8 @@ public class GameController {
 
     private boolean hasInitStats = true;
 
+    private final boolean[] keyboard = new boolean[26];
+
     @FXML
     private Stage stage;
     private Stage howToPlay;
@@ -51,8 +51,7 @@ public class GameController {
     private wordleStatisticsController statistics;
     private wordleEndController endScreen;
 
-    public GameController() throws SQLException {
-    }
+    public GameController() throws SQLException { }
 
     @FXML
     private void mouseClick(MouseEvent event) throws SQLException {
@@ -72,7 +71,7 @@ public class GameController {
     }
 
     @FXML
-    private void gameInfo(ActionEvent event) throws IOException {
+    private void gameInfo() throws IOException {
         SoundController.makeSound("click");
         if (howToPlay != null) {
             howToPlay.show();
@@ -114,7 +113,7 @@ public class GameController {
         ts.setOnAction(eventHandler -> {
             try {
                 Scene scene = c11.getScene();
-                //5x6 board
+                // 5x6 board
                 for (int i = 1; i <= 6; i++) {
                     for (int j = 1; j <= 5; j++) {
                         Label label = (Label) scene.lookup("#c" + i + j);
@@ -124,7 +123,7 @@ public class GameController {
                     }
                 }
 
-                //A-Z keyboard
+                // A-Z keyboard
                 for (char c = 'A'; c <= 'Z'; c++) {
                     StackPane stackPaneChar = (StackPane) (scene.lookup("#" + c));
                     stackPaneChar.setStyle("-fx-background-color: #d3d6da;-fx-background-radius:5;");
@@ -132,10 +131,13 @@ public class GameController {
                     labelChar.setStyle("-fx-text-fill: black;");
                 }
 
+                // Reset keyboard color
+                java.util.Arrays.fill(keyboard, false);
+
                 if (gameStats == null) {
                     hasInitStats = false;
                     try {
-                        userStatistic(new ActionEvent());
+                        userStatistic();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -154,13 +156,13 @@ public class GameController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            //run when press okay
+            // Run when press okay
             DialogController.okay();
         });
     }
 
     @FXML
-    private void userStatistic(ActionEvent event) throws IOException {
+    private void userStatistic() throws IOException {
         SoundController.makeSound("click");
         if (gameStats != null) {
             statistics.update();
@@ -237,9 +239,12 @@ public class GameController {
                         temp = temp.replaceFirst(String.valueOf(c), "0");
                         stackPane.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
                         stackPaneChar.setStyle("-fx-background-color: #6aaa64;-fx-background-radius:5;");
+                        keyboard[c - 65] = true;
                     } else {
                         stackPane.setStyle("-fx-background-color: #787c7e;-fx-background-radius:5;");
-                        stackPaneChar.setStyle("-fx-background-color: #787c7e;-fx-background-radius:5;");
+                        if (!keyboard[c - 65]) {
+                            stackPaneChar.setStyle("-fx-background-color: #787c7e;-fx-background-radius:5;");
+                        }
                     }
                     labelChar.setStyle("-fx-text-fill: white;");
                 }
@@ -254,7 +259,9 @@ public class GameController {
                         flag[i] = true;
                         temp = temp.replaceFirst(String.valueOf(c), "0");
                         stackPane.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
-                        stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
+                        if (!keyboard[c - 65]) {
+                            stackPaneChar.setStyle("-fx-background-color: #c9b458;-fx-background-radius:5;");
+                        }
                     }
                 }
 
@@ -316,7 +323,7 @@ public class GameController {
         if (gameStats == null) {
             hasInitStats = false;
             try {
-                userStatistic(new ActionEvent());
+                userStatistic();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
