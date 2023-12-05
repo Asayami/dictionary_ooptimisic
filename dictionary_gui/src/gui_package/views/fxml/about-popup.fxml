@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="350.0" style="-fx-background-color: #bfd9ff; -fx-border-color: #aecaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.PopupController">
+<BorderPane fx:id="popUpBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="350.0" styleClass="aboutPopup" stylesheets="@../css/lightMode.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_package.controllers.PopupController">
    <top>
-      <HBox alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #77a4ed;" BorderPane.alignment="CENTER">
+      <HBox fx:id="popUpTitleBar" alignment="CENTER" onMouseDragged="#titleBarDragged" onMousePressed="#titleBarPressed" prefHeight="40.0" prefWidth="200.0" styleClass="titleBar" stylesheets="@../css/lightMode.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/google_translate.png" />
+                  <Image url="@../images/logo.png" />
                </image>
                <HBox.margin>
                   <Insets left="4.0" />
@@ -31,7 +31,7 @@
                   <Insets left="4.0" />
                </HBox.margin>
             </Label>
-            <Button id="button_close" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" onMouseEntered="#close_button_highlight" onMouseExited="#close_button_reset" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/button.css">
+            <Button id="popupCloseButton" fx:id="popupCloseButton" cancelButton="true" defaultButton="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" onMouseEntered="#close_button_highlight" onMouseExited="#close_button_reset" prefHeight="32.0" prefWidth="48.0" stylesheets="@../css/lightMode.css">
                <graphic>
                   <ImageView fx:id="button_close_icon" fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -57,7 +57,7 @@
                   <Font name="Constantia Bold" size="18.0" />
                </font>
             </Label>
-            <TextArea id="member_list" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="132.0" prefRowCount="6" prefWidth="334.0" style="-fx-background-color: none;" stylesheets="@../css/textarea.css" text="Project Manager: Bùi Tuấn Minh&#10;Developers:&#10;• Phan Vũ Liêm&#10;• Bùi Thành Lộc&#10;• Trương Quang Minh&#10;Designed by Hoàng Minh Nghĩa" wrapText="true">
+            <TextArea id="member_list" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefColumnCount="1" prefHeight="132.0" prefRowCount="6" prefWidth="334.0" stylesheets="@../css/lightMode.css" text="Project Manager: Bùi Tuấn Minh&#10;UI Designer: Hoàng Minh Nghĩa&#10;Developers:&#10;    • Trương Quang Minh&#10;    • Bùi Thành Lộc&#10;    • Phan Vũ Liêm" wrapText="true">
                <font>
                   <Font name="Cambria" size="17.0" />
                </font>

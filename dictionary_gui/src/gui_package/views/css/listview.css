@@ -1,9 +1,0 @@
-.list-cell {
-    -fx-background-radius: 10;
-    -fx-background-color: #f0f7ff;
-}
-
-.list-cell:filled:hover {
-    -fx-background-color: #77a4ed;
-    -fx-text-fill: white;
-}
