@@ -5,8 +5,8 @@ This is a team project for UET OOP 2023 course.
  - Bùi Tuấn Minh (Project Manager) <https://github.com/Asayami>
  - Hoàng Minh Nghĩa (UI Designer) <https://github.com/GP-Sword>
  - Phan Vũ Liêm (Developer) <https://github.com/fior4neee>
- - Trương Quang Minh <https://github.com/jest4r>
- - Bùi Thành Lộc <https://github.com/locbbb48>
+ - Trương Quang Minh (Developer) <https://github.com/jest4r>
+ - Bùi Thành Lộc (Developer) <https://github.com/locbbb48>
 
 ## Introduction
 Dictionary Ultra Pro Max is a Java English - Vietnamese dictionary app for students, university students and beginners learning English.
